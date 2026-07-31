@@ -10,10 +10,11 @@ import UI from "./UI/UI";
 function App() {
   return (
     <>
-      <Canvas>
-        <ResponsiveCamera />
+      <Canvas
+        camera={{ position: [0, 800, 2500], fov: 50, near: 10, far: 10000 }}
+      >
         <Lights />
-        <DaySky />
+        {/* <DaySky /> */}
         <Scene />
         <OrbitControls
           makeDefault

@@ -1,7 +1,8 @@
 import Model from "./Model";
+import Terrain from "./Terrain";
 
 const Scene = () => {
-  return <Model />;
+  return <Terrain />;
 };
 
 export default Scene;
