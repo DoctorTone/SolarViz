@@ -29,3 +29,29 @@ export const getScreenConfiguration = (width: number, height: number) => {
 
   return CONFIGURATIONS["small"];
 };
+
+// BNG easting/northing -> world position on the centred terrain plane
+export const bngToWorld = (easting, northing, meta, heights) => {
+  const { origin_easting, origin_northing, cols, rows, cell_size_m } = meta;
+
+  const col = (easting - origin_easting) / cell_size_m; // 0..cols-1
+  const row = (origin_northing - northing) / cell_size_m; // 0..rows-1 (north=row0)
+
+  // world X/Z: plane centred, so shift by half-extent
+  const worldX = col * cell_size_m - ((cols - 1) * cell_size_m) / 2;
+  const worldZ = row * cell_size_m - ((rows - 1) * cell_size_m) / 2;
+
+  // sample terrain height (nearest cell; bilinear later if needed)
+  const ci = Math.round(col),
+    ri = Math.round(row);
+  let worldY = 0;
+  if (ci >= 0 && ci < cols && ri >= 0 && ri < rows) {
+    worldY = heights[ri * cols + ci];
+  }
+  return {
+    worldX,
+    worldY,
+    worldZ,
+    inTile: ci >= 0 && ci < cols && ri >= 0 && ri < rows,
+  };
+};
