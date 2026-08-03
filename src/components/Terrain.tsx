@@ -8,8 +8,9 @@ const Terrain = () => {
     Promise.all([
       fetch("/data/terrain_meta.json").then((r) => r.json()),
       fetch("/data/terrain_heights.bin").then((r) => r.arrayBuffer()),
-    ]).then(([meta, buf]) => {
-      setData({ meta, heights: new Float32Array(buf) });
+      fetch("/data/viewpoints.json").then((r) => r.json()),
+    ]).then(([meta, buf, views]) => {
+      setData({ meta, heights: new Float32Array(buf), views });
     });
   }, []);
 
