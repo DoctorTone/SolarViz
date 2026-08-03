@@ -21,8 +21,8 @@ function App() {
           enablePan={INTERACTIONS.PAN}
           enableRotate={INTERACTIONS.ROTATE}
           enableDamping={true}
-          minPolarAngle={0}
-          maxPolarAngle={Math.PI / 2}
+          // minPolarAngle={0}
+          // maxPolarAngle={Math.PI / 2}
           target={[TARGET_POSITION.X, TARGET_POSITION.Y, TARGET_POSITION.Z]}
         />
       </Canvas>
