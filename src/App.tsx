@@ -3,7 +3,6 @@ import { OrbitControls } from "@react-three/drei";
 import { INTERACTIONS, TARGET_POSITION } from "./state/Config";
 import DaySky from "./components/DaySky";
 import Lights from "./components/Lights";
-import ResponsiveCamera from "./components/ResponsiveCamera";
 import Scene from "./components/Scene";
 import UI from "./UI/UI";
 

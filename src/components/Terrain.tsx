@@ -1,23 +1,15 @@
 import { useMemo, useEffect, useState } from "react";
+import useSolar from "../state/store";
 import * as THREE from "three";
 
 const Terrain = () => {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    Promise.all([
-      fetch("/data/terrain_meta.json").then((r) => r.json()),
-      fetch("/data/terrain_heights.bin").then((r) => r.arrayBuffer()),
-      fetch("/data/viewpoints.json").then((r) => r.json()),
-    ]).then(([meta, buf, views]) => {
-      setData({ meta, heights: new Float32Array(buf), views });
-    });
-  }, []);
+  const metaData = useSolar((state) => state.metaData);
+  const heights = useSolar((state) => state.heights);
+  const viewpoints = useSolar((state) => state.viewpoints);
 
   const geometry = useMemo(() => {
-    if (!data) return null;
-    const { cols, rows, cell_size_m } = data.meta;
-    const heights = data.heights;
+    if (!metaData || !heights) return null;
+    const { cols, rows, cell_size_m } = metaData;
 
     // Plane sized in real metres: (cols-1)*cell wide, (rows-1)*cell deep
     const width = (cols - 1) * cell_size_m;
@@ -37,7 +29,7 @@ const Terrain = () => {
     geo.computeVertexNormals();
 
     return geo;
-  }, [data]);
+  }, [metaData]);
 
   if (!geometry) return null;
 

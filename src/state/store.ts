@@ -1,19 +1,31 @@
 import { create } from "zustand";
-import type { ScreenSize } from "./Config";
 
-type FrameworkState = {
-  screenSize: ScreenSize;
-  setScreenSize: (size: ScreenSize) => void;
-  infoDialogOpen: boolean;
-  setShowInfoDialog: (status: boolean) => void;
+type SolarState = {
+  metaData: null;
+  heights: null | Float32Array;
+  viewpoints: [];
+  loaded: boolean;
+  loadData: () => void;
 };
 
-const useStore = create<FrameworkState>((set) => ({
-  screenSize: { width: window.innerWidth, height: window.innerHeight },
-  setScreenSize: (size) =>
-    set((state) => ({ screenSize: { ...state.screenSize, ...size } })),
-  infoDialogOpen: false,
-  setShowInfoDialog: (status) => set(() => ({ infoDialogOpen: status })),
+const useSolar = create<SolarState>((set, get) => ({
+  metaData: null,
+  heights: null,
+  viewpoints: [],
+  loaded: false,
+  loadData: async () => {
+    const [meta, buffer, views] = await Promise.all([
+      fetch("/data/terrain_meta.json").then((r) => r.json()),
+      fetch("/data/terrain_heights.bin").then((r) => r.arrayBuffer()),
+      fetch("/data/viewpoints.json").then((r) => r.json()),
+    ]);
+    set({
+      metaData: meta,
+      heights: new Float32Array(buffer),
+      viewpoints: views,
+      loaded: true,
+    });
+  },
 }));
 
-export default useStore;
+export default useSolar;
