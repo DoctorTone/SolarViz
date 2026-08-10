@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Terrain from "./Terrain";
 import useSolar from "../state/store";
 import Markers from "./Markers";
+import Grid from "./Grid";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
@@ -19,6 +20,7 @@ const Scene = () => {
         <>
           <Terrain />
           <Markers />
+          <Grid />
         </>
       ) : null}
     </>
