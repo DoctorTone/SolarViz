@@ -95,7 +95,7 @@ const Grid = ({ spacing = 500 }) => {
         key={`nl${n}`}
         position={[-halfW, LABEL_HEIGHT, z]}
         fontSize={40}
-        color="#ffaa00"
+        color="#000000"
         anchorX="center"
       >
         {n}N
