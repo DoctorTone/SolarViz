@@ -19,5 +19,82 @@
     "easting": 508583,
     "northing": 358371,
     "distance": 120
+  },
+  {
+    "no": 5,
+    "name": "Scop/7/1 at junction with B1191",
+    "easting": 508651,
+    "northing": 357963,
+    "distance": 500
+  },
+  {
+    "no": 6,
+    "name": "Junction of Scop/1135/4 and Acre Lane",
+    "easting": 508239,
+    "northing": 358901,
+    "distance": 20
+  },
+  {
+    "no": 7,
+    "name": "Permissive path between Scop/1134/1 and Bln/4/2",
+    "easting": 508016,
+    "northing": 359686,
+    "distance": 10
+  },
+  {
+    "no": 9,
+    "name": "Scop/3/1 at junction with Main Street, Scopwick",
+    "easting": 507616,
+    "northing": 358049,
+    "distance": 510
+  },
+  {
+    "no": 10,
+    "name": "Spires and Steeples Trail junction with Trundle Lane - North of Scopwick",
+    "easting": 506972,
+    "northing": 358430,
+    "distance": 420
+  },
+  {
+    "no": 11,
+    "name": "B1188 junction with Bloxholm Lane",
+    "easting": 506649,
+    "northing": 358523,
+    "distance": 470
+  },
+  {
+    "no": 12,
+    "name": "Spires and Steeples Trail",
+    "easting": 506855,
+    "northing": 359445,
+    "distance": 120
+  },
+  {
+    "no": 15,
+    "name": "B1191 western edge of Scopwick",
+    "easting": 506358,
+    "northing": 357964,
+    "distance": 610
+  },
+  {
+    "no": 16,
+    "name": "Footpath Rows/5/1 west of Sheffield House",
+    "easting": 506401,
+    "northing": 356655,
+    "distance": 80
+  },
+  {
+    "no": 17,
+    "name": "Footpath Rows/5/1 north of The Maltings",
+    "easting": 505581,
+    "northing": 356426,
+    "distance": 10
+  },
+  {
+    "no": 18,
+    "name": "Heath Road (B1191) near Digby Quarry",
+    "easting": 505316,
+    "northing": 357209,
+    "distance": 300
   }
 ]
