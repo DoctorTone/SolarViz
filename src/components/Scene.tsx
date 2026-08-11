@@ -3,6 +3,8 @@ import Terrain from "./Terrain";
 import useSolar from "../state/store";
 import Markers from "./Markers";
 import Grid from "./Grid";
+import { hedgerows } from "../state/hedgerowData";
+import HedgeRow from "./Hedgerow";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
@@ -21,6 +23,9 @@ const Scene = () => {
           <Terrain />
           <Markers />
           <Grid />
+          {hedgerows.map((h) => (
+            <HedgeRow key={h.id} hedge={h} />
+          ))}
         </>
       ) : null}
     </>

@@ -5,6 +5,8 @@ type SolarState = {
   heights: null | Float32Array;
   viewpoints: [];
   loaded: boolean;
+  currentYear: number;
+  currentSeason: "summer" | "winter";
   loadData: () => void;
   sampleHeight: (easting: number, northing: number) => null | number;
 };
@@ -14,6 +16,8 @@ const useSolar = create<SolarState>((set, get) => ({
   heights: null,
   viewpoints: [],
   loaded: false,
+  currentYear: 0,
+  currentSeason: "summer",
   loadData: async () => {
     const [meta, buffer, views] = await Promise.all([
       fetch("/data/terrain_meta.json").then((r) => r.json()),
