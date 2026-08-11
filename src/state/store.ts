@@ -6,6 +6,7 @@ type SolarState = {
   viewpoints: [];
   loaded: boolean;
   loadData: () => void;
+  sampleHeight: (easting: number, northing: number) => null | number;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -25,6 +26,24 @@ const useSolar = create<SolarState>((set, get) => ({
       viewpoints: views,
       loaded: true,
     });
+  },
+  // Terrain height lookup: BNG easting/northing -> ground elevation (m AOD).
+  // Returns null if the point is outside the loaded tile.
+  sampleHeight: (easting, northing) => {
+    const { metaData, heights } = get();
+    if (!metaData || !heights) return null;
+
+    const col = Math.round(
+      (easting - metaData.origin_easting) / metaData.cell_size_m,
+    );
+    const row = Math.round(
+      (metaData.origin_northing - northing) / metaData.cell_size_m,
+    );
+
+    if (col < 0 || col >= metaData.cols || row < 0 || row >= metaData.rows)
+      return null;
+
+    return heights[row * metaData.cols + col];
   },
 }));
 
