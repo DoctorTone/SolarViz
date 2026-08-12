@@ -6,6 +6,7 @@ type SolarState = {
   viewpoints: [];
   loaded: boolean;
   currentYear: number;
+  setCurrentYear: (year: number) => void;
   currentSeason: "summer" | "winter";
   loadData: () => void;
   sampleHeight: (easting: number, northing: number) => null | number;
@@ -17,6 +18,7 @@ const useSolar = create<SolarState>((set, get) => ({
   viewpoints: [],
   loaded: false,
   currentYear: 0,
+  setCurrentYear: (year) => set({ currentYear: year }),
   currentSeason: "summer",
   loadData: async () => {
     const [meta, buffer, views] = await Promise.all([
