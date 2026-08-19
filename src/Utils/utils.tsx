@@ -1,4 +1,5 @@
 import { RESOLUTIONS, CONFIGURATIONS } from "../state/Config";
+import useSolar from "../state/store";
 
 export const getScreenConfiguration = (width: number, height: number) => {
   // Small screens
