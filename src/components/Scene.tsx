@@ -4,7 +4,9 @@ import useSolar from "../state/store";
 import Markers from "./Markers";
 import Grid from "./Grid";
 import { hedgerows } from "../state/hedgerowData";
-import HedgeRow from "./Hedgerow";
+import HedgeRow from "./HedgeRow";
+import { pvParcels } from "../state/parcelData";
+import Panels from "./Panels";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
@@ -26,6 +28,7 @@ const Scene = () => {
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
           ))}
+          <Panels parcel={pvParcels[0].boundary} />
         </>
       ) : null}
     </>
