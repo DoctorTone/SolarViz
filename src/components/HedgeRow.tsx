@@ -1,11 +1,8 @@
-import { useMemo } from "react";
+import { useMemo, useRef, useLayoutEffect } from "react";
 import * as THREE from "three";
 import useSolar from "../state/store";
-import { makeHedgeTexture } from "../Utils/utils";
 
 const MIN_HEIGHT = 0.15;
-// module-level singleton so every hedge shares one texture
-let HEDGE_TEX = null;
 
 // Convert BNG easting/northing to world X/Z on the centred terrain plane.
 function bngToWorld(easting, northing, meta) {
@@ -26,6 +23,7 @@ const HedgeRow = ({ hedge }) => {
   const sampleHeight = useSolar((s) => s.sampleHeight);
   const year = useSolar((s) => s.currentYear); // 0..10
   const season = useSolar((s) => s.currentSeason); // 'summer' | 'winter'
+  const ref = useRef(null);
 
   const { start_height = 1.5, mature_height = 3.5, points } = hedge;
   const t = Math.min(1, Math.max(0, year / 10));
@@ -33,10 +31,9 @@ const HedgeRow = ({ hedge }) => {
 
   const blobs = useMemo(() => {
     if (!meta || height < 0.15) return [];
-
-    const STEP = 0.7; // metres between sphere clusters along the hedge
-    const WIDTH = 1.4; // hedge thickness across
-    const DENSITY = 2.2; // blobs per vertical metre per step (higher = denser)
+    const STEP = 0.7,
+      WIDTH = 1.4,
+      DENSITY = 2.2;
     const out = [];
     let seed = 0;
 
@@ -45,7 +42,6 @@ const HedgeRow = ({ hedge }) => {
       const [bx, bz] = bngToWorld(points[i + 1][0], points[i + 1][1], meta);
       const ay = sampleHeight(points[i][0], points[i][1]) ?? 0;
       const by = sampleHeight(points[i + 1][0], points[i + 1][1]) ?? 0;
-
       const dx = bx - ax,
         dz = bz - az;
       const segLen = Math.hypot(dx, dz) || 1;
@@ -53,23 +49,23 @@ const HedgeRow = ({ hedge }) => {
 
       for (let s = 0; s <= steps; s++) {
         const f = s / steps;
-        const cx = ax + dx * f;
-        const cz = az + dz * f;
+        const cx = ax + dx * f,
+          cz = az + dz * f;
         const groundY = ay + (by - ay) * f;
-
-        // number of blobs at this position scales with hedge height (volume fill)
         const nBlobs = Math.max(2, Math.round(height * DENSITY));
-
         for (let k = 0; k < nBlobs; k++) {
           seed++;
-          const r = 0.55 + rand(seed * 3.1) * 0.35; // 0.55-0.9m radius
-          const jx = (rand(seed * 1.7) - 0.5) * WIDTH; // across width
+          const r = 0.55 + rand(seed * 3.1) * 0.35;
+          const jx = (rand(seed * 1.7) - 0.5) * WIDTH;
           const jz = (rand(seed * 2.3) - 0.5) * WIDTH;
-          // random height through the whole body, biased slightly so base fills
           const jy = Math.pow(rand(seed * 4.5), 0.85) * height;
+          const shade = 0.8 + rand(seed * 5.9) * 0.4; // per-blob colour variation
           out.push({
-            pos: [cx + jx, groundY + r * 0.6 + jy, cz + jz], // base sits on ground
+            x: cx + jx,
+            y: groundY + r * 0.6 + jy,
+            z: cz + jz,
             r,
+            shade,
           });
         }
       }
@@ -77,28 +73,50 @@ const HedgeRow = ({ hedge }) => {
     return out;
   }, [hedge, meta, sampleHeight, height]);
 
-  if (!blobs.length) return null;
+  const count = blobs.length;
+
+  // Build the per-instance matrices and colours whenever blobs change
+  useLayoutEffect(() => {
+    if (!ref.current || !count) return;
+    const dummy = new THREE.Object3D();
+    const isWinter = season === "winter";
+    const base = new THREE.Color(isWinter ? "#6b6a45" : "#33532a");
+    const col = new THREE.Color();
+
+    blobs.forEach((b, i) => {
+      dummy.position.set(b.x, b.y, b.z);
+      dummy.scale.set(b.r * 1.25, b.r * 0.85, b.r * 1.25);
+      dummy.rotation.set(0, 0, 0);
+      dummy.updateMatrix();
+      ref.current.setMatrixAt(i, dummy.matrix);
+
+      col.copy(base).multiplyScalar(b.shade);
+      ref.current.setColorAt(i, col);
+    });
+    ref.current.instanceMatrix.needsUpdate = true;
+    if (ref.current.instanceColor) ref.current.instanceColor.needsUpdate = true;
+  }, [blobs, count, season]);
+
+  if (!count) return null;
 
   // winter: more transparent (leaf-off, gappy), summer: denser
   const isWinter = season === "winter";
-  const color = isWinter ? "#6b6a45" : "#33532a";
-  const opacity = isWinter ? 0.7 : 1.0;
 
   return (
-    <group>
-      {blobs.map((b, i) => (
-        <mesh key={i} position={b.pos} scale={[1.25, 0.85, 1.25]}>
-          <sphereGeometry args={[b.r, 8, 6]} />
-          <meshStandardMaterial
-            color={color}
-            roughness={0.9}
-            transparent={isWinter}
-            opacity={opacity}
-            flatShading
-          />
-        </mesh>
-      ))}
-    </group>
+    <instancedMesh
+      ref={ref}
+      args={[undefined, undefined, count]}
+      key={count} /* remount if count changes */
+    >
+      <sphereGeometry args={[1, 8, 6]} />{" "}
+      {/* unit sphere, scaled per-instance */}
+      <meshStandardMaterial
+        roughness={0.9}
+        flatShading
+        transparent={isWinter}
+        opacity={isWinter ? 0.7 : 1.0}
+      />
+    </instancedMesh>
   );
 };
 
