@@ -1,4 +1,5 @@
 import { Canvas } from "@react-three/fiber";
+import { Perf } from "r3f-perf";
 import DaySky from "./components/DaySky";
 import Lights from "./components/Lights";
 import Scene from "./components/Scene";
@@ -14,6 +15,7 @@ function App() {
         <Lights />
         <DaySky />
         <Scene />
+        <Perf />
       </Canvas>
       <UI />
     </>
