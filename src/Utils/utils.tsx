@@ -56,3 +56,29 @@ export const bngToWorld = (easting, northing, meta, heights) => {
     inTile: ci >= 0 && ci < cols && ri >= 0 && ri < rows,
   };
 };
+
+import * as THREE from "three";
+
+// Build a hedge-like alpha texture procedurally (call once, memoize/share).
+export function makeHedgeTexture() {
+  const size = 256;
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, size, size); // start FULLY TRANSPARENT
+
+  // paint only green foliage clumps, leaving gaps transparent
+  for (let i = 0; i < 3000; i++) {
+    const x = Math.random() * size,
+      y = Math.random() * size;
+    const r = 3 + Math.random() * 7;
+    const g = 60 + Math.random() * 80;
+    ctx.fillStyle = `rgba(${(g * 0.4) | 0}, ${g | 0}, ${(g * 0.3) | 0}, 0.9)`;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  return tex;
+}
