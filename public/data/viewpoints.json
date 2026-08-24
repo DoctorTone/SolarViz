@@ -1,5 +1,12 @@
 [
   {
+    "no": 1,
+    "name": "B1189 Moor Lane, Blankney",
+    "easting": 510040,
+    "northing": 360859,
+    "distance": 1300
+  },
+  {
     "no": 2,
     "name": "Junction of Bln/4/3, Bln/4/2 and Bln/738/1",
     "easting": 508662,
@@ -42,6 +49,13 @@
     "distance": 10
   },
   {
+    "no": 8,
+    "name": "Bln/4/2",
+    "easting": 507771,
+    "northing": 360245,
+    "distance": 20
+  },
+  {
     "no": 9,
     "name": "Scop/3/1 at junction with Main Street, Scopwick",
     "easting": 507616,
@@ -70,6 +84,20 @@
     "distance": 120
   },
   {
+    "no": 13,
+    "name": "Blankney Stepping Out car park picnic area",
+    "easting": 507418,
+    "northing": 360577,
+    "distance": 150
+  },
+  {
+    "no": 14,
+    "name": "Blankney Walks Lane near Brickyard Cottage",
+    "easting": 508370,
+    "northing": 360628,
+    "distance": 240
+  },
+  {
     "no": 15,
     "name": "B1191 western edge of Scopwick",
     "easting": 506358,
@@ -96,5 +124,12 @@
     "easting": 505316,
     "northing": 357209,
     "distance": 300
+  },
+  {
+    "no": 19,
+    "name": "Scopwick Heath Restricted Byway Scop/12/2",
+    "easting": 505372,
+    "northing": 357874,
+    "distance": 850
   }
 ]

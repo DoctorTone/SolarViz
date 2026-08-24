@@ -120,4 +120,81 @@ export const hedgerows = [
       [507961, 359664],
     ],
   },
+  {
+    id: "By11 - South",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508018, 359694],
+      [508204, 359719],
+    ],
+  },
+  {
+    id: "By11 - East 1",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508294, 359800],
+      [508245, 359953],
+    ],
+  },
+  {
+    id: "By11 - East 2",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508245, 359953],
+      [508060, 360287],
+    ],
+  },
+  {
+    id: "By11 - North 1",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508060, 360287],
+      [507962, 360279],
+    ],
+  },
+  {
+    id: "By11 - North 2",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [507962, 360279],
+      [507813, 360250],
+    ],
+  },
+  {
+    id: "By11 - West 1",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 2, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [507813, 360250],
+      [507925, 359963],
+    ],
+  },
+  {
+    id: "By11 - West 1",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 2, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [507925, 359963],
+      [508018, 359694],
+    ],
+  },
 ];
