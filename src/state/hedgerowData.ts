@@ -1,123 +1,145 @@
 export const hedgerows = [
   {
-    id: "Scopwick Low - West",
+    id: "By24 - West 1",
     type: "hedgerow",
     augments_existing: true,
     start_height: 1.8, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [507961, 359664],
-      [508067, 359272],
+      [507964, 359654],
+      [508064, 359281],
     ],
   },
   {
-    id: "Scopwick Low - South West",
+    id: "By24 - South West 1",
     type: "hedgerow",
     augments_existing: true,
     start_height: 1.8, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [508067, 359272],
-      [508168, 359213],
+      [508070, 359274],
+      [508168, 359214],
     ],
   },
   {
-    id: "Scopwick Low - South",
+    id: "By24 - South 1",
     type: "hedgerow",
     augments_existing: true,
     start_height: 1.8, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [508168, 359213],
-      [508435, 359258],
+      [508168, 359214],
+      [508350, 359240],
     ],
   },
   {
-    id: "Scopwick Low - South East",
+    id: "By24 - South 2",
     type: "hedgerow",
     augments_existing: true,
     start_height: 1.8, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [508435, 359258],
-      [508680, 359435],
+      [508350, 359240],
+      [508434, 359261],
     ],
   },
   {
-    id: "Scopwick Low - East",
+    id: "By24 - South East 1",
     type: "hedgerow",
     augments_existing: true,
     start_height: 1.8, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [508680, 359435],
-      [508488, 359741],
+      [508434, 359261],
+      [508569, 359345],
     ],
   },
   {
-    id: "Scopwick Low - North East 1",
+    id: "By24 - South East 2",
     type: "hedgerow",
     augments_existing: true,
     start_height: 1.8, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [508488, 359741],
-      [508464, 359736],
+      [508569, 359345],
+      [508680, 359438],
     ],
   },
   {
-    id: "Scopwick Low - North East 2",
+    id: "By24 - East 1",
     type: "hedgerow",
     augments_existing: true,
     start_height: 1.8, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [508464, 359736],
-      [508448, 359741],
+      [508680, 359438],
+      [508499, 359734],
     ],
   },
   {
-    id: "Scopwick Low - North East 3",
-    type: "hedgerow",
-    augments_existing: true,
-    start_height: 1.8, // existing hedge height at year 0 (m)
-    mature_height: 3.5, // documented year-10 maintained height
-    points: [
-      [508448, 359741],
-      [508422, 359732],
-    ],
-  },
-  {
-    id: "Scopwick Low - North East 4",
-    type: "hedgerow",
-    augments_existing: true,
-    start_height: 1.8, // existing hedge height at year 0 (m)
-    mature_height: 3.5, // documented year-10 maintained height
-    points: [
-      [508422, 359732],
-      [508338, 359734],
-    ],
-  },
-  {
-    id: "Scopwick Low - North 1",
+    id: "By24 - North 1",
     type: "hedgerow",
     augments_existing: false,
     start_height: 0, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [508338, 359734],
-      [508170, 359695],
+      [508335, 359731],
+      [508314, 359728],
     ],
   },
   {
-    id: "Scopwick Low - North 2",
+    id: "By24 - North 2",
     type: "hedgerow",
     augments_existing: false,
     start_height: 0, // existing hedge height at year 0 (m)
     mature_height: 3.5, // documented year-10 maintained height
     points: [
-      [508170, 359695],
-      [507961, 359664],
+      [508314, 359728],
+      [508219, 359706],
+    ],
+  },
+  {
+    id: "By24 - North 3",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508219, 359706],
+      [508168, 359697],
+    ],
+  },
+  {
+    id: "By24 - North 4",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508168, 359697],
+      [508122, 359690],
+    ],
+  },
+  {
+    id: "By24 - North 5",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508122, 359690],
+      [508036, 359681],
+    ],
+  },
+  {
+    id: "By24 - North 6",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: 0, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508036, 359681],
+      [507997, 359671],
     ],
   },
   {
