@@ -230,4 +230,15 @@ export const hedgerows = [
       [507699, 360226],
     ],
   },
+  {
+    id: "By10 - West 1",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 2, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [507699, 360226],
+      [507765, 359959],
+    ],
+  },
 ];
