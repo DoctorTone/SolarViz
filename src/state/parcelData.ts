@@ -1,7 +1,7 @@
 export const pvParcels = [
   {
     id: "Scopwick Low Field Farm",
-    field_code: "Lf04",
+    field_code: "By24",
     boundary: [
       [507989, 359650],
       [508088, 359291],
@@ -14,6 +14,24 @@ export const pvParcels = [
       [508322, 359723],
       [508166, 359686],
       [507989, 359650],
+    ],
+    panel_top_height: 3.0,
+    tilt_deg: 28,
+    row_pitch_m: 6,
+  },
+  {
+    id: "Scopwick North",
+    field_code: "By11",
+    boundary: [
+      [508031, 359706],
+      [508190, 359725],
+      [508204, 359775],
+      [508285, 359802],
+      [508238, 359952],
+      [507949, 360273],
+      [507834, 360246],
+      [507951, 359945],
+      [508031, 359706],
     ],
     panel_top_height: 3.0,
     tilt_deg: 28,
