@@ -7,10 +7,13 @@ import { hedgerows } from "../state/hedgerowData";
 import HedgeRow from "./HedgeRow";
 import { pvParcels } from "../state/parcelData";
 import Panels from "./Panels";
+import { treeData } from "../state/treeData";
+import Trees from "./Trees";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
   const loaded = useSolar((state) => state.loaded);
+  const season = useSolar((state) => state.currentSeason);
 
   useEffect(() => {
     if (!loaded) {
@@ -31,6 +34,7 @@ const Scene = () => {
           {pvParcels.map((p) => (
             <Panels key={p.id} parcel={p.boundary} />
           ))}
+          <Trees trees={treeData} season={season} />
         </>
       ) : null}
     </>
