@@ -32,7 +32,7 @@ export const getScreenConfiguration = (width: number, height: number) => {
 };
 
 // BNG easting/northing -> world position on the centred terrain plane
-export const bngToWorld = (easting, northing, meta, heights) => {
+export const bngMarkersToWorld = (easting, northing, meta, heights) => {
   const { origin_easting, origin_northing, cols, rows, cell_size_m } = meta;
 
   const col = (easting - origin_easting) / cell_size_m; // 0..cols-1
@@ -57,28 +57,8 @@ export const bngToWorld = (easting, northing, meta, heights) => {
   };
 };
 
-import * as THREE from "three";
-
-// Build a hedge-like alpha texture procedurally (call once, memoize/share).
-export function makeHedgeTexture() {
-  const size = 256;
-  const canvas = document.createElement("canvas");
-  canvas.width = canvas.height = size;
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, size, size); // start FULLY TRANSPARENT
-
-  // paint only green foliage clumps, leaving gaps transparent
-  for (let i = 0; i < 3000; i++) {
-    const x = Math.random() * size,
-      y = Math.random() * size;
-    const r = 3 + Math.random() * 7;
-    const g = 60 + Math.random() * 80;
-    ctx.fillStyle = `rgba(${(g * 0.4) | 0}, ${g | 0}, ${(g * 0.3) | 0}, 0.9)`;
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  const tex = new THREE.CanvasTexture(canvas);
-  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-  return tex;
+export function bngToWorld(e, n, meta) {
+  const halfW = (meta.cols * meta.cell_size_m) / 2;
+  const halfD = (meta.rows * meta.cell_size_m) / 2;
+  return [e - meta.origin_easting - halfW, meta.origin_northing - n - halfD];
 }

@@ -1,5 +1,5 @@
 import useSolar from "../state/store";
-import { bngToWorld } from "../Utils/utils";
+import { bngMarkersToWorld } from "../Utils/utils";
 import { Text } from "@react-three/drei";
 
 const Markers = () => {
@@ -10,7 +10,7 @@ const Markers = () => {
   return (
     <>
       {viewpoints.map((vp) => {
-        const p = bngToWorld(vp.easting, vp.northing, metaData, heights);
+        const p = bngMarkersToWorld(vp.easting, vp.northing, metaData, heights);
         return (
           <>
             <mesh key={vp.no} position={[p.worldX, p.worldY + 4, p.worldZ]}>
