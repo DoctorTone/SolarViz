@@ -60,7 +60,7 @@ const Panels = ({ parcel }) => {
   const onRef = (mesh) => {
     if (!mesh) return;
     instances.forEach((inst, i) => {
-      meshRef.position.set(inst.x, inst.y + 1.5, inst.z); // panel centre ~1.5m
+      meshRef.position.set(inst.x, inst.y + 0.5, inst.z); // panel centre ~1.5m
       meshRef.rotation.set(THREE.MathUtils.degToRad(28), 0, 0); // tilt south
       meshRef.updateMatrix();
       mesh.setMatrixAt(i, meshRef.matrix);
