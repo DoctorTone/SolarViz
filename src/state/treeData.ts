@@ -48,6 +48,12 @@ export const treeData = [
     existing: true,
     mature_height: 15, // full height; existing trees sit at this always
   },
+  {
+    easting: 508420,
+    northing: 359732,
+    existing: true,
+    mature_height: 12.5, // full height; existing trees sit at this always
+  },
   // Existing tree lines - part way down By10 on west side
   {
     easting: 507766,
