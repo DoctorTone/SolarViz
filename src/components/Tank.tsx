@@ -25,6 +25,13 @@ const Tank = () => {
       >
         <meshStandardMaterial color="#a06a6a" flatShading />
       </Box>
+      <mesh
+        position={[0, TANK_HEIGHT, 0]}
+        rotation={[0, Math.PI / 10, Math.PI / 2]}
+      >
+        <cylinderGeometry args={[2, 2, 10]} />
+        <meshStandardMaterial color={"grey"} flatShading />
+      </mesh>
     </group>
   );
 };
