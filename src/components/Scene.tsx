@@ -9,6 +9,7 @@ import { pvParcels } from "../state/parcelData";
 import Panels from "./Panels";
 import { treeData } from "../state/treeData";
 import Trees from "./Trees";
+import Buildings from "./Buildings";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
@@ -35,6 +36,7 @@ const Scene = () => {
             <Panels key={p.id} parcel={p.boundary} />
           ))}
           <Trees trees={treeData} season={season} />
+          <Buildings />
         </>
       ) : null}
     </>
