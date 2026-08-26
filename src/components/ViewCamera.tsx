@@ -21,14 +21,16 @@ const ViewCamera = ({ hFovDeg = 90 }) => {
     const halfD = (meta.rows * meta.cell_size_m) / 2;
 
     // --- position (survey grid ref + eye level AOD) ---
-    const E = 508022,
-      N = 359680;
+    // const E = 508022,
+    //   N = 359680;
+    const E = 508665,
+      N = 360138;
     const x = E - meta.origin_easting - halfW;
     const z = meta.origin_northing - N - halfD;
-    const y = 15.32 + 1.5; // eye level AOD, plus eye height
+    const y = 10.5 + 1.5; // eye level AOD, plus eye height
 
     // --- look direction (bearing 115.7° clockwise from north) ---
-    const bearing = THREE.MathUtils.degToRad(115.7);
+    const bearing = THREE.MathUtils.degToRad(88.1);
     const d = 100;
     const lookE = E + Math.sin(bearing) * d; // easting component
     const lookN = N + Math.cos(bearing) * d; // northing component
