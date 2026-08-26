@@ -68,15 +68,14 @@ const Trees = ({ trees, season }) => {
       // canopy: squashed sphere-blob sitting atop the trunk
       const canopyY = t.groundY + t.h * 0.62;
       dummy.position.set(t.x, canopyY, t.z);
-      dummy.rotation.set(t.lean, rand(i) * 6.28, 0);
-      dummy.scale.set(t.canopyR, t.canopyR * 0.9, t.canopyR);
+      dummy.scale.set(t.canopyR * 0.7, t.canopyR * 1.8, t.canopyR * 0.7);
       dummy.updateMatrix();
       canopyRef.current.setMatrixAt(i, dummy.matrix);
       col.copy(base).multiplyScalar(t.shade);
       canopyRef.current.setColorAt(i, col);
 
       // trunk: thin cylinder from ground to canopy base
-      const trunkH = t.h * 0.55;
+      const trunkH = t.h * 0.25;
       dummy.position.set(t.x, t.groundY + trunkH / 2, t.z);
       dummy.rotation.set(0, 0, 0);
       dummy.scale.set(t.h * 0.04, trunkH, t.h * 0.04);
