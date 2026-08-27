@@ -384,4 +384,169 @@ export const hedgerows = [
       [509028, 360059],
     ],
   },
+  {
+    id: "Lf08 - East 1",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508413, 358971],
+      [508420, 358911],
+    ],
+  },
+  {
+    id: "Lf08 - East 2",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508420, 358911],
+      [508431, 358750],
+    ],
+  },
+  {
+    id: "Lf08 - East 3",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508431, 358750],
+      [508434, 358714],
+    ],
+  },
+  {
+    id: "Lf08 - East 4",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508434, 358714],
+      [508461, 358585],
+    ],
+  },
+  {
+    id: "Lf08 - East 5",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508461, 358585],
+      [508491, 358427],
+    ],
+  },
+  {
+    id: "Lf08 - South 1",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508474, 358417],
+      [508275, 358359],
+    ],
+  },
+  {
+    id: "Lf08 - West 1",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508258, 358942],
+      [508250, 358908],
+    ],
+  },
+  {
+    id: "Lf08 - West 2",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508248, 358895],
+      [508227, 358696],
+    ],
+  },
+  {
+    id: "Lf08 - West 3",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508227, 358696],
+      [508224, 358641],
+    ],
+  },
+  {
+    id: "Lf08 - West 4",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508224, 358641],
+      [508225, 358597],
+    ],
+  },
+  {
+    id: "Lf08 - West 5",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508225, 358597],
+      [508230, 358556],
+    ],
+  },
+  {
+    id: "Lf08 - West 6",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508230, 358556],
+      [508239, 358505],
+    ],
+  },
+  {
+    id: "Lf08 - West 7",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508239, 358505],
+      [508253, 358453],
+    ],
+  },
+  {
+    id: "Lf08 - West 8",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508253, 358453],
+      [508263, 358415],
+    ],
+  },
+  {
+    id: "Lf08 - West 9",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508263, 358415],
+      [508273, 358372],
+    ],
+  },
 ];

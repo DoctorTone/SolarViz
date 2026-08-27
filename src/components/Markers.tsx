@@ -14,7 +14,7 @@ const Markers = () => {
         return (
           <>
             <mesh key={vp.no} position={[p.worldX, p.worldY + 4, p.worldZ]}>
-              <sphereGeometry args={[0.2, 16, 16]} />
+              <sphereGeometry args={[2, 16, 16]} />
               <meshStandardMaterial color="#ff3333" />
             </mesh>
             <Text
