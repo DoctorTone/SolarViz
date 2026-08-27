@@ -66,7 +66,7 @@ const Trees = ({ trees, season }) => {
 
     currentTrees.forEach((t, i) => {
       // canopy: squashed sphere-blob sitting atop the trunk
-      const canopyY = t.groundY + t.h * 0.62;
+      const canopyY = t.groundY + t.h * 0.76;
       dummy.position.set(t.x, canopyY, t.z);
       dummy.scale.set(t.canopyR * 0.7, t.canopyR * 1.8, t.canopyR * 0.7);
       dummy.updateMatrix();
