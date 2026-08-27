@@ -1,5 +1,4 @@
 import { Box } from "@react-three/drei";
-import * as THREE from "three";
 import useSolar from "../state/store";
 import { bngToWorld } from "../Utils/utils";
 
@@ -23,14 +22,14 @@ const Tank = () => {
         position={[0, TANK_HEIGHT / 2, 0]}
         rotation-y={Math.PI / 10}
       >
-        <meshStandardMaterial color="#a06a6a" flatShading />
+        <meshStandardMaterial color="#976b6b" flatShading />
       </Box>
       <mesh
         position={[0, TANK_HEIGHT, 0]}
         rotation={[0, Math.PI / 10, Math.PI / 2]}
       >
         <cylinderGeometry args={[2, 2, 10]} />
-        <meshStandardMaterial color={"grey"} flatShading />
+        <meshStandardMaterial color="#6d6969" flatShading />
       </mesh>
     </group>
   );

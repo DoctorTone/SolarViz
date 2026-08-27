@@ -4,9 +4,9 @@ import useSolar from "../state/store";
 import { bngToWorld } from "../Utils/utils";
 
 const BARN_E = 508825;
-const BARN_N = 360184;
+const BARN_N = 360175;
 const BARN_WIDTH = 12;
-const BARN_HEIGHT = 5;
+const BARN_HEIGHT = 7;
 
 const Barn = () => {
   const meta = useSolar((s) => s.metaData);
@@ -19,14 +19,14 @@ const Barn = () => {
     <group position={[x, y, z]}>
       <Box
         args={[BARN_WIDTH, BARN_HEIGHT, 6]}
-        rotation-y={(1.4 * 180) / Math.PI}
+        rotation-y={1.7}
         position={[1, BARN_HEIGHT / 2, 0]}
       >
         <meshStandardMaterial color="grey" />
       </Box>
       <mesh
-        position={[-1, 7.5, 0.25]}
-        rotation={[-Math.PI / 8, (1.4 * 180) / Math.PI, 0, "YXZ"]}
+        position={[-1.5, 9.75, 0.475]}
+        rotation={[Math.PI / 12, 1.7, 0, "YXZ"]}
       >
         <planeGeometry args={[BARN_WIDTH, 7]} />
         <meshStandardMaterial
