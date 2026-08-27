@@ -56,4 +56,19 @@ export const pvParcels = [
     tilt_deg: 28,
     row_pitch_m: 6,
   },
+  {
+    id: "South of Scopwick Farm",
+    field_code: "Lf08",
+    boundary: [
+      [508269, 358933],
+      [508396, 358955],
+      [508402, 358875],
+      [508407, 358810],
+      [508252, 358807],
+      [508269, 358933],
+    ],
+    panel_top_height: 3.0,
+    tilt_deg: 28,
+    row_pitch_m: 6,
+  },
 ];
