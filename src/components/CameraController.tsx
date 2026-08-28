@@ -35,6 +35,8 @@ const VIEWPOINTS = {
   },
 };
 
+const CAM_POS = [0, 900, 1200];
+
 function CameraController() {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
@@ -64,7 +66,7 @@ function CameraController() {
     if (mode === "overview") {
       // high vantage looking down over site centre
       const [cx, cz] = toWorld(508400, 359000); // rough site centre BNG — tune
-      targetPos.current.set(cx + 0, 1400, cz + 1500);
+      targetPos.current.set(cx + CAM_POS[0], CAM_POS[1], cz + CAM_POS[2]);
       targetLook.current.set(cx, 0, cz);
       targetFov.current = 55;
     } else {
