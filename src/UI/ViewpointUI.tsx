@@ -1,4 +1,5 @@
 import useSolar from "../state/store";
+import StageControl from "./StageControl";
 
 const VP_ORDER = [7, 2, 4];
 
@@ -54,6 +55,7 @@ export default function ViewpointUI() {
           Assessed visual impact ({phase}): <strong>{impact}</strong>
         </p>
 
+        <StageControl />
         <div style={label}>View direction</div>
         <div style={dirRow}>
           {vp.directions.map((d, i) => (
