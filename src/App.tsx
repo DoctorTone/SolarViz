@@ -7,13 +7,15 @@ import UI from "./UI/UI";
 import { pvParcels } from "./state/parcelData";
 import ParcelInspector from "./components/ParcelInspector";
 import ViewCamera from "./components/ViewCamera";
+import CameraController from "./components/CameraController";
 
 function App() {
   return (
     <>
       <Canvas>
-        <ViewCamera hFovDeg={90} />
+        {/* <ViewCamera hFovDeg={90} /> */}
         {/* <ParcelInspector parcel={pvParcels[0].boundary} /> */}
+        <CameraController />
         <Lights />
         <DaySky />
         <Scene />

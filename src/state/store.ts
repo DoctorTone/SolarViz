@@ -12,6 +12,12 @@ type SolarState = {
   sampleHeight: (easting: number, northing: number) => null | number;
   viewPoint: number[];
   setViewpoint: (viewPoint: number[]) => void;
+  viewMode: string; // 'overview' | 'viewpoint'
+  activeViewpoint: null | number; // vp id when in viewpoint mod
+  activeDirection: number;
+  enterViewpoint: (id: number) => void;
+  exitToOverview: () => void;
+  setDirection: (i: number) => void;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -24,6 +30,13 @@ const useSolar = create<SolarState>((set, get) => ({
   currentYear: 0,
   setCurrentYear: (year) => set({ currentYear: year }),
   currentSeason: "summer",
+  viewMode: "overview",
+  activeViewpoint: null,
+  activeDirection: 0,
+  enterViewpoint: (id) =>
+    set({ viewMode: "viewpoint", activeViewpoint: id, activeDirection: 0 }),
+  exitToOverview: () => set({ viewMode: "overview", activeViewpoint: null }),
+  setDirection: (i) => set({ activeDirection: i }),
   loadData: async () => {
     const [meta, buffer, views] = await Promise.all([
       fetch("/data/terrain_meta.json").then((r) => r.json()),
