@@ -8,6 +8,7 @@ type SolarState = {
   currentYear: number;
   setCurrentYear: (year: number) => void;
   currentSeason: "summer" | "winter";
+  setCurrentSeason: (season: "summer" | "winter") => void;
   loadData: () => void;
   sampleHeight: (easting: number, northing: number) => null | number;
   viewPoint: number[];
@@ -30,6 +31,7 @@ const useSolar = create<SolarState>((set, get) => ({
   currentYear: 0,
   setCurrentYear: (year) => set({ currentYear: year }),
   currentSeason: "summer",
+  setCurrentSeason: (season) => set({ currentSeason: season }),
   viewMode: "overview",
   activeViewpoint: null,
   activeDirection: 0,

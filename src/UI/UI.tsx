@@ -1,6 +1,7 @@
 import Copyright from "../UI/Copyright";
 import Controls from "./Controls";
 import Info from "./Info";
+import ViewpointUI from "./ViewpointUI";
 
 const UI = () => {
   return (
@@ -8,6 +9,7 @@ const UI = () => {
       <Copyright />
       <Controls />
       <Info />
+      <ViewpointUI />
     </>
   );
 };
