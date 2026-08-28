@@ -16,6 +16,7 @@
     "distance": 230,
     "impactY1": "Medium",
     "impactY10": "Small/Negligible",
+    "eyeAOD": 12,
     "directions": [
       { "label": "East", "bearing": 88.1 },
       { "label": "South", "bearing": 178.1 },
@@ -39,6 +40,7 @@
     "distance": 120,
     "impactY1": "Medium",
     "impactY10": "Small/Negligible",
+    "eyeAOD": 15.17,
     "directions": [{ "label": "NW - toward development", "bearing": 313.7 }]
   },
   {
@@ -67,6 +69,7 @@
     "distance": 10,
     "impactY1": "Large",
     "impactY10": "Medium",
+    "eyeAOD": 16.82,
     "directions": [
       { "label": "SE — toward development", "bearing": 115.7 },
       { "label": "SW", "bearing": 205.7 },

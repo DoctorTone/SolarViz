@@ -8,33 +8,6 @@ function hFovToVFov(hFovDeg, aspect) {
   return THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(h / 2) / aspect));
 }
 
-// viewpoint definitions: BNG position, eye level AOD, and the view directions
-const VIEWPOINTS = {
-  7: {
-    easting: 508022,
-    northing: 359680,
-    eyeAOD: 16.82, // 15.32 ground +1.5
-    directions: [
-      { bearing: 115.7 },
-      { bearing: 205.7 },
-      { bearing: 295.7 },
-      { bearing: 25.7 },
-    ],
-  },
-  2: {
-    easting: 508665,
-    northing: 360138,
-    eyeAOD: 12, // 10.5 ground +1.5
-    directions: [{ bearing: 88.1 }, { bearing: 178.1 }, { bearing: 268.1 }],
-  },
-  4: {
-    easting: 508587,
-    northing: 358365,
-    eyeAOD: 15.17, // 13.67 +1.5,
-    directions: [{ bearing: 313.7 }],
-  },
-};
-
 const CAM_POS = [0, 900, 1200];
 
 function CameraController() {
@@ -43,6 +16,7 @@ function CameraController() {
   const mode = useSolar((s) => s.viewMode);
   const vpId = useSolar((s) => s.activeViewpoint);
   const dirIdx = useSolar((s) => s.activeDirection);
+  const viewpoints = useSolar((s) => s.viewpoints);
   const { camera, size } = useThree();
 
   // reusable target vectors
@@ -59,6 +33,9 @@ function CameraController() {
     return [e - meta.origin_easting - halfW, meta.origin_northing - n - halfD];
   };
 
+  // Get current viewpoint
+  const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
+
   useFrame(() => {
     if (!meta) return;
 
@@ -70,9 +47,8 @@ function CameraController() {
       targetLook.current.set(cx, 0, cz);
       targetFov.current = 55;
     } else {
-      if (vpId === null) return;
+      if (!vp) return null;
 
-      const vp = VIEWPOINTS[vpId];
       const [x, z] = toWorld(vp.easting, vp.northing);
       const groundAOD = sampleHeight(vp.easting, vp.northing) ?? 0;
       const y = vp.eyeAOD ?? groundAOD + 1.5;
