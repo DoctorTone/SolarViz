@@ -1,32 +1,15 @@
 import useSolar from "../state/store";
 
-// viewpoint metadata for labels + directions (mirror your camera controller data)
-const VP_INFO = {
-  7: {
-    name: "Permissive path, Scop/1134/1",
-    impact: "Large impact (Year 1)",
-    directions: ["SE — toward development", "SW", "NW", "NE"],
-  },
-  2: {
-    name: "Junction of Bln/4/3, Bln/4/2 & Bln/738/1",
-    impact: "Medium impact (Year 1)",
-    directions: ["East", "South", "West - toward development"], // fill your real directions
-  },
-  4: {
-    name: "Scop/7/2 at junction with Scop/7/1",
-    impact: "Medium impact (Year 1)",
-    directions: ["NW - toward development"],
-  },
-};
-
 const VP_ORDER = [7, 2, 4];
 
 export default function ViewpointUI() {
   const mode = useSolar((s) => s.viewMode);
   const vpId = useSolar((s) => s.activeViewpoint);
+
   const dirIdx = useSolar((s) => s.activeDirection);
   const year = useSolar((s) => s.currentYear);
   const season = useSolar((s) => s.currentSeason);
+  const viewpoints = useSolar((s) => s.viewpoints);
 
   const enter = useSolar((s) => s.enterViewpoint);
   const exit = useSolar((s) => s.exitToOverview);
@@ -34,73 +17,87 @@ export default function ViewpointUI() {
   const setYear = useSolar((s) => s.setCurrentYear);
   const setSeason = useSolar((s) => s.setCurrentSeason);
 
-  return (
-    <div style={panelWrap}>
-      {mode === "overview" ? (
+  const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
+
+  if (!vp) return null;
+
+  if (mode === "overview") {
+    return (
+      <div style={panelWrap}>
         <div style={panel}>
           <h3 style={h3}>Springwell Solar Farm</h3>
           <p style={sub}>Select a viewpoint to assess</p>
           {VP_ORDER.map((id) => (
             <button key={id} style={btn} onClick={() => enter(id)}>
-              <strong>VP{id}</strong> — {VP_INFO[id].name}
-              <span style={tag}>{VP_INFO[id].impact}</span>
+              <strong>VP{id}</strong> — {vp.name}
+              <span style={tag}>{vp.impactY1}</span>
             </button>
           ))}
         </div>
-      ) : (
-        <div style={panel}>
-          <button style={backBtn} onClick={exit}>
-            ← Overview
-          </button>
-          <h3 style={h3}>VP{vpId}</h3>
-          <p style={sub}>{VP_INFO[vpId].name}</p>
-          <p style={tagLine}>{VP_INFO[vpId].impact}</p>
+      </div>
+    );
+  }
 
-          <div style={label}>View direction</div>
-          <div style={dirRow}>
-            {VP_INFO[vpId].directions.map((d, i) => (
-              <button
-                key={i}
-                style={i === dirIdx ? dirBtnActive : dirBtn}
-                onClick={() => setDir(i)}
-              >
-                {d}
-              </button>
-            ))}
-          </div>
+  // inside the viewpoint-mode branch of your UI component
+  const impact = year <= 5 ? vp.impactY1 : vp.impactY10;
+  const phase = year <= 5 ? "Year 1" : "Year 10";
 
-          <div style={label}>Year: {year}</div>
-          <input
-            type="range"
-            min={0}
-            max={10}
-            step={1}
-            value={year}
-            onChange={(e) => setYear(+e.target.value)}
-            style={slider}
-          />
-          <div style={scaleRow}>
-            <span>Planting</span>
-            <span>Established</span>
-          </div>
+  return (
+    <div style={panelWrap}>
+      <div style={panel}>
+        <button style={backBtn} onClick={exit}>
+          ← Overview
+        </button>
+        <h3 style={h3}>VP{vpId}</h3>
+        <p style={sub}>{vp.name}</p>
+        <p style={tagLine}>
+          Assessed visual impact ({phase}): <strong>{impact}</strong>
+        </p>
 
-          <div style={label}>Season</div>
-          <div style={dirRow}>
+        <div style={label}>View direction</div>
+        <div style={dirRow}>
+          {vp.directions.map((d, i) => (
             <button
-              style={season === "summer" ? dirBtnActive : dirBtn}
-              onClick={() => setSeason("summer")}
+              key={i}
+              style={i === dirIdx ? dirBtnActive : dirBtn}
+              onClick={() => setDir(i)}
             >
-              Summer
+              {d.label}
             </button>
-            <button
-              style={season === "winter" ? dirBtnActive : dirBtn}
-              onClick={() => setSeason("winter")}
-            >
-              Winter (leaf-off)
-            </button>
-          </div>
+          ))}
         </div>
-      )}
+
+        <div style={label}>Year: {year}</div>
+        <input
+          type="range"
+          min={0}
+          max={10}
+          step={1}
+          value={year}
+          onChange={(e) => setYear(+e.target.value)}
+          style={slider}
+        />
+        <div style={scaleRow}>
+          <span>Planting</span>
+          <span>Established</span>
+        </div>
+
+        <div style={label}>Season</div>
+        <div style={dirRow}>
+          <button
+            style={season === "summer" ? dirBtnActive : dirBtn}
+            onClick={() => setSeason("summer")}
+          >
+            Summer
+          </button>
+          <button
+            style={season === "winter" ? dirBtnActive : dirBtn}
+            onClick={() => setSeason("winter")}
+          >
+            Winter (leaf-off)
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

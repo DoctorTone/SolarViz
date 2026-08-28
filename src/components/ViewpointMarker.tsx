@@ -56,7 +56,7 @@ const ViewpointMarker = ({ vp }) => {
       >
         {/* cone with 3 radial segments = a pyramid/triangle marker */}
         <coneGeometry args={[18, 30, 3]} />
-        <meshBasicMaterial color={hovered ? "#d8c070" : "orange"} />
+        <meshBasicMaterial color={hovered ? "#d43e4a" : "orange"} />
       </mesh>
     </group>
   );
