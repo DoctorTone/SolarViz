@@ -10,12 +10,12 @@ const VP_INFO = {
   2: {
     name: "Junction of Bln/4/3, Bln/4/2 & Bln/738/1",
     impact: "Medium impact (Year 1)",
-    directions: ["Toward development"], // fill your real directions
+    directions: ["East", "South", "West - toward development"], // fill your real directions
   },
   4: {
     name: "Scop/7/2 at junction with Scop/7/1",
     impact: "Medium impact (Year 1)",
-    directions: ["Toward development"],
+    directions: ["NW - toward development"],
   },
 };
 
