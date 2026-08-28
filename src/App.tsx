@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       <Canvas>
-        {/* <ViewCamera hFovDeg={90} /> */}
-        <ParcelInspector parcel={pvParcels[0].boundary} />
+        <ViewCamera hFovDeg={90} />
+        {/* <ParcelInspector parcel={pvParcels[0].boundary} /> */}
         <Lights />
         <DaySky />
         <Scene />

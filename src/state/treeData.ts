@@ -353,7 +353,7 @@ export const treeData = [
     easting: 508731,
     northing: 360184,
     existing: true,
-    mature_height: 12.5, // full height; existing trees sit at this always
+    mature_height: 9.5, // full height; existing trees sit at this always
   },
   {
     easting: 508692,
