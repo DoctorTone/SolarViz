@@ -1,24 +1,10 @@
 [
   {
-    "no": 1,
-    "name": "B1189 Moor Lane, Blankney",
-    "easting": 510040,
-    "northing": 360859,
-    "distance": 1300
-  },
-  {
     "no": 2,
     "name": "Junction of Bln/4/3, Bln/4/2 and Bln/738/1",
     "easting": 508662,
     "northing": 360144,
     "distance": 230
-  },
-  {
-    "no": 3,
-    "name": "Junction of Scop/738/1 and Scop/8/1",
-    "easting": 509001,
-    "northing": 359249,
-    "distance": 10
   },
   {
     "no": 4,
@@ -28,108 +14,10 @@
     "distance": 120
   },
   {
-    "no": 5,
-    "name": "Scop/7/1 at junction with B1191",
-    "easting": 508651,
-    "northing": 357963,
-    "distance": 500
-  },
-  {
-    "no": 6,
-    "name": "Junction of Scop/1135/4 and Acre Lane",
-    "easting": 508239,
-    "northing": 358901,
-    "distance": 20
-  },
-  {
     "no": 7,
     "name": "Permissive path between Scop/1134/1 and Bln/4/2",
     "easting": 508016,
     "northing": 359686,
     "distance": 10
-  },
-  {
-    "no": 8,
-    "name": "Bln/4/2",
-    "easting": 507771,
-    "northing": 360245,
-    "distance": 20
-  },
-  {
-    "no": 9,
-    "name": "Scop/3/1 at junction with Main Street, Scopwick",
-    "easting": 507616,
-    "northing": 358049,
-    "distance": 510
-  },
-  {
-    "no": 10,
-    "name": "Spires and Steeples Trail junction with Trundle Lane - North of Scopwick",
-    "easting": 506972,
-    "northing": 358430,
-    "distance": 420
-  },
-  {
-    "no": 11,
-    "name": "B1188 junction with Bloxholm Lane",
-    "easting": 506649,
-    "northing": 358523,
-    "distance": 470
-  },
-  {
-    "no": 12,
-    "name": "Spires and Steeples Trail",
-    "easting": 506855,
-    "northing": 359445,
-    "distance": 120
-  },
-  {
-    "no": 13,
-    "name": "Blankney Stepping Out car park picnic area",
-    "easting": 507418,
-    "northing": 360577,
-    "distance": 150
-  },
-  {
-    "no": 14,
-    "name": "Blankney Walks Lane near Brickyard Cottage",
-    "easting": 508370,
-    "northing": 360628,
-    "distance": 240
-  },
-  {
-    "no": 15,
-    "name": "B1191 western edge of Scopwick",
-    "easting": 506358,
-    "northing": 357964,
-    "distance": 610
-  },
-  {
-    "no": 16,
-    "name": "Footpath Rows/5/1 west of Sheffield House",
-    "easting": 506401,
-    "northing": 356655,
-    "distance": 80
-  },
-  {
-    "no": 17,
-    "name": "Footpath Rows/5/1 north of The Maltings",
-    "easting": 505581,
-    "northing": 356426,
-    "distance": 10
-  },
-  {
-    "no": 18,
-    "name": "Heath Road (B1191) near Digby Quarry",
-    "easting": 505316,
-    "northing": 357209,
-    "distance": 300
-  },
-  {
-    "no": 19,
-    "name": "Scopwick Heath Restricted Byway Scop/12/2",
-    "easting": 505372,
-    "northing": 357874,
-    "distance": 850
   }
 ]
