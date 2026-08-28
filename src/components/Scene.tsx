@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Terrain from "./Terrain";
 import useSolar from "../state/store";
-import Markers from "./Markers";
+import ViewpointMarkers from "./ViewpointMarkers";
 import Grid from "./Grid";
 import { hedgerows } from "../state/hedgerowData";
 import HedgeRow from "./HedgeRow";
@@ -27,7 +27,7 @@ const Scene = () => {
       {loaded ? (
         <>
           <Terrain />
-          <Markers />
+          <ViewpointMarkers />
           <Grid />
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
