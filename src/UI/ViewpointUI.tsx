@@ -28,6 +28,7 @@ export default function ViewpointUI() {
           <p style={sub}>Select a viewpoint to assess</p>
           {viewpoints
             .filter((v) => [7, 2, 4].includes(v.no))
+            .reverse()
             .map((vp, index) => (
               <button key={index} style={btn} onClick={() => enter(vp.no)}>
                 <strong>VP{vp.no}</strong> — {vp.name}
