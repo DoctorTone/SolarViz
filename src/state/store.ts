@@ -13,7 +13,7 @@ type SolarState = {
   sampleHeight: (easting: number, northing: number) => null | number;
   viewPoint: number[];
   setViewpoint: (viewPoint: number[]) => void;
-  viewMode: string; // 'overview' | 'viewpoint'
+  viewMode: "overview" | "viewpoint";
   activeViewpoint: null | number; // vp id when in viewpoint mod
   activeDirection: number;
   enterViewpoint: (id: number) => void;

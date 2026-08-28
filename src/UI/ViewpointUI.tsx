@@ -20,20 +20,19 @@ export default function ViewpointUI() {
 
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
 
-  if (!vp) return null;
-
   if (mode === "overview") {
     return (
       <div style={panelWrap}>
         <div style={panel}>
           <h3 style={h3}>Springwell Solar Farm</h3>
           <p style={sub}>Select a viewpoint to assess</p>
-          {VP_ORDER.map((id) => (
-            <button key={id} style={btn} onClick={() => enter(id)}>
-              <strong>VP{id}</strong> — {vp.name}
-              <span style={tag}>{vp.impactY1}</span>
-            </button>
-          ))}
+          {viewpoints
+            .filter((v) => [7, 2, 4].includes(v.no))
+            .map((vp, index) => (
+              <button key={index} style={btn} onClick={() => enter(vp.no)}>
+                <strong>VP{vp.no}</strong> — {vp.name}
+              </button>
+            ))}
         </div>
       </div>
     );
