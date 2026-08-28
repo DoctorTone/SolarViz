@@ -21,6 +21,8 @@ type SolarState = {
   setDirection: (i: number) => void;
   stage: "baseline" | "built" | "grown";
   setStage: (stage: "baseline" | "built" | "grown") => void;
+  showPanels: boolean;
+  togglePanels: () => void;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -50,6 +52,8 @@ const useSolar = create<SolarState>((set, get) => ({
     };
     set(map[stage] ? { stage, ...map[stage] } : { stage });
   },
+  showPanels: false,
+  togglePanels: () => set((s) => ({ showPanels: !s.showPanels })),
   loadData: async () => {
     const [meta, buffer, views] = await Promise.all([
       fetch("/data/terrain_meta.json").then((r) => r.json()),
