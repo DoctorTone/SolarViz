@@ -32,9 +32,9 @@ const Scene = () => {
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
           ))}
-          {pvParcels.map((p) => (
+          {/* {pvParcels.map((p) => (
             <Panels key={p.id} parcel={p.boundary} />
-          ))}
+          ))} */}
           <Trees trees={treeData} season={season} />
           <Buildings />
         </>

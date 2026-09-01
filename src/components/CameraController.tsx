@@ -8,7 +8,7 @@ function hFovToVFov(hFovDeg, aspect) {
   return THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(h / 2) / aspect));
 }
 
-const CAM_POS = [0, 100, 800];
+const CAM_POS = [0, 300, 300];
 
 function CameraController() {
   const meta = useSolar((s) => s.metaData);
@@ -42,7 +42,7 @@ function CameraController() {
     // --- compute the target pose for the current mode ---
     if (mode === "overview") {
       // high vantage looking down over site centre
-      const [cx, cz] = toWorld(508400, 359000); // rough site centre BNG — tune
+      const [cx, cz] = toWorld(508400, 359500); // rough site centre BNG — tune
       targetPos.current.set(cx + CAM_POS[0], CAM_POS[1], cz + CAM_POS[2]);
       targetLook.current.set(cx, 0, cz);
       targetFov.current = 55;

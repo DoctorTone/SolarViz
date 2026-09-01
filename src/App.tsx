@@ -14,7 +14,7 @@ function App() {
         <Lights />
         <DaySky />
         <Scene />
-        <Perf />
+        {/* <Perf /> */}
       </Canvas>
       <UI />
     </>

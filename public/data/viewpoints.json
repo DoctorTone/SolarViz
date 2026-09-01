@@ -64,8 +64,8 @@
   {
     "no": 7,
     "name": "Permissive path between Scop/1134/1 and Bln/4/2",
-    "easting": 508016,
-    "northing": 359686,
+    "easting": 508022,
+    "northing": 359680,
     "distance": 10,
     "impactY1": "Large",
     "impactY10": "Medium",
