@@ -42,7 +42,14 @@ const useSolar = create<SolarState>((set, get) => ({
   activeDirection: 0,
   developmentVisible: true,
   enterViewpoint: (id) =>
-    set({ viewMode: "viewpoint", activeViewpoint: id, activeDirection: 0 }),
+    set({
+      viewMode: "viewpoint",
+      activeViewpoint: id,
+      activeDirection: 0,
+      stage: "built",
+      developmentVisible: true,
+      currentYear: 1,
+    }),
   exitToOverview: () => set({ viewMode: "overview", activeViewpoint: null }),
   setDirection: (i) => set({ activeDirection: i }),
   stage: "baseline",
