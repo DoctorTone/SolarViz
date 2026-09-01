@@ -388,8 +388,8 @@ export const hedgerows = [
     id: "Lf08 - East 1",
     type: "hedgerow",
     augments_existing: true,
-    start_height: 1.5, // existing hedge height at year 0 (m)
-    mature_height: 1.5, // documented year-10 maintained height
+    start_height: 3.5, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
     points: [
       [508413, 358971],
       [508420, 358911],
@@ -399,8 +399,8 @@ export const hedgerows = [
     id: "Lf08 - East 2",
     type: "hedgerow",
     augments_existing: true,
-    start_height: 1.5, // existing hedge height at year 0 (m)
-    mature_height: 1.5, // documented year-10 maintained height
+    start_height: 3.5, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
     points: [
       [508420, 358911],
       [508431, 358750],
@@ -410,8 +410,8 @@ export const hedgerows = [
     id: "Lf08 - East 3",
     type: "hedgerow",
     augments_existing: true,
-    start_height: 1.5, // existing hedge height at year 0 (m)
-    mature_height: 1.5, // documented year-10 maintained height
+    start_height: 3.5, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
     points: [
       [508431, 358750],
       [508434, 358714],
@@ -421,8 +421,8 @@ export const hedgerows = [
     id: "Lf08 - East 4",
     type: "hedgerow",
     augments_existing: true,
-    start_height: 1.5, // existing hedge height at year 0 (m)
-    mature_height: 1.5, // documented year-10 maintained height
+    start_height: 3.5, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
     points: [
       [508434, 358714],
       [508461, 358585],
@@ -432,8 +432,8 @@ export const hedgerows = [
     id: "Lf08 - East 5",
     type: "hedgerow",
     augments_existing: true,
-    start_height: 1.5, // existing hedge height at year 0 (m)
-    mature_height: 1.5, // documented year-10 maintained height
+    start_height: 3.5, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
     points: [
       [508461, 358585],
       [508491, 358427],
