@@ -23,6 +23,7 @@ type SolarState = {
   setStage: (stage: "baseline" | "built" | "grown") => void;
   showPanels: boolean;
   togglePanels: () => void;
+  developmentVisible: boolean;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -39,6 +40,7 @@ const useSolar = create<SolarState>((set, get) => ({
   viewMode: "overview",
   activeViewpoint: null,
   activeDirection: 0,
+  developmentVisible: true,
   enterViewpoint: (id) =>
     set({ viewMode: "viewpoint", activeViewpoint: id, activeDirection: 0 }),
   exitToOverview: () => set({ viewMode: "overview", activeViewpoint: null }),
@@ -46,9 +48,13 @@ const useSolar = create<SolarState>((set, get) => ({
   stage: "baseline",
   setStage: (stage) => {
     const map = {
-      baseline: { showPanels: false, year: 0 },
-      built: { showPanels: true, year: 1 },
-      grown: { showPanels: true, year: 10 },
+      baseline: {
+        developmentVisible: false,
+        showPanels: false,
+        currentYear: 0,
+      },
+      built: { developmentVisible: true, showPanels: true, currentYear: 1 },
+      grown: { developmentVisible: true, showPanels: true, currentYear: 10 },
     };
     set(map[stage] ? { stage, ...map[stage] } : { stage });
   },

@@ -19,18 +19,47 @@ function rand(seed) {
 }
 
 const HedgeRow = ({ hedge }) => {
+  const developmentVisible = useSolar((s) => s.developmentVisible);
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
   const year = useSolar((s) => s.currentYear); // 0..10
   const season = useSolar((s) => s.currentSeason); // 'summer' | 'winter'
   const ref = useRef(null);
 
-  const { start_height = 1.5, mature_height = 3.5, points } = hedge;
-  const t = Math.min(1, Math.max(0, year / 10));
-  const height = start_height + (mature_height - start_height) * t;
+  const {
+    augments_existing,
+    start_height = 1.5,
+    mature_height = 3.5,
+    points,
+  } = hedge;
+
+  // Decide this hedge's current height AND whether it renders at all:
+  let height;
+  let render = true;
+
+  if (augments_existing) {
+    // Existing hedge being strengthened: ALWAYS renders (it's part of baseline).
+    // At baseline/year 0 it sits at its existing (start) height.
+    // When development present, it grows toward mature with the year.
+    if (developmentVisible) {
+      const t = Math.min(1, Math.max(0, year / 10));
+      height = start_height + (mature_height - start_height) * t;
+    } else {
+      height = start_height; // baseline: existing height only
+    }
+  } else {
+    // Brand-new mitigation hedge: part of the scheme.
+    // Does NOT exist in baseline — hide entirely when development not shown.
+    if (!developmentVisible) {
+      render = false;
+    } else {
+      const t = Math.min(1, Math.max(0, year / 10));
+      height = start_height + (mature_height - start_height) * t; // start_height ~0
+    }
+  }
 
   const blobs = useMemo(() => {
-    if (!meta || height < 0.15) return [];
+    if (!render || height < 0.15) return [];
     const STEP = 0.7,
       WIDTH = 1.4,
       DENSITY = 2.2;
@@ -71,7 +100,7 @@ const HedgeRow = ({ hedge }) => {
       }
     }
     return out;
-  }, [hedge, meta, sampleHeight, height]);
+  }, [hedge, meta, sampleHeight, height, render]);
 
   const count = blobs.length;
 

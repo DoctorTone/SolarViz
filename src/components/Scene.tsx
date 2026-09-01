@@ -15,6 +15,7 @@ const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
   const loaded = useSolar((state) => state.loaded);
   const season = useSolar((state) => state.currentSeason);
+  const developmentVisible = useSolar((s) => s.developmentVisible);
 
   useEffect(() => {
     if (!loaded) {
@@ -32,9 +33,8 @@ const Scene = () => {
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
           ))}
-          {pvParcels.map((p) => (
-            <Panels key={p.id} parcel={p.boundary} />
-          ))}
+          {developmentVisible &&
+            pvParcels.map((p) => <Panels key={p.id} parcel={p.boundary} />)}
           <Trees trees={treeData} season={season} />
           <Buildings />
         </>
