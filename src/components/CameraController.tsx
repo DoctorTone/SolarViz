@@ -8,7 +8,7 @@ function hFovToVFov(hFovDeg, aspect) {
   return THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(h / 2) / aspect));
 }
 
-const CAM_POS = [0, 300, 300];
+const CAM_POS = [0, 300, 400];
 
 function CameraController() {
   const meta = useSolar((s) => s.metaData);

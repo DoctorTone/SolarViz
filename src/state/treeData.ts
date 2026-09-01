@@ -57,7 +57,7 @@ export const treeData = [
   // Existing tree lines - VP7 looking SW
   {
     easting: 507989,
-    northing: 359673,
+    northing: 359670,
     existing: true,
     mature_height: 12.5, // full height; existing trees sit at this always
   },
@@ -72,6 +72,50 @@ export const treeData = [
     northing: 359657,
     existing: true,
     mature_height: 12.5, // full height; existing trees sit at this always
+  },
+  // Existing tree lines - VP7 looking NW
+  {
+    easting: 507896,
+    northing: 359682,
+    existing: true,
+    mature_height: 12.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507896,
+    northing: 359678,
+    existing: true,
+    mature_height: 12.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507926,
+    northing: 359672,
+    existing: true,
+    mature_height: 12.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507919,
+    northing: 359665,
+    existing: true,
+    mature_height: 12.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507915,
+    northing: 359675,
+    existing: true,
+    mature_height: 12.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507915,
+    northing: 359668,
+    existing: true,
+    mature_height: 10.5, // full height; existing trees sit at this always
+  },
+  // Existing tree lines - VP7 lookinh NE
+  {
+    easting: 508021,
+    northing: 359690,
+    existing: true,
+    mature_height: 8.5, // full height; existing trees sit at this always
   },
   // Existing tree lines - part way down By10 on west side
   // Top
