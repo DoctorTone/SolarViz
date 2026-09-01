@@ -42,7 +42,7 @@ function CameraController() {
     // --- compute the target pose for the current mode ---
     if (mode === "overview") {
       // high vantage looking down over site centre
-      const [cx, cz] = toWorld(508400, 359500); // rough site centre BNG — tune
+      const [cx, cz] = toWorld(508900, 360000); // rough site centre BNG — tune
       targetPos.current.set(cx + CAM_POS[0], CAM_POS[1], cz + CAM_POS[2]);
       targetLook.current.set(cx, 0, cz);
       targetFov.current = 55;

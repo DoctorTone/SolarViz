@@ -360,7 +360,7 @@ export const treeData = [
   // Existing tree line - additional trees adding to VP2
   {
     easting: 508997,
-    northing: 360239,
+    northing: 360245,
     existing: true,
     mature_height: 17.5, // full height; existing trees sit at this always
   },
@@ -383,6 +383,24 @@ export const treeData = [
     mature_height: 17.5, // full height; existing trees sit at this always
   },
   {
+    easting: 509013,
+    northing: 360169,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509013,
+    northing: 360161,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509013,
+    northing: 360156,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
     easting: 509020,
     northing: 360149,
     existing: true,
@@ -391,6 +409,30 @@ export const treeData = [
   {
     easting: 509028,
     northing: 360123,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509030,
+    northing: 360116,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509030,
+    northing: 360110,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509030,
+    northing: 360104,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509030,
+    northing: 360098,
     existing: true,
     mature_height: 17.5, // full height; existing trees sit at this always
   },
@@ -419,10 +461,16 @@ export const treeData = [
     mature_height: 9.5, // full height; existing trees sit at this always
   },
   {
-    easting: 508692,
-    northing: 360172,
+    easting: 508688,
+    northing: 360170,
     existing: true,
-    mature_height: 5.5, // full height; existing trees sit at this always
+    mature_height: 7.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508709,
+    northing: 360178,
+    existing: true,
+    mature_height: 5, // full height; existing trees sit at this always
   },
   {
     easting: 508670,
