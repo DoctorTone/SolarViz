@@ -24,6 +24,8 @@ type SolarState = {
   showPanels: boolean;
   togglePanels: () => void;
   developmentVisible: boolean;
+  infoDialogOpen: boolean;
+  setShowInfoDialog: (status: boolean) => void;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -86,6 +88,8 @@ const useSolar = create<SolarState>((set, get) => ({
       loaded: true,
     });
   },
+  infoDialogOpen: false,
+  setShowInfoDialog: (status) => set(() => ({ infoDialogOpen: status })),
   // Terrain height lookup: BNG easting/northing -> ground elevation (m AOD).
   // Returns null if the point is outside the loaded tile.
   sampleHeight: (easting, northing) => {
