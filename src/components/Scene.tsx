@@ -29,7 +29,7 @@ const Scene = () => {
         <>
           <Terrain />
           <ViewpointMarkers />
-          <Grid />
+          {/* <Grid /> */}
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
           ))}

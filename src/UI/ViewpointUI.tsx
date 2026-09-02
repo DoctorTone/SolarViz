@@ -17,6 +17,7 @@ export default function ViewpointUI() {
   const setDir = useSolar((s) => s.setDirection);
   const setYear = useSolar((s) => s.setCurrentYear);
   const setSeason = useSolar((s) => s.setCurrentSeason);
+  const developmentVisible = useSolar((s) => s.developmentVisible);
 
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
 
@@ -72,12 +73,13 @@ export default function ViewpointUI() {
         <div style={label}>Year: {year}</div>
         <input
           type="range"
-          min={0}
+          min={1}
           max={10}
           step={1}
+          disabled={!developmentVisible}
           value={year}
           onChange={(e) => setYear(+e.target.value)}
-          style={slider}
+          style={{ ...slider, opacity: developmentVisible ? 1 : 0.4 }}
         />
         <div style={scaleRow}>
           <span>Planting</span>
