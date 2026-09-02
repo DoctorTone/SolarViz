@@ -5,13 +5,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
-import useStore from "../state/store";
+import useSolar from "../state/store";
 
 const InfoDialog = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const infoDialogOpen = useStore((state) => state.infoDialogOpen);
-  const setShowInfoDialog = useStore((state) => state.setShowInfoDialog);
+  const infoDialogOpen = useSolar((state) => state.infoDialogOpen);
+  const setShowInfoDialog = useSolar((state) => state.setShowInfoDialog);
 
   const handleClose = () => {
     setDialogOpen(false);
@@ -41,28 +40,34 @@ const InfoDialog = () => {
           },
         }}
       >
-        <DialogTitle>Framework Model</DialogTitle>
-        <DialogContent dividers>
+        <DialogTitle
+          sx={{ textAlign: "center", pb: 0, mb: 3, color: "orange" }}
+        >
+          Solar Farm Visualisation
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="h6" sx={{ mb: 3 }}>
+            This is an interactive visualisation of the consented Springwell
+            Solar Farm, a Nationally Significant Infrastructure Project in
+            Lincolnshire (DCO refereence EN010149). It reproduces the
+            assessment's surveyed viewpoints, showing the development and its
+            screening from construction through to year ten.
+          </Typography>
+          <Typography variant="h6" sx={{ mb: 3 }}>
+            Terrain is from Environment Agency LIDAR; viewpoints, panel
+            specifications and planting positions are taken from the submitted
+            application documents. Existing vegetation is shown as it is now;
+            new and strengthened hedgerows grow to their 3.5m maintained height
+            over the ten-year period assessed, with reduced screening shown in
+            winter.
+          </Typography>
           <Typography variant="h6">
-            <Link
-              variant="h6"
-              underline="none"
-              href="https://market.pmnd.rs/model/suzanne-high-poly"
-              target="_blank"
-              rel="noopener"
-            >
-              Suzanne{" "}
-            </Link>
-            by pmndrs is licensed under{" "}
-            <Link
-              variant="h6"
-              underline="none"
-              href="http://creativecommons.org/licenses/by/4.0/"
-              target="_blank"
-              rel="noopener"
-            >
-              Creative Commons Attribution
-            </Link>
+            This is a demonstration, not a verified photomontage. Where planting
+            is shown only indicatively, hedgerows are placed within field
+            margins, and heights are representative. It shows every state as
+            accurately as possible, including the least-screened views, and is
+            intended to be equally useful to applicants, authorities and the
+            public.
           </Typography>
         </DialogContent>
         <DialogActions>
