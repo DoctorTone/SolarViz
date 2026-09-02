@@ -11,6 +11,7 @@
   {
     "no": 2,
     "name": "Junction of Bln/4/3, Bln/4/2 and Bln/738/1",
+    "description": "Footpath junction some distance north of the site",
     "easting": 508662,
     "northing": 360144,
     "distance": 230,
@@ -35,6 +36,7 @@
   {
     "no": 4,
     "name": "Scop/7/2 at junction with Scop/7/1",
+    "description": "Footpath junction looking across the wider landscape",
     "easting": 508587,
     "northing": 358365,
     "distance": 120,
@@ -64,6 +66,7 @@
   {
     "no": 7,
     "name": "Permissive path between Scop/1134/1 and Bln/4/2",
+    "description": "Permissive path immediately beside the development, the closest assessed view",
     "easting": 508022,
     "northing": 359680,
     "distance": 10,

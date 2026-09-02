@@ -25,14 +25,36 @@ export default function ViewpointUI() {
     return (
       <div style={panelWrap}>
         <div style={panel}>
-          <h3 style={h3}>Springwell Solar Farm</h3>
-          <p style={sub}>Select a viewpoint to assess</p>
+          <h1
+            style={{
+              fontSize: 20,
+              fontWeight: 600,
+              margin: 0,
+              lineHeight: 1.2,
+              color: "#1a1a1a",
+            }}
+          >
+            Springwell Solar Farm
+          </h1>
+          <p
+            style={{
+              fontSize: 13,
+              fontWeight: 400,
+              margin: "6px 0 0",
+              lineHeight: 1.45,
+              color: "#666",
+            }}
+          >
+            An interactive visualisation of the consented scheme in
+            Lincolnshire.
+          </p>
+          <p style={sub}>Select a viewpoint to assess:</p>
           {viewpoints
             .filter((v) => [7, 2, 4].includes(v.no))
             .reverse()
             .map((vp, index) => (
               <button key={index} style={btn} onClick={() => enter(vp.no)}>
-                <strong>VP{vp.no}</strong> — {vp.name}
+                <strong>VP{vp.no}</strong> — {vp.description}
               </button>
             ))}
         </div>
@@ -122,7 +144,7 @@ const panel = {
   boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
 };
 const h3 = { margin: "0 0 2px", fontSize: 18 };
-const sub = { margin: "0 0 12px", fontSize: 13, color: "#555" };
+const sub = { margin: "8px 0 12px 0", fontSize: 13, color: "#0e0d0d" };
 const tagLine = {
   margin: "0 0 14px",
   fontSize: 12,

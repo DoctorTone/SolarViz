@@ -1,18 +1,12 @@
 import { useMemo } from "react";
 import * as THREE from "three";
 import useSolar from "../state/store";
+import { bngToWorld } from "../Utils/utils";
 
-function bngToWorld(easting, northing, meta) {
-  const halfW = (meta.cols * meta.cell_size_m) / 2;
-  const halfD = (meta.rows * meta.cell_size_m) / 2;
-  return [
-    easting - meta.origin_easting - halfW,
-    meta.origin_northing - northing - halfD,
-  ];
-}
+const TILT = THREE.MathUtils.degToRad(13); // south-facing tilt
 
 // point-in-polygon (ray cast) on BNG coords
-function inside(e, n, poly) {
+function inside(e: number, n: number, poly: number[][]) {
   let c = false;
   for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
     const [ei, ni] = poly[i],
@@ -23,16 +17,15 @@ function inside(e, n, poly) {
   return c;
 }
 
-const Panels = ({ parcel }) => {
+const Panels = ({ parcel }: { parcel: number[][] }) => {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
 
   const { instances, count } = useMemo(() => {
     if (!meta) return { instances: [], count: 0 };
 
-    const ROW_PITCH = 6; // metres between rows (N-S spacing)
-    const PANEL_STEP = 4; // metres between panels along a row (E-W)
-    const TILT = THREE.MathUtils.degToRad(28); // south-facing tilt
+    const ROW_PITCH = 12.2; // metres between rows (N-S spacing)
+    const PANEL_STEP = 0 + 29.98; // metres between panels along a row (E-W)
 
     // bounding box of the parcel in BNG
     const es = parcel.map((p) => p[0]),
@@ -42,7 +35,7 @@ const Panels = ({ parcel }) => {
     const nMin = Math.min(...ns),
       nMax = Math.max(...ns);
 
-    const insts = [];
+    const insts: { x: number; y: number; z: number }[] = [];
     // rows run E-W (constant northing), stepping north-south
     for (let n = nMin; n <= nMax; n += ROW_PITCH) {
       for (let e = eMin; e <= eMax; e += PANEL_STEP) {
@@ -57,11 +50,11 @@ const Panels = ({ parcel }) => {
 
   const meshRef = useMemo(() => new THREE.Object3D(), []);
 
-  const onRef = (mesh) => {
+  const onRef = (mesh: THREE.InstancedMesh | null) => {
     if (!mesh) return;
     instances.forEach((inst, i) => {
-      meshRef.position.set(inst.x, inst.y + 0.5, inst.z); // panel centre ~1.5m
-      meshRef.rotation.set(THREE.MathUtils.degToRad(28), 0, 0); // tilt south
+      meshRef.position.set(inst.x, inst.y + 1.5, inst.z); // panel centre ~1.5m
+      meshRef.rotation.set(TILT, 0, 0); // tilt south
       meshRef.updateMatrix();
       mesh.setMatrixAt(i, meshRef.matrix);
     });
@@ -71,8 +64,8 @@ const Panels = ({ parcel }) => {
   if (!count) return null;
 
   return (
-    <instancedMesh ref={onRef} args={[null, null, count]}>
-      <boxGeometry args={[3.5, 0.1, 2]} /> {/* panel: 3.5m wide, 2m deep */}
+    <instancedMesh ref={onRef} args={[undefined, undefined, count]}>
+      <boxGeometry args={[29.98, 0.1, 9.4]} /> {/* panel: 3.5m wide, 2m deep */}
       <meshStandardMaterial color="#1a2b4a" metalness={0.3} roughness={0.4} />
     </instancedMesh>
   );
