@@ -77,12 +77,6 @@ export const treeData = [
   // Crop at field edge
   {
     easting: 507896,
-    northing: 359682,
-    existing: true,
-    mature_height: 12.5, // full height; existing trees sit at this always
-  },
-  {
-    easting: 507896,
     northing: 359678,
     existing: true,
     mature_height: 12.5, // full height; existing trees sit at this always
@@ -90,12 +84,6 @@ export const treeData = [
   {
     easting: 507926,
     northing: 359672,
-    existing: true,
-    mature_height: 12.5, // full height; existing trees sit at this always
-  },
-  {
-    easting: 507919,
-    northing: 359665,
     existing: true,
     mature_height: 12.5, // full height; existing trees sit at this always
   },
