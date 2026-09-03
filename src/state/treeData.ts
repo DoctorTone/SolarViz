@@ -219,6 +219,12 @@ export const treeData = [
   },
   {
     easting: 507790,
+    northing: 359845,
+    existing: true,
+    mature_height: 15, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507790,
     northing: 359840,
     existing: true,
     mature_height: 15, // full height; existing trees sit at this always
@@ -230,8 +236,20 @@ export const treeData = [
     mature_height: 15, // full height; existing trees sit at this always
   },
   {
+    easting: 507790,
+    northing: 359830,
+    existing: true,
+    mature_height: 15, // full height; existing trees sit at this always
+  },
+  {
     easting: 507794,
     northing: 359825,
+    existing: true,
+    mature_height: 15, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507794,
+    northing: 359820,
     existing: true,
     mature_height: 15, // full height; existing trees sit at this always
   },
@@ -435,6 +453,43 @@ export const treeData = [
     northing: 359750,
     existing: true,
     mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  // Trees in middle of clump
+  {
+    easting: 507722,
+    northing: 359851,
+    existing: true,
+    mature_height: 30, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507720,
+    northing: 359838,
+    existing: true,
+    mature_height: 32.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507733,
+    northing: 359861,
+    existing: true,
+    mature_height: 27.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507727,
+    northing: 359821,
+    existing: true,
+    mature_height: 22.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507722,
+    northing: 359816,
+    existing: true,
+    mature_height: 22.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507736,
+    northing: 359869,
+    existing: true,
+    mature_height: 25.5, // full height; existing trees sit at this always
   },
   // Existing tree line - additional trees adding to VP2
   {

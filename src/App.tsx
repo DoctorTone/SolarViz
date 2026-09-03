@@ -8,7 +8,7 @@ import ParcelInspector from "./components/ParcelInspector";
 import CameraController from "./components/CameraController";
 import { pvParcels } from "./state/parcelData";
 
-const TEST_CAMERA = true;
+const TEST_CAMERA = false;
 
 function App() {
   return (
