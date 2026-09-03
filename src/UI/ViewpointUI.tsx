@@ -1,7 +1,6 @@
+import { useEffect } from "react";
 import useSolar from "../state/store";
 import StageControl from "./StageControl";
-
-const VP_ORDER = [7, 2, 4];
 
 export default function ViewpointUI() {
   const mode = useSolar((s) => s.viewMode);
@@ -18,8 +17,17 @@ export default function ViewpointUI() {
   const setYear = useSolar((s) => s.setCurrentYear);
   const setSeason = useSolar((s) => s.setCurrentSeason);
   const developmentVisible = useSolar((s) => s.developmentVisible);
+  const uiHidden = useSolar((s) => s.uiHidden);
 
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "h") useSolar.getState().toggleUI();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   if (mode === "overview") {
     return (
@@ -67,64 +75,68 @@ export default function ViewpointUI() {
   const phase = year <= 5 ? "Year 1" : "Year 10";
 
   return (
-    <div style={panelWrap}>
-      <div style={panel}>
-        <button style={backBtn} onClick={exit}>
-          ← Overview
-        </button>
-        <h3 style={h3}>VP{vpId}</h3>
-        <p style={sub}>{vp.name}</p>
-        <p style={tagLine}>
-          Assessed visual impact ({phase}): <strong>{impact}</strong>
-        </p>
-
-        <StageControl />
-        <div style={label}>View direction</div>
-        <div style={dirRow}>
-          {vp.directions.map((d, i) => (
-            <button
-              key={i}
-              style={i === dirIdx ? dirBtnActive : dirBtn}
-              onClick={() => setDir(i)}
-            >
-              {d.label}
+    <>
+      {!uiHidden && (
+        <div style={panelWrap}>
+          <div style={panel}>
+            <button style={backBtn} onClick={exit}>
+              ← Overview
             </button>
-          ))}
-        </div>
+            <h3 style={h3}>VP{vpId}</h3>
+            <p style={sub}>{vp.name}</p>
+            <p style={tagLine}>
+              Assessed visual impact ({phase}): <strong>{impact}</strong>
+            </p>
 
-        <div style={label}>Year: {year}</div>
-        <input
-          type="range"
-          min={1}
-          max={10}
-          step={1}
-          disabled={!developmentVisible}
-          value={year}
-          onChange={(e) => setYear(+e.target.value)}
-          style={{ ...slider, opacity: developmentVisible ? 1 : 0.4 }}
-        />
-        <div style={scaleRow}>
-          <span>Planting</span>
-          <span>Established</span>
-        </div>
+            <StageControl />
+            <div style={label}>View direction</div>
+            <div style={dirRow}>
+              {vp.directions.map((d, i) => (
+                <button
+                  key={i}
+                  style={i === dirIdx ? dirBtnActive : dirBtn}
+                  onClick={() => setDir(i)}
+                >
+                  {d.label}
+                </button>
+              ))}
+            </div>
 
-        <div style={label}>Season</div>
-        <div style={dirRow}>
-          <button
-            style={season === "summer" ? dirBtnActive : dirBtn}
-            onClick={() => setSeason("summer")}
-          >
-            Summer
-          </button>
-          <button
-            style={season === "winter" ? dirBtnActive : dirBtn}
-            onClick={() => setSeason("winter")}
-          >
-            Winter (leaf-off)
-          </button>
+            <div style={label}>Year: {year}</div>
+            <input
+              type="range"
+              min={1}
+              max={10}
+              step={1}
+              disabled={!developmentVisible}
+              value={year}
+              onChange={(e) => setYear(+e.target.value)}
+              style={{ ...slider, opacity: developmentVisible ? 1 : 0.4 }}
+            />
+            <div style={scaleRow}>
+              <span>Planting</span>
+              <span>Established</span>
+            </div>
+
+            <div style={label}>Season</div>
+            <div style={dirRow}>
+              <button
+                style={season === "summer" ? dirBtnActive : dirBtn}
+                onClick={() => setSeason("summer")}
+              >
+                Summer
+              </button>
+              <button
+                style={season === "winter" ? dirBtnActive : dirBtn}
+                onClick={() => setSeason("winter")}
+              >
+                Winter (leaf-off)
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

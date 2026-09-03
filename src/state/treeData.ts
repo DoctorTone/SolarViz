@@ -76,28 +76,22 @@ export const treeData = [
   // Existing tree lines - VP7 looking NW
   // Crop at field edge
   {
-    easting: 507896,
-    northing: 359678,
-    existing: true,
-    mature_height: 12.5, // full height; existing trees sit at this always
-  },
-  {
-    easting: 507926,
-    northing: 359672,
-    existing: true,
-    mature_height: 12.5, // full height; existing trees sit at this always
-  },
-  {
-    easting: 507915,
-    northing: 359675,
-    existing: true,
-    mature_height: 12.5, // full height; existing trees sit at this always
-  },
-  {
     easting: 507915,
     northing: 359668,
     existing: true,
-    mature_height: 10.5, // full height; existing trees sit at this always
+    mature_height: 12.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507915,
+    northing: 359673,
+    existing: true,
+    mature_height: 12.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 507905,
+    northing: 359677,
+    existing: true,
+    mature_height: 10, // full height; existing trees sit at this always
   },
   // Existing tree lines - VP7 lookinh NE
   {
