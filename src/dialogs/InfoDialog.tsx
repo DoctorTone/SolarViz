@@ -5,6 +5,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "@mui/material/Link";
 import useSolar from "../state/store";
 
@@ -12,6 +14,8 @@ const InfoDialog = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const infoDialogOpen = useSolar((state) => state.infoDialogOpen);
   const setShowInfoDialog = useSolar((state) => state.setShowInfoDialog);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleClose = () => {
     setDialogOpen(false);
@@ -27,6 +31,7 @@ const InfoDialog = () => {
       <Dialog
         onClose={handleClose}
         open={dialogOpen}
+        fullScreen={fullScreen}
         maxWidth={"md"}
         fullWidth={true}
         slotProps={{
