@@ -13,9 +13,6 @@ const MobileOverviewPanel = () => {
       <div style={bar}>
         {/* title + orienting line */}
         <div style={{ marginBottom: 10 }}>
-          <div style={{ fontSize: 16, fontWeight: 600, color: "#1a1a1a" }}>
-            Springwell Solar Farm
-          </div>
           <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>
             Select a viewpoint to explore
           </div>

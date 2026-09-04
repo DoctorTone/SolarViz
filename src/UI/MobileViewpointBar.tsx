@@ -35,16 +35,6 @@ const MobileViewpointBar = () => {
     <>
       <MobileTopBar />
       <div style={bar}>
-        {/* header row */}
-        <div style={headerRow}>
-          <span style={{ fontSize: 13, fontWeight: 600 }}>
-            VP{vp.no} — {vp.name}
-          </span>
-          <button onClick={exit} style={linkBtn}>
-            Overview
-          </button>
-        </div>
-
         {/* stage — the mini timeline */}
         <div style={segRow}>
           {STAGES.map((s) => (
@@ -60,13 +50,13 @@ const MobileViewpointBar = () => {
 
         {/* direction */}
         <div style={dirRow}>
-          {vp.directions?.map((d, i) => (
+          {vp.directions.map((d, i) => (
             <button
               key={i}
               style={i === dirIdx ? dirActive : dir}
               onClick={() => setDir(i)}
             >
-              {d.label}
+              {d.shortLabel}
             </button>
           ))}
         </div>
@@ -154,7 +144,12 @@ const seg = {
   fontWeight: 600,
 };
 const segActive = { ...seg, background: "#2a7d2a", color: "#fff" };
-const dirRow = { display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 4 };
+const dirRow = {
+  display: "flex",
+  justifyContent: "center", // centre the group horizontally
+  gap: 8,
+  marginBottom: 8,
+};
 const dir = {
   minHeight: 40,
   padding: "0 12px",

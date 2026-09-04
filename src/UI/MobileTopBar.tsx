@@ -24,8 +24,8 @@ function MobileTopBar() {
       <div style={leftGroup}>
         {mode === "viewpoint" && (
           <button onClick={exit} aria-label="Back to overview" style={backBtn}>
-            <span style={{ fontSize: 18, lineHeight: 1 }}>←</span>
-            <span style={{ fontSize: 13 }}>Overview</span>
+            <span style={{ fontSize: 22, lineHeight: 1 }}>←</span>
+            <span style={{ fontSize: 20 }}>Overview</span>
           </button>
         )}
 
@@ -34,8 +34,9 @@ function MobileTopBar() {
             <div style={titleText}>Springwell Solar Farm</div>
           ) : (
             <>
-              <div style={vpNumber}>VP{vp?.no}</div>
-              <div style={vpName}>{vp?.name}</div>
+              <div style={vpNumber}>
+                VP{vp?.no} - {vp?.name}
+              </div>
             </>
           )}
         </div>
@@ -57,16 +58,16 @@ const topBar = {
   justifyContent: "space-between",
   gap: 12,
   padding: "calc(10px + env(safe-area-inset-top)) 14px 16px",
-  background: "linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.0))",
   fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
   pointerEvents: "none", // gradient lets taps through …
 };
 
 const leftGroup = {
   display: "flex",
-  alignItems: "center",
-  gap: 10,
-  minWidth: 0, // lets the name truncate instead of pushing the icon off-screen
+  flexDirection: "column", // was implicitly row — now stacks vertically
+  alignItems: "flex-start", // left-align the back button and text
+  gap: 6,
+  minWidth: 0,
   flex: 1,
 };
 
@@ -88,7 +89,7 @@ const backBtn = {
 const identity = { minWidth: 0 }; // truncation context for the name
 
 const titleText = {
-  fontSize: 15,
+  fontSize: 20,
   fontWeight: 600,
   color: "#1a1a1a",
 };

@@ -1,17 +1,31 @@
 import Copyright from "../UI/Copyright";
 import ViewpointUI from "./ViewpointUI";
 import Info from "./Info";
-import MobileViewpointUI from "./MobileViewpointUI";
+import MobilePortraitUI from "./MobilePortraitUI";
+import MobileLandscapeUI from "./MobileLandscapeUI";
 import { useMediaQuery } from "@mui/material";
 
 const UI = () => {
-  const isMobile = useMediaQuery("(max-width: 600px)");
+  const isPhonePortrait = useMediaQuery(
+    "(max-width: 1024px) and (orientation: portrait)",
+  );
+  const isPhoneLandscape = useMediaQuery(
+    "(orientation: landscape) and (max-height: 500px)",
+  );
 
   return (
     <>
-      <Copyright />
-      {isMobile ? <MobileViewpointUI /> : <ViewpointUI />}
       <Info />
+      {isPhonePortrait ? (
+        <MobilePortraitUI />
+      ) : isPhoneLandscape ? (
+        <MobileLandscapeUI />
+      ) : (
+        <>
+          <ViewpointUI />
+          <Copyright />
+        </>
+      )}
     </>
   );
 };

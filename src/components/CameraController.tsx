@@ -38,7 +38,7 @@ function CameraController() {
 
   // Get current viewpoint
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
-  const CAM_POS = isMobile ? [0, 900, 1200] : [0, 700, 900];
+  const CAM_POS = isMobile ? [0, 900, 1200] : [0, 350, 800];
 
   useFrame(() => {
     if (!meta) return;
