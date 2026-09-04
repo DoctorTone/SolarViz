@@ -7,6 +7,7 @@ import UI from "./UI/UI";
 import ParcelInspector from "./components/ParcelInspector";
 import CameraController from "./components/CameraController";
 import { pvParcels } from "./state/parcelData";
+import LoadingScreen from "./UI/LoadingScreen";
 
 const TEST_CAMERA = false;
 
@@ -22,6 +23,7 @@ function App() {
         {/* <Perf /> */}
       </Canvas>
       <UI />
+      <LoadingScreen />
     </>
   );
 }

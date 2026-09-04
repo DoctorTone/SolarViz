@@ -24,8 +24,8 @@ function MobileTopBar() {
       <div style={leftGroup}>
         {mode === "viewpoint" && (
           <button onClick={exit} aria-label="Back to overview" style={backBtn}>
-            <span style={{ fontSize: 22, lineHeight: 1 }}>←</span>
-            <span style={{ fontSize: 20 }}>Overview</span>
+            <span className="overViewText">←</span>
+            <span className="overViewText">Overview</span>
           </button>
         )}
 
@@ -34,7 +34,7 @@ function MobileTopBar() {
             <div className="titleText">Springwell Solar Farm</div>
           ) : (
             <>
-              <div style={vpNumber}>
+              <div className="vpNumber">
                 VP{vp?.no} - {vp?.name}
               </div>
             </>
@@ -87,13 +87,6 @@ const backBtn = {
 };
 
 const identity = { minWidth: 0 }; // truncation context for the name
-
-const vpNumber = {
-  fontSize: 14,
-  fontWeight: 600,
-  color: "#1a1a1a",
-  lineHeight: 1.15,
-};
 
 const vpName = {
   fontSize: 11,

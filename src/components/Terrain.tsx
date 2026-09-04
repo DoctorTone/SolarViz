@@ -1,11 +1,13 @@
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import useSolar from "../state/store";
 import * as THREE from "three";
 
 const Terrain = () => {
   const metaData = useSolar((state) => state.metaData);
   const heights = useSolar((state) => state.heights);
-  const viewpoints = useSolar((state) => state.viewpoints);
+  const setRendered = useSolar((s) => s.setRendered);
+  const signalled = useRef(false);
 
   const geometry = useMemo(() => {
     if (!metaData || !heights) return null;
@@ -30,6 +32,13 @@ const Terrain = () => {
 
     return geo;
   }, [metaData]);
+
+  useFrame(() => {
+    if (geometry && !signalled.current) {
+      signalled.current = true;
+      setRendered(true);
+    }
+  });
 
   if (!geometry) return null;
 

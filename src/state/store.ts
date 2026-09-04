@@ -28,6 +28,8 @@ type SolarState = {
   setShowInfoDialog: (status: boolean) => void;
   uiHidden: boolean;
   toggleUI: () => void;
+  rendered: boolean;
+  setRendered: (status: boolean) => void;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -94,6 +96,8 @@ const useSolar = create<SolarState>((set, get) => ({
   setShowInfoDialog: (status) => set(() => ({ infoDialogOpen: status })),
   uiHidden: false,
   toggleUI: () => set((s) => ({ uiHidden: !s.uiHidden })),
+  rendered: false,
+  setRendered: (status) => set(() => ({ rendered: status })),
   // Terrain height lookup: BNG easting/northing -> ground elevation (m AOD).
   // Returns null if the point is outside the loaded tile.
   sampleHeight: (easting, northing) => {

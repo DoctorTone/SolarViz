@@ -24,6 +24,16 @@ body {
   font-weight: 600;
   color: #1a1a1a;
 }
+.overViewText {
+  font-size: 22px;
+  line-height: 1;
+}
+.vpNumber {
+  font-size: 14;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.15;
+}
 #info {
   right: 1%;
   top: 1%;
@@ -37,5 +47,11 @@ body {
     font-size: 30px;
     margin-left: 10px;
     margin-top: 10px;
+  }
+  .overViewText {
+    font-size: 28px;
+  }
+  .vpNumber {
+    font-size: 20px;
   }
 }
