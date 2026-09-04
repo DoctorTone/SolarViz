@@ -31,7 +31,7 @@ function MobileTopBar() {
 
         <div style={identity}>
           {mode === "overview" ? (
-            <div style={titleText}>Springwell Solar Farm</div>
+            <div className="titleText">Springwell Solar Farm</div>
           ) : (
             <>
               <div style={vpNumber}>
@@ -87,12 +87,6 @@ const backBtn = {
 };
 
 const identity = { minWidth: 0 }; // truncation context for the name
-
-const titleText = {
-  fontSize: 20,
-  fontWeight: 600,
-  color: "#1a1a1a",
-};
 
 const vpNumber = {
   fontSize: 14,
