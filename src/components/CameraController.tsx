@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { useMediaQuery } from "@mui/material";
 import useSolar from "../state/store";
 
 function hFovToVFov(hFovDeg, aspect) {
@@ -8,11 +9,11 @@ function hFovToVFov(hFovDeg, aspect) {
   return THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(h / 2) / aspect));
 }
 
-const CAM_POS = [0, 900, 1200];
 const LOOK_POS_EAST = 508400;
 const LOOK_POS_NORTH = 358850;
 
 function CameraController() {
+  const isMobile = useMediaQuery("(max-width: 600px)");
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
   const mode = useSolar((s) => s.viewMode);
@@ -37,6 +38,7 @@ function CameraController() {
 
   // Get current viewpoint
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
+  const CAM_POS = isMobile ? [0, 900, 1200] : [0, 700, 900];
 
   useFrame(() => {
     if (!meta) return;
