@@ -5,6 +5,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 import useSolar from "../state/store";
 
 const InfoDialog = () => {
@@ -61,7 +62,7 @@ const InfoDialog = () => {
             over the ten-year period assessed, with reduced screening shown in
             winter.
           </Typography>
-          <Typography variant="h6">
+          <Typography variant="h6" sx={{ mb: 2 }}>
             This is a demonstration, not a verified photomontage. Where planting
             is shown only indicatively, hedgerows are placed within field
             margins, and heights are representative. It shows every state as
@@ -69,10 +70,25 @@ const InfoDialog = () => {
             intended to be equally useful to applicants, authorities and the
             public.
           </Typography>
+          <Typography variant="h6">
+            Created by{" "}
+            <Link
+              href="https://www.drt-software.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              underline="none"
+              aria-label="Go to DRT software main site"
+              color="orange"
+            >
+              DRT Software Ltd
+            </Link>{" "}
+            2026.
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button
             variant="contained"
+            color="warning"
             onClick={handleClose}
             sx={{ mr: 1, mb: 1 }}
           >
