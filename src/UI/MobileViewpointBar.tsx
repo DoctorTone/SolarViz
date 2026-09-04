@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MobileTopBar from "./MobileTopBar";
 import useSolar from "../state/store";
 
 const MobileViewpointBar = () => {
@@ -31,76 +32,79 @@ const MobileViewpointBar = () => {
   ];
 
   return (
-    <div style={bar}>
-      {/* header row */}
-      <div style={headerRow}>
-        <span style={{ fontSize: 13, fontWeight: 600 }}>
-          VP{vp.no} — {vp.name}
-        </span>
-        <button onClick={exit} style={linkBtn}>
-          Overview
+    <>
+      <MobileTopBar />
+      <div style={bar}>
+        {/* header row */}
+        <div style={headerRow}>
+          <span style={{ fontSize: 13, fontWeight: 600 }}>
+            VP{vp.no} — {vp.name}
+          </span>
+          <button onClick={exit} style={linkBtn}>
+            Overview
+          </button>
+        </div>
+
+        {/* stage — the mini timeline */}
+        <div style={segRow}>
+          {STAGES.map((s) => (
+            <button
+              key={s.key}
+              style={activeStage === s.key ? segActive : seg}
+              onClick={() => setStage(s.key)}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+
+        {/* direction */}
+        <div style={dirRow}>
+          {vp.directions?.map((d, i) => (
+            <button
+              key={i}
+              style={i === dirIdx ? dirActive : dir}
+              onClick={() => setDir(i)}
+            >
+              {d.label}
+            </button>
+          ))}
+        </div>
+
+        {/* expandable: slider + season */}
+        {expanded && (
+          <div style={{ marginTop: 8 }}>
+            <input
+              type="range"
+              min={1}
+              max={10}
+              value={year}
+              disabled={!developmentVisible}
+              onChange={(e) => setYear(+e.target.value)}
+              style={{ width: "100%", opacity: developmentVisible ? 1 : 0.4 }}
+            />
+            <div style={segRow}>
+              <button
+                style={season === "summer" ? segActive : seg}
+                onClick={() => setSeason("summer")}
+              >
+                Summer
+              </button>
+              <button
+                style={season === "winter" ? segActive : seg}
+                onClick={() => setSeason("winter")}
+              >
+                Winter
+              </button>
+            </div>
+          </div>
+        )}
+
+        <button onClick={() => setExpanded((e) => !e)} style={moreBtn}>
+          {expanded ? "Less ▲" : "More ▼"}
         </button>
       </div>
-
-      {/* stage — the mini timeline */}
-      <div style={segRow}>
-        {STAGES.map((s) => (
-          <button
-            key={s.key}
-            style={activeStage === s.key ? segActive : seg}
-            onClick={() => setStage(s.key)}
-          >
-            {s.label}
-          </button>
-        ))}
-      </div>
-
-      {/* direction */}
-      <div style={dirRow}>
-        {vp.directions?.map((d, i) => (
-          <button
-            key={i}
-            style={i === dirIdx ? dirActive : dir}
-            onClick={() => setDir(i)}
-          >
-            {d.label}
-          </button>
-        ))}
-      </div>
-
-      {/* expandable: slider + season */}
-      {expanded && (
-        <div style={{ marginTop: 8 }}>
-          <input
-            type="range"
-            min={1}
-            max={10}
-            value={year}
-            disabled={!developmentVisible}
-            onChange={(e) => setYear(+e.target.value)}
-            style={{ width: "100%", opacity: developmentVisible ? 1 : 0.4 }}
-          />
-          <div style={segRow}>
-            <button
-              style={season === "summer" ? segActive : seg}
-              onClick={() => setSeason("summer")}
-            >
-              Summer
-            </button>
-            <button
-              style={season === "winter" ? segActive : seg}
-              onClick={() => setSeason("winter")}
-            >
-              Winter
-            </button>
-          </div>
-        </div>
-      )}
-
-      <button onClick={() => setExpanded((e) => !e)} style={moreBtn}>
-        {expanded ? "Less ▲" : "More ▼"}
-      </button>
-    </div>
+    </>
   );
 };
 
