@@ -1,7 +1,7 @@
 import Copyright from "../UI/Copyright";
 import ViewpointUI from "./ViewpointUI";
-import MobileViewpointBar from "../components/MobileViewpointBar";
 import Info from "./Info";
+import MobileViewpointUI from "./MobileViewpointUI";
 import { useMediaQuery } from "@mui/material";
 
 const UI = () => {
@@ -10,7 +10,7 @@ const UI = () => {
   return (
     <>
       <Copyright />
-      {isMobile ? <MobileViewpointBar /> : <ViewpointUI />}
+      {isMobile ? <MobileViewpointUI /> : <ViewpointUI />}
       <Info />
     </>
   );

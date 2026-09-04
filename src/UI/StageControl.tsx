@@ -13,9 +13,6 @@ const StageControl = () => {
   const year = useSolar((s) => s.currentYear);
 
   // derive active stage — no stored state, always correct
-  // DEBUG
-  console.log("Current year = ", year);
-
   let active = null;
   if (!developmentVisible) active = "baseline";
   else if (year === 1) active = "built";

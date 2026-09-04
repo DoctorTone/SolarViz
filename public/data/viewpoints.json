@@ -12,6 +12,7 @@
     "no": 2,
     "name": "Junction of Bln/4/3, Bln/4/2 and Bln/738/1",
     "description": "Footpath junction some distance north of the site",
+    "shortDescription": "Distant, North",
     "easting": 508662,
     "northing": 360144,
     "distance": 230,
@@ -21,7 +22,7 @@
     "directions": [
       { "label": "East", "bearing": 88.1 },
       { "label": "South", "bearing": 178.1 },
-      { "label": "West - toward development", "bearing": 268.1 }
+      { "label": "West", "bearing": 268.1 }
     ]
   },
   {
@@ -37,13 +38,14 @@
     "no": 4,
     "name": "Scop/7/2 at junction with Scop/7/1",
     "description": "Footpath junction looking across the wider landscape",
+    "shortDescription": "Wider landscape",
     "easting": 508587,
     "northing": 358365,
     "distance": 120,
     "impactY1": "Medium",
     "impactY10": "Small/Negligible",
     "eyeAOD": 15.17,
-    "directions": [{ "label": "NW - toward development", "bearing": 313.7 }]
+    "directions": [{ "label": "North West", "bearing": 313.7 }]
   },
   {
     "no": 5,
@@ -67,6 +69,7 @@
     "no": 7,
     "name": "Permissive path between Scop/1134/1 and Bln/4/2",
     "description": "Permissive path immediately beside the development, the closest assessed view",
+    "shortDescription": "Closest view",
     "easting": 508022,
     "northing": 359680,
     "distance": 10,
@@ -74,10 +77,10 @@
     "impactY10": "Medium",
     "eyeAOD": 16.82,
     "directions": [
-      { "label": "SE — toward development", "bearing": 115.7 },
-      { "label": "SW", "bearing": 205.7 },
-      { "label": "NW", "bearing": 295.7 },
-      { "label": "NE", "bearing": 25.7 }
+      { "label": "South East", "bearing": 115.7 },
+      { "label": "South West", "bearing": 205.7 },
+      { "label": "North West", "bearing": 295.7 },
+      { "label": "North East", "bearing": 25.7 }
     ]
   },
   {
