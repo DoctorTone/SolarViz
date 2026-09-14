@@ -1,10 +1,11 @@
+import type { CSSProperties } from "react";
 import useSolar from "../state/store";
 
 const STAGES = [
   { key: "baseline", label: "Before" },
   { key: "built", label: "As built" },
   { key: "grown", label: "Year 10" },
-];
+] as const;
 
 const MobileLandscapeViewpoint = () => {
   const vpId = useSolar((s) => s.activeViewpoint);
@@ -20,6 +21,7 @@ const MobileLandscapeViewpoint = () => {
   const exit = useSolar((s) => s.exitToOverview);
 
   const vp = viewpoints.find((v) => v.no === vpId);
+  if (!vp) return null;
 
   // derive active stage for highlight (no stored state — always correct)
   let activeStage = null;
@@ -62,7 +64,7 @@ const MobileLandscapeViewpoint = () => {
       </div>
 
       {/* direction — compact wrapping grid of 2-letter buttons */}
-      {vp.directions?.length > 1 && (
+      {vp.directions && vp.directions.length > 1 && (
         <div style={group}>
           <div style={label}>View</div>
           <div
@@ -121,7 +123,7 @@ const MobileLandscapeViewpoint = () => {
   );
 };
 
-const sidePanel = {
+const sidePanel: CSSProperties = {
   position: "absolute",
   top: 0,
   left: 0,
@@ -140,7 +142,7 @@ const sidePanel = {
   zIndex: 15,
 };
 
-const backBtn = {
+const backBtn: CSSProperties = {
   display: "flex",
   alignItems: "center",
   gap: 6,
@@ -155,7 +157,11 @@ const backBtn = {
   flexShrink: 0,
 };
 
-const group = { display: "flex", flexDirection: "column", gap: 4 };
+const group: CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 4,
+};
 
 const label = {
   fontSize: 10,

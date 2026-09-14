@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import useSolar from "../state/store";
 
 const MobileLandscapeOverview = () => {
@@ -20,7 +21,7 @@ const MobileLandscapeOverview = () => {
   );
 };
 
-const sidePanel = {
+const sidePanel: CSSProperties = {
   position: "absolute",
   top: 0,
   left: 0,
@@ -36,7 +37,7 @@ const sidePanel = {
   overflowY: "auto",
   fontFamily: "system-ui, sans-serif",
 };
-const sideVpBtn = {
+const sideVpBtn: CSSProperties = {
   display: "flex",
   flexDirection: "column",
   gap: 2,

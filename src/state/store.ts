@@ -1,9 +1,29 @@
 import { create } from "zustand";
 
+export type ViewpointDirection = {
+  label: string;
+  shortLabel: string;
+  bearing: number;
+};
+
+export type Viewpoint = {
+  no: number;
+  name: string;
+  description?: string;
+  shortDescription?: string;
+  easting: number;
+  northing: number;
+  distance: number;
+  impactY1: string;
+  impactY10: string;
+  eyeAOD?: number;
+  directions?: ViewpointDirection[];
+};
+
 type SolarState = {
   metaData: null;
   heights: null | Float32Array;
-  viewpoints: [];
+  viewpoints: Viewpoint[];
   loaded: boolean;
   currentYear: number;
   setCurrentYear: (year: number) => void;
