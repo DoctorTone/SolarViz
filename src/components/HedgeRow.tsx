@@ -62,7 +62,8 @@ const HedgeRow = ({ hedge }) => {
     if (!render || height < 0.15) return [];
     const STEP = 0.7,
       WIDTH = 1.4,
-      DENSITY = 2.2;
+      DENSITY = season === "winter" ? 0.7 : 2.2;
+    const RADIUS_BOOST = season === "winter" ? 1.25 : 1.0;
     const out = [];
     let seed = 0;
 
@@ -84,7 +85,7 @@ const HedgeRow = ({ hedge }) => {
         const nBlobs = Math.max(2, Math.round(height * DENSITY));
         for (let k = 0; k < nBlobs; k++) {
           seed++;
-          const r = 0.55 + rand(seed * 3.1) * 0.35;
+          const r = 0.55 + rand(seed * 3.1) * 0.35 * RADIUS_BOOST;
           const jx = (rand(seed * 1.7) - 0.5) * WIDTH;
           const jz = (rand(seed * 2.3) - 0.5) * WIDTH;
           const jy = Math.pow(rand(seed * 4.5), 0.85) * height;
@@ -100,7 +101,7 @@ const HedgeRow = ({ hedge }) => {
       }
     }
     return out;
-  }, [hedge, meta, sampleHeight, height, render]);
+  }, [hedge, meta, sampleHeight, height, render, season]);
 
   const count = blobs.length;
 
@@ -143,7 +144,7 @@ const HedgeRow = ({ hedge }) => {
         roughness={0.9}
         flatShading
         transparent={isWinter}
-        opacity={isWinter ? 0.7 : 1.0}
+        opacity={1.0}
       />
     </instancedMesh>
   );
