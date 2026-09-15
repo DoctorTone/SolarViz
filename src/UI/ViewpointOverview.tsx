@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import useSolar from "../state/store";
 
 const ViewpointOverview = () => {
@@ -46,22 +47,22 @@ const ViewpointOverview = () => {
 export default ViewpointOverview;
 
 // CSS styling
-const panelWrap = {
+const panelWrap: CSSProperties = {
   position: "absolute",
   top: 16,
   left: 16,
   zIndex: 10,
   fontFamily: "system-ui, sans-serif",
 };
-const panel = {
+const panel: CSSProperties = {
   background: "rgba(255,255,255,0.94)",
   borderRadius: 10,
   padding: 16,
   width: 300,
   boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
 };
-const sub = { margin: "8px 0 12px 0", fontSize: 13, color: "#0e0d0d" };
-const btn = {
+const sub: CSSProperties = { margin: "8px 0 12px 0", fontSize: 13, color: "#0e0d0d" };
+const btn: CSSProperties = {
   display: "block",
   width: "100%",
   textAlign: "left",

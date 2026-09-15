@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { useState } from "react";
 import MobileTopBar from "./MobileTopBar";
 import useSolar from "../state/store";
@@ -13,7 +14,6 @@ const MobileViewpointBar = () => {
   const setDir = useSolar((s) => s.setDirection);
   const setYear = useSolar((s) => s.setCurrentYear);
   const setSeason = useSolar((s) => s.setCurrentSeason);
-  const exit = useSolar((s) => s.exitToOverview);
   const [expanded, setExpanded] = useState(false);
 
   const vp = viewpoints.find((v) => v.no === vpId);
@@ -29,7 +29,7 @@ const MobileViewpointBar = () => {
     { key: "baseline", label: "Before" },
     { key: "built", label: "As built" },
     { key: "grown", label: "Year 10" },
-  ];
+  ] as const;
 
   return (
     <>
@@ -50,15 +50,16 @@ const MobileViewpointBar = () => {
 
         {/* direction */}
         <div style={dirRow}>
-          {vp.directions.map((d, i) => (
-            <button
-              key={i}
-              style={i === dirIdx ? dirActive : dir}
-              onClick={() => setDir(i)}
-            >
-              {d.shortLabel}
-            </button>
-          ))}
+          {vp.directions &&
+            vp.directions.map((d, i) => (
+              <button
+                key={i}
+                style={i === dirIdx ? dirActive : dir}
+                onClick={() => setDir(i)}
+              >
+                {d.shortLabel}
+              </button>
+            ))}
         </div>
 
         {/* expandable: slider + season */}
@@ -100,7 +101,7 @@ const MobileViewpointBar = () => {
 
 export default MobileViewpointBar;
 
-const bar = {
+const bar: CSSProperties = {
   position: "absolute",
   bottom: 0,
   left: 0,
@@ -111,19 +112,6 @@ const bar = {
   borderTopRightRadius: 14,
   boxShadow: "0 -2px 14px rgba(0,0,0,0.14)",
   fontFamily: "system-ui, sans-serif",
-};
-const headerRow = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: 8,
-};
-const linkBtn = {
-  border: "none",
-  background: "none",
-  color: "#2a7d2a",
-  fontSize: 13,
-  fontWeight: 600,
 };
 const segRow = {
   display: "flex",
@@ -144,7 +132,7 @@ const seg = {
   fontWeight: 600,
 };
 const segActive = { ...seg, background: "#2a7d2a", color: "#fff" };
-const dirRow = {
+const dirRow: CSSProperties = {
   display: "flex",
   justifyContent: "center", // centre the group horizontally
   gap: 8,

@@ -4,7 +4,7 @@ import * as THREE from "three";
 import useSolar from "../state/store";
 
 // Convert a horizontal FOV to the vertical FOV Three.js needs, for this aspect.
-function hFovToVFov(hFovDeg, aspect) {
+function hFovToVFov(hFovDeg: number, aspect: number) {
   const h = THREE.MathUtils.degToRad(hFovDeg);
   const v = 2 * Math.atan(Math.tan(h / 2) / aspect);
   return THREE.MathUtils.radToDeg(v);
@@ -12,7 +12,9 @@ function hFovToVFov(hFovDeg, aspect) {
 
 const ViewCamera = ({ hFovDeg = 90 }) => {
   const meta = useSolar((s) => s.metaData);
-  const { camera, size } = useThree();
+  const { camera: defaultCamera, size } = useThree();
+  // The scene uses a perspective camera, so fov is available
+  const camera = defaultCamera as THREE.PerspectiveCamera;
 
   useEffect(() => {
     if (!meta) return;

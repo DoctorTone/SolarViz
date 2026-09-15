@@ -1,4 +1,5 @@
 import { RESOLUTIONS, CONFIGURATIONS } from "../state/Config";
+import type { TerrainMeta } from "../state/store";
 
 export const getScreenConfiguration = (width: number, height: number) => {
   // Small screens
@@ -31,7 +32,12 @@ export const getScreenConfiguration = (width: number, height: number) => {
 };
 
 // BNG easting/northing -> world position on the centred terrain plane
-export const bngMarkersToWorld = (easting, northing, meta, heights) => {
+export const bngMarkersToWorld = (
+  easting: number,
+  northing: number,
+  meta: TerrainMeta,
+  heights: Float32Array,
+) => {
   const { origin_easting, origin_northing, cols, rows, cell_size_m } = meta;
 
   const col = (easting - origin_easting) / cell_size_m; // 0..cols-1
@@ -56,7 +62,11 @@ export const bngMarkersToWorld = (easting, northing, meta, heights) => {
   };
 };
 
-export function bngToWorld(e, n, meta) {
+export function bngToWorld(
+  e: number,
+  n: number,
+  meta: TerrainMeta,
+): [number, number] {
   const halfW = (meta.cols * meta.cell_size_m) / 2;
   const halfD = (meta.rows * meta.cell_size_m) / 2;
   return [e - meta.origin_easting - halfW, meta.origin_northing - n - halfD];

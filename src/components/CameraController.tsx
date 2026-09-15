@@ -3,8 +3,9 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useMediaQuery } from "@mui/material";
 import useSolar from "../state/store";
+import { bngToWorld } from "../Utils/utils";
 
-function hFovToVFov(hFovDeg, aspect) {
+function hFovToVFov(hFovDeg: number, aspect: number) {
   const h = THREE.MathUtils.degToRad(hFovDeg);
   return THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(h / 2) / aspect));
 }
@@ -20,7 +21,9 @@ function CameraController() {
   const vpId = useSolar((s) => s.activeViewpoint);
   const dirIdx = useSolar((s) => s.activeDirection);
   const viewpoints = useSolar((s) => s.viewpoints);
-  const { camera, size } = useThree();
+  const { camera: defaultCamera, size } = useThree();
+  // The scene uses a perspective camera, so fov is available
+  const camera = defaultCamera as THREE.PerspectiveCamera;
 
   // reusable target vectors
   const targetPos = useRef(new THREE.Vector3());
@@ -28,13 +31,6 @@ function CameraController() {
   const currentLook = useRef(new THREE.Vector3());
   const targetFov = useRef(55);
   const initialised = useRef(false);
-
-  // convert BNG -> world (centred plane)
-  const toWorld = (e, n) => {
-    const halfW = (meta.cols * meta.cell_size_m) / 2;
-    const halfD = (meta.rows * meta.cell_size_m) / 2;
-    return [e - meta.origin_easting - halfW, meta.origin_northing - n - halfD];
-  };
 
   // Get current viewpoint
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
@@ -46,22 +42,24 @@ function CameraController() {
     // --- compute the target pose for the current mode ---
     if (mode === "overview") {
       // high vantage looking down over site centre
-      const [cx, cz] = toWorld(LOOK_POS_EAST, LOOK_POS_NORTH); // rough site centre BNG — tune
+      const [cx, cz] = bngToWorld(LOOK_POS_EAST, LOOK_POS_NORTH, meta); // rough site centre BNG — tune
       targetPos.current.set(cx + CAM_POS[0], CAM_POS[1], cz + CAM_POS[2]);
       targetLook.current.set(cx, 0, cz);
       targetFov.current = 55;
     } else {
       if (!vp) return null;
 
-      const [x, z] = toWorld(vp.easting, vp.northing);
+      const [x, z] = bngToWorld(vp.easting, vp.northing, meta);
       const groundAOD = sampleHeight(vp.easting, vp.northing) ?? 0;
       const y = vp.eyeAOD ?? groundAOD + 1.5;
 
-      const bearing = THREE.MathUtils.degToRad(vp.directions[dirIdx].bearing);
+      const direction = vp.directions?.[dirIdx];
+      if (!direction) return;
+      const bearing = THREE.MathUtils.degToRad(direction.bearing);
       const d = 200;
       const lookE = vp.easting + Math.sin(bearing) * d;
       const lookN = vp.northing + Math.cos(bearing) * d;
-      const [lx, lz] = toWorld(lookE, lookN);
+      const [lx, lz] = bngToWorld(lookE, lookN, meta);
 
       targetPos.current.set(x, y, z);
       targetLook.current.set(lx, y, lz); // level look

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import useSolar from "../state/store";
 import StageControl from "./StageControl";
 
@@ -14,6 +15,8 @@ const ViewpointView = () => {
   const setSeason = useSolar((s) => s.setCurrentSeason);
 
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
+  if (!vp) return null;
+
   const impact = year <= 5 ? vp.impactY1 : vp.impactY10;
   const phase = year <= 5 ? "Year 1" : "Year 10";
 
@@ -32,7 +35,7 @@ const ViewpointView = () => {
         <StageControl />
         <div style={label}>View direction</div>
         <div style={dirRow}>
-          {vp.directions.map((d, i) => (
+          {vp.directions?.map((d, i) => (
             <button
               key={i}
               style={i === dirIdx ? dirBtnActive : dirBtn}
@@ -82,21 +85,21 @@ const ViewpointView = () => {
 export default ViewpointView;
 
 // CSS styling
-const panelWrap = {
+const panelWrap: CSSProperties = {
   position: "absolute",
   top: 16,
   left: 16,
   zIndex: 10,
   fontFamily: "system-ui, sans-serif",
 };
-const panel = {
+const panel: CSSProperties = {
   background: "rgba(255,255,255,0.94)",
   borderRadius: 10,
   padding: 16,
   width: 300,
   boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
 };
-const backBtn = {
+const backBtn: CSSProperties = {
   border: "none",
   background: "none",
   color: "#2a6",
@@ -105,22 +108,22 @@ const backBtn = {
   padding: 0,
   marginBottom: 8,
 };
-const h3 = { margin: "0 0 2px", fontSize: 18 };
-const sub = { margin: "8px 0 12px 0", fontSize: 13, color: "#0e0d0d" };
-const tagLine = {
+const h3: CSSProperties = { margin: "0 0 2px", fontSize: 18 };
+const sub: CSSProperties = { margin: "8px 0 12px 0", fontSize: 13, color: "#0e0d0d" };
+const tagLine: CSSProperties = {
   margin: "0 0 14px",
   fontSize: 12,
   color: "#8a6d1f",
   fontWeight: 600,
 };
-const label = {
+const label: CSSProperties = {
   fontSize: 12,
   fontWeight: 600,
   color: "#444",
   margin: "14px 0 6px",
 };
-const dirRow = { display: "flex", flexWrap: "wrap", gap: 6 };
-const dirBtn = {
+const dirRow: CSSProperties = { display: "flex", flexWrap: "wrap", gap: 6 };
+const dirBtn: CSSProperties = {
   padding: "6px 10px",
   border: "1px solid #ccc",
   borderRadius: 6,
@@ -128,14 +131,14 @@ const dirBtn = {
   cursor: "pointer",
   fontSize: 12,
 };
-const dirBtnActive = {
+const dirBtnActive: CSSProperties = {
   ...dirBtn,
   background: "#2a6",
   color: "#fff",
   borderColor: "#2a6",
 };
-const slider = { width: "100%" };
-const scaleRow = {
+const slider: CSSProperties = { width: "100%" };
+const scaleRow: CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
   fontSize: 11,

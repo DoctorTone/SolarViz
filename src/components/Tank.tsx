@@ -12,6 +12,8 @@ const Tank = () => {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
 
+  if (!meta) return null;
+
   const [x, z] = bngToWorld(TANK_E, TANK_N, meta);
   const y = sampleHeight(TANK_E, TANK_N) ?? 0;
 

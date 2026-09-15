@@ -1,30 +1,25 @@
 import { useMemo, useRef, useLayoutEffect } from "react";
 import * as THREE from "three";
 import useSolar from "../state/store";
+import type { hedgerows } from "../state/hedgerowData";
+import { bngToWorld } from "../Utils/utils";
 
 const MIN_HEIGHT = 0.15;
 
-// Convert BNG easting/northing to world X/Z on the centred terrain plane.
-function bngToWorld(easting, northing, meta) {
-  const halfW = (meta.cols * meta.cell_size_m) / 2;
-  const halfD = (meta.rows * meta.cell_size_m) / 2;
-  const x = easting - meta.origin_easting - halfW;
-  const z = meta.origin_northing - northing - halfD;
-  return [x, z];
-}
-
-function rand(seed) {
+function rand(seed: number) {
   const s = Math.sin(seed * 127.1) * 43758.5453;
   return s - Math.floor(s);
 }
 
-const HedgeRow = ({ hedge }) => {
+type Hedgerow = (typeof hedgerows)[number];
+
+const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
   const developmentVisible = useSolar((s) => s.developmentVisible);
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
   const year = useSolar((s) => s.currentYear); // 0..10
   const season = useSolar((s) => s.currentSeason); // 'summer' | 'winter'
-  const ref = useRef(null);
+  const ref = useRef<THREE.InstancedMesh>(null);
 
   const {
     augments_existing,
@@ -34,7 +29,7 @@ const HedgeRow = ({ hedge }) => {
   } = hedge;
 
   // Decide this hedge's current height AND whether it renders at all:
-  let height;
+  let height = 0;
   let render = true;
 
   if (augments_existing) {
@@ -59,7 +54,7 @@ const HedgeRow = ({ hedge }) => {
   }
 
   const blobs = useMemo(() => {
-    if (!render || height < 0.15) return [];
+    if (!render || height < MIN_HEIGHT || !meta) return [];
     const STEP = 0.7,
       WIDTH = 1.4,
       DENSITY = season === "winter" ? 0.7 : 2.2;
@@ -107,7 +102,8 @@ const HedgeRow = ({ hedge }) => {
 
   // Build the per-instance matrices and colours whenever blobs change
   useLayoutEffect(() => {
-    if (!ref.current || !count) return;
+    const mesh = ref.current;
+    if (!mesh || !count) return;
     const dummy = new THREE.Object3D();
     const isWinter = season === "winter";
     const base = new THREE.Color(isWinter ? "#6b6a45" : "#33532a");
@@ -118,13 +114,13 @@ const HedgeRow = ({ hedge }) => {
       dummy.scale.set(b.r * 1.25, b.r * 0.85, b.r * 1.25);
       dummy.rotation.set(0, 0, 0);
       dummy.updateMatrix();
-      ref.current.setMatrixAt(i, dummy.matrix);
+      mesh.setMatrixAt(i, dummy.matrix);
 
       col.copy(base).multiplyScalar(b.shade);
-      ref.current.setColorAt(i, col);
+      mesh.setColorAt(i, col);
     });
-    ref.current.instanceMatrix.needsUpdate = true;
-    if (ref.current.instanceColor) ref.current.instanceColor.needsUpdate = true;
+    mesh.instanceMatrix.needsUpdate = true;
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
   }, [blobs, count, season]);
 
   if (!count) return null;

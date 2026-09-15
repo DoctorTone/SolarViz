@@ -4,11 +4,10 @@ const STAGES = [
   { key: "baseline", label: "Before", panels: false, year: 0 },
   { key: "built", label: "As built", panels: true, year: 1 },
   { key: "grown", label: "Year 10", panels: true, year: 10 },
-];
+] as const;
 
 const StageControl = () => {
   const developmentVisible = useSolar((s) => s.developmentVisible);
-  const stage = useSolar((s) => s.stage); // 'baseline' | 'built' | 'grown'
   const setStage = useSolar((s) => s.setStage);
   const year = useSolar((s) => s.currentYear);
 

@@ -20,8 +20,20 @@ export type Viewpoint = {
   directions?: ViewpointDirection[];
 };
 
+export type TerrainMeta = {
+  cols: number;
+  rows: number;
+  cell_size_m: number;
+  origin_easting: number;
+  origin_northing: number;
+  height_min: number;
+  height_max: number;
+  row_order: string;
+  crs: string;
+};
+
 type SolarState = {
-  metaData: null;
+  metaData: null | TerrainMeta;
   heights: null | Float32Array;
   viewpoints: Viewpoint[];
   loaded: boolean;

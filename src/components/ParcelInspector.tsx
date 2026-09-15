@@ -3,7 +3,7 @@ import { useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import useSolar from "../state/store";
 
-const ParcelInspector = ({ parcel }) => {
+const ParcelInspector = ({ parcel }: { parcel: number[][] }) => {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
   const { camera } = useThree();

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import useSolar from "../state/store";
 /**
  * Mobile top bar — a slim, gradient-faded strip across the top.
@@ -47,7 +48,7 @@ function MobileTopBar() {
 
 /* ---- styles ---- */
 
-const topBar = {
+const topBar: CSSProperties = {
   position: "absolute",
   top: 0,
   left: 0,
@@ -62,7 +63,7 @@ const topBar = {
   pointerEvents: "none", // gradient lets taps through …
 };
 
-const leftGroup = {
+const leftGroup: CSSProperties = {
   display: "flex",
   flexDirection: "column", // was implicitly row — now stacks vertically
   alignItems: "flex-start", // left-align the back button and text
@@ -71,7 +72,7 @@ const leftGroup = {
   flex: 1,
 };
 
-const backBtn = {
+const backBtn: CSSProperties = {
   pointerEvents: "auto", // … buttons stay tappable
   display: "flex",
   alignItems: "center",
@@ -87,30 +88,5 @@ const backBtn = {
 };
 
 const identity = { minWidth: 0 }; // truncation context for the name
-
-const vpName = {
-  fontSize: 11,
-  color: "#555",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-};
-
-const infoIcon = {
-  pointerEvents: "auto",
-  flexShrink: 0,
-  width: 40,
-  height: 40,
-  borderRadius: "50%",
-  border: "none",
-  background: "rgba(255,255,255,0.9)",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-  fontSize: 20,
-  color: "#2a7d2a",
-  cursor: "pointer",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
 
 export default MobileTopBar;

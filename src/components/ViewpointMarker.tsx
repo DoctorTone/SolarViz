@@ -1,8 +1,8 @@
 import { Billboard, Text } from "@react-three/drei";
 import { useState } from "react";
-import useSolar from "../state/store";
+import useSolar, { type Viewpoint } from "../state/store";
 
-const ViewpointMarker = ({ vp }) => {
+const ViewpointMarker = ({ vp }: { vp: Viewpoint }) => {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
   const enter = useSolar((s) => s.enterViewpoint);

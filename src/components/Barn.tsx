@@ -12,6 +12,8 @@ const Barn = () => {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
 
+  if (!meta) return null;
+
   const [x, z] = bngToWorld(BARN_E, BARN_N, meta);
   const y = sampleHeight(BARN_E, BARN_N) ?? 0;
 

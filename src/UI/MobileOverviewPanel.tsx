@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import useSolar from "../state/store";
 import MobileTopBar from "./MobileTopBar";
 
@@ -43,7 +44,7 @@ const MobileOverviewPanel = () => {
 };
 
 // CSS styling
-const bar = {
+const bar: CSSProperties = {
   position: "absolute",
   bottom: 0,
   left: 0,
@@ -57,7 +58,7 @@ const bar = {
   zIndex: 10,
 };
 
-const vpBtn = {
+const vpBtn: CSSProperties = {
   flex: 1,
   minHeight: 60,
   display: "flex",

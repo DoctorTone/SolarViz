@@ -1,7 +1,7 @@
 import { PerspectiveCamera } from "@react-three/drei";
 import useSolar from "../state/store";
 
-const ViewpointCamera = ({ parcel }) => {
+const ViewpointCamera = ({ parcel }: { parcel: number[][] }) => {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
   const setViewpoint = useSolar((s) => s.setViewpoint);
