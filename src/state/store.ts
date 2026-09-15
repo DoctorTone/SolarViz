@@ -113,9 +113,9 @@ const useSolar = create<SolarState>((set, get) => ({
   togglePanels: () => set((s) => ({ showPanels: !s.showPanels })),
   loadData: async () => {
     const [meta, buffer, views] = await Promise.all([
-      fetch("/data/terrain_meta.json").then((r) => r.json()),
-      fetch("/data/terrain_heights.bin").then((r) => r.arrayBuffer()),
-      fetch("/data/viewpoints.json").then((r) => r.json()),
+      fetch("./data/terrain_meta.json").then((r) => r.json()),
+      fetch("./data/terrain_heights.bin").then((r) => r.arrayBuffer()),
+      fetch("./data/viewpoints.json").then((r) => r.json()),
     ]);
     set({
       metaData: meta,

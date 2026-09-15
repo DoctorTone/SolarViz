@@ -25,7 +25,7 @@ const ViewpointMarker = ({ vp }: { vp: Viewpoint }) => {
       {/* Billboarded number label */}
       <Billboard>
         <Text
-          fontSize={40}
+          fontSize={30}
           color="#ffffff"
           outlineWidth={3}
           outlineColor="#1a3a1a"
