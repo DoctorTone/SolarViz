@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Secrets - never commit tokens, especially under public/
+.env
+.env.*
+!.env.example
+public/data/token.txt
+*.token
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

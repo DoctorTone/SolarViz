@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Terrain from "./Terrain";
 import useSolar from "../state/store";
 import ViewpointMarkers from "./ViewpointMarkers";
-// import Grid from "./Grid"; // debug grid, re-enable along with <Grid /> below
+import Grid from "./Grid";
 import { hedgerows } from "../state/hedgerowData";
 import HedgeRow from "./HedgeRow";
 import { pvParcels } from "../state/parcelData";
@@ -29,7 +29,7 @@ const Scene = () => {
         <>
           <Terrain />
           <ViewpointMarkers />
-          {/* <Grid /> */}
+          <Grid />
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
           ))}
