@@ -1,4 +1,5 @@
 import { useMemo, useRef, useLayoutEffect } from "react";
+import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import useSolar from "../state/store";
 import type { hedgerows } from "../state/hedgerowData";
@@ -19,7 +20,16 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
   const sampleHeight = useSolar((s) => s.sampleHeight);
   const year = useSolar((s) => s.currentYear); // 0..10
   const season = useSolar((s) => s.currentSeason); // 'summer' | 'winter'
-  const ref = useRef<THREE.InstancedMesh>(null);
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+
+  // load the hedge GLB — grab its geometry + material for instancing
+  const { nodes, materials } = useGLTF("/models/hedgePiece.glb");
+  const hedgeGeo = nodes.Object_2.geometry;
+  const hedgeMat = materials.hedgetextured;
+  hedgeGeo.computeBoundingBox();
+  hedgeGeo.translate(0, -hedgeGeo.boundingBox.min.y, 0); // shift base to y=0
+
+  const SEGMENT_LENGTH = 10; // metres each hedge piece covers along the line — match your model
 
   const {
     augments_existing,
@@ -28,121 +38,71 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
     points,
   } = hedge;
 
-  // Decide this hedge's current height AND whether it renders at all:
-  let height = 0;
-  let render = true;
-
+  const t = Math.min(1, Math.max(0, year / 10));
+  let height,
+    render = true;
   if (augments_existing) {
-    // Existing hedge being strengthened: ALWAYS renders (it's part of baseline).
-    // At baseline/year 0 it sits at its existing (start) height.
-    // When development present, it grows toward mature with the year.
-    if (developmentVisible) {
-      const t = Math.min(1, Math.max(0, year / 10));
-      height = start_height + (mature_height - start_height) * t;
-    } else {
-      height = start_height; // baseline: existing height only
-    }
+    height = developmentVisible
+      ? start_height + (mature_height - start_height) * t
+      : start_height;
   } else {
-    // Brand-new mitigation hedge: part of the scheme.
-    // Does NOT exist in baseline — hide entirely when development not shown.
     if (!developmentVisible) {
       render = false;
-    } else {
-      const t = Math.min(1, Math.max(0, year / 10));
-      height = start_height + (mature_height - start_height) * t; // start_height ~0
-    }
+      height = 0;
+    } else height = start_height + (mature_height - start_height) * t;
   }
+  const yScale = height / mature_height; // model base = mature, so scale is fraction
 
-  const blobs = useMemo(() => {
-    if (!render || height < MIN_HEIGHT || !meta) return [];
-    const STEP = 0.7,
-      WIDTH = 1.4,
-      DENSITY = season === "winter" ? 0.7 : 2.2;
-    const RADIUS_BOOST = season === "winter" ? 1.25 : 1.0;
+  // build the per-segment transforms along the polyline
+  const segments = useMemo(() => {
+    if (!meta || !render) return [];
     const out = [];
-    let seed = 0;
-
     for (let i = 0; i < points.length - 1; i++) {
       const [ax, az] = bngToWorld(points[i][0], points[i][1], meta);
       const [bx, bz] = bngToWorld(points[i + 1][0], points[i + 1][1], meta);
-      const ay = sampleHeight(points[i][0], points[i][1]) ?? 0;
-      const by = sampleHeight(points[i + 1][0], points[i + 1][1]) ?? 0;
       const dx = bx - ax,
         dz = bz - az;
       const segLen = Math.hypot(dx, dz) || 1;
-      const steps = Math.max(1, Math.floor(segLen / STEP));
+      const steps = Math.max(1, Math.round(segLen / SEGMENT_LENGTH));
+      const angle = Math.atan2(dx, dz); // rotation to align hedge with line direction
 
-      for (let s = 0; s <= steps; s++) {
-        const f = s / steps;
-        const cx = ax + dx * f,
-          cz = az + dz * f;
-        const groundY = ay + (by - ay) * f;
-        const nBlobs = Math.max(2, Math.round(height * DENSITY));
-        for (let k = 0; k < nBlobs; k++) {
-          seed++;
-          const r = 0.55 + rand(seed * 3.1) * 0.35 * RADIUS_BOOST;
-          const jx = (rand(seed * 1.7) - 0.5) * WIDTH;
-          const jz = (rand(seed * 2.3) - 0.5) * WIDTH;
-          const jy = Math.pow(rand(seed * 4.5), 0.85) * height;
-          const shade = 0.8 + rand(seed * 5.9) * 0.4; // per-blob colour variation
-          out.push({
-            x: cx + jx,
-            y: groundY + r * 0.6 + jy,
-            z: cz + jz,
-            r,
-            shade,
-          });
-        }
+      for (let s = 0; s < steps; s++) {
+        const f = (s + 0.5) / steps; // centre of each sub-segment
+        const px = ax + dx * f;
+        const pz = az + dz * f;
+        // sample ground at this point (convert back to BNG for sampleHeight)
+        const e = points[i][0] + (points[i + 1][0] - points[i][0]) * f;
+        const n = points[i][1] + (points[i + 1][1] - points[i][1]) * f;
+        const py = sampleHeight(e, n) ?? 0;
+        out.push({ px, py, pz, angle });
       }
     }
     return out;
-  }, [hedge, meta, sampleHeight, height, render, season]);
+  }, [meta, sampleHeight, points, render]);
 
-  const count = blobs.length;
+  const count = segments.length;
 
-  // Build the per-instance matrices and colours whenever blobs change
   useLayoutEffect(() => {
-    const mesh = ref.current;
-    if (!mesh || !count) return;
+    if (!meshRef.current || !count) return;
     const dummy = new THREE.Object3D();
-    const isWinter = season === "winter";
-    const base = new THREE.Color(isWinter ? "#6b6a45" : "#33532a");
-    const col = new THREE.Color();
-
-    blobs.forEach((b, i) => {
-      dummy.position.set(b.x, b.y, b.z);
-      dummy.scale.set(b.r * 1.25, b.r * 0.85, b.r * 1.25);
-      dummy.rotation.set(0, 0, 0);
+    segments.forEach((seg, i) => {
+      dummy.position.set(seg.px, seg.py, seg.pz);
+      dummy.rotation.set(0, seg.angle + Math.PI / 2, 0);
+      dummy.scale.set(1, yScale, yScale); // base scale = mature; Y-scale for growth
       dummy.updateMatrix();
-      mesh.setMatrixAt(i, dummy.matrix);
-
-      col.copy(base).multiplyScalar(b.shade);
-      mesh.setColorAt(i, col);
+      meshRef.current.setMatrixAt(i, dummy.matrix);
     });
-    mesh.instanceMatrix.needsUpdate = true;
-    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-  }, [blobs, count, season]);
+    meshRef.current.instanceMatrix.needsUpdate = true;
+  }, [segments, count, yScale]);
 
-  if (!count) return null;
-
-  // winter: more transparent (leaf-off, gappy), summer: denser
-  const isWinter = season === "winter";
+  if (!render || !count || height < 0.15) return null;
 
   return (
     <instancedMesh
-      ref={ref}
-      args={[undefined, undefined, count]}
-      key={count} /* remount if count changes */
-    >
-      <sphereGeometry args={[1, 8, 6]} />{" "}
-      {/* unit sphere, scaled per-instance */}
-      <meshStandardMaterial
-        roughness={0.9}
-        flatShading
-        transparent={isWinter}
-        opacity={1.0}
-      />
-    </instancedMesh>
+      ref={meshRef}
+      args={[hedgeGeo, hedgeMat, count]}
+      key={count}
+    />
   );
 };
 

@@ -8,7 +8,7 @@ import CameraController from "./components/CameraController";
 import { pvParcels } from "./state/parcelData";
 import LoadingScreen from "./UI/LoadingScreen";
 
-const TEST_CAMERA = true;
+const TEST_CAMERA = false;
 
 function App() {
   return (
