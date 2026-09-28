@@ -1,30 +1,121 @@
 import { create } from "zustand";
 
+export type ViewpointDirection = {
+  label: string;
+  shortLabel: string;
+  bearing: number;
+};
+
+export type Viewpoint = {
+  no: number;
+  name: string;
+  description?: string;
+  shortDescription?: string;
+  easting: number;
+  northing: number;
+  distance: number;
+  impactY1: string;
+  impactY10: string;
+  eyeAOD?: number;
+  directions?: ViewpointDirection[];
+};
+
+export type TerrainMeta = {
+  cols: number;
+  rows: number;
+  cell_size_m: number;
+  origin_easting: number;
+  origin_northing: number;
+  height_min: number;
+  height_max: number;
+  row_order: string;
+  crs: string;
+};
+
 type SolarState = {
-  metaData: null;
+  metaData: null | TerrainMeta;
   heights: null | Float32Array;
-  viewpoints: [];
+  viewpoints: Viewpoint[];
   loaded: boolean;
   currentYear: number;
   setCurrentYear: (year: number) => void;
   currentSeason: "summer" | "winter";
+  setCurrentSeason: (season: "summer" | "winter") => void;
   loadData: () => void;
   sampleHeight: (easting: number, northing: number) => null | number;
+  viewPoint: number[];
+  setViewpoint: (viewPoint: number[]) => void;
+  viewMode: "overview" | "viewpoint";
+  activeViewpoint: null | number; // vp id when in viewpoint mod
+  activeDirection: number;
+  enterViewpoint: (id: number) => void;
+  exitToOverview: () => void;
+  setDirection: (i: number) => void;
+  stage: "baseline" | "built" | "grown";
+  setStage: (stage: "baseline" | "built" | "grown") => void;
+  showPanels: boolean;
+  togglePanels: () => void;
+  developmentVisible: boolean;
+  infoDialogOpen: boolean;
+  setShowInfoDialog: (status: boolean) => void;
+  uiHidden: boolean;
+  toggleUI: () => void;
+  rendered: boolean;
+  setRendered: (status: boolean) => void;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
   metaData: null,
   heights: null,
   viewpoints: [],
+  viewPoint: [0, 0, 0],
+  setViewpoint: (viewpoint) => set({ viewPoint: [...viewpoint] }),
   loaded: false,
   currentYear: 0,
   setCurrentYear: (year) => set({ currentYear: year }),
   currentSeason: "summer",
+  setCurrentSeason: (season) => set({ currentSeason: season }),
+  viewMode: "overview",
+  activeViewpoint: null,
+  activeDirection: 0,
+  developmentVisible: true,
+  enterViewpoint: (id) =>
+    set({
+      viewMode: "viewpoint",
+      activeViewpoint: id,
+      activeDirection: 0,
+      stage: "built",
+      developmentVisible: true,
+      currentYear: 1,
+    }),
+  exitToOverview: () =>
+    set({
+      viewMode: "overview",
+      activeViewpoint: null,
+      developmentVisible: true,
+      currentYear: 10,
+    }),
+  setDirection: (i) => set({ activeDirection: i }),
+  stage: "baseline",
+  setStage: (stage) => {
+    const map = {
+      baseline: {
+        developmentVisible: false,
+        showPanels: false,
+        currentYear: 0,
+      },
+      built: { developmentVisible: true, showPanels: true, currentYear: 1 },
+      grown: { developmentVisible: true, showPanels: true, currentYear: 10 },
+    };
+    set(map[stage] ? { stage, ...map[stage] } : { stage });
+  },
+  showPanels: false,
+  togglePanels: () => set((s) => ({ showPanels: !s.showPanels })),
   loadData: async () => {
     const [meta, buffer, views] = await Promise.all([
-      fetch("/data/terrain_meta.json").then((r) => r.json()),
-      fetch("/data/terrain_heights.bin").then((r) => r.arrayBuffer()),
-      fetch("/data/viewpoints.json").then((r) => r.json()),
+      fetch("./data/terrain_meta.json").then((r) => r.json()),
+      fetch("./data/terrain_heights.bin").then((r) => r.arrayBuffer()),
+      fetch("./data/viewpoints.json").then((r) => r.json()),
     ]);
     set({
       metaData: meta,
@@ -33,6 +124,12 @@ const useSolar = create<SolarState>((set, get) => ({
       loaded: true,
     });
   },
+  infoDialogOpen: false,
+  setShowInfoDialog: (status) => set(() => ({ infoDialogOpen: status })),
+  uiHidden: false,
+  toggleUI: () => set((s) => ({ uiHidden: !s.uiHidden })),
+  rendered: false,
+  setRendered: (status) => set(() => ({ rendered: status })),
   // Terrain height lookup: BNG easting/northing -> ground elevation (m AOD).
   // Returns null if the point is outside the loaded tile.
   sampleHeight: (easting, northing) => {

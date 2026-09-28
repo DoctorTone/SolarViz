@@ -19,11 +19,39 @@ body {
 .hover {
   cursor: pointer;
 }
+.titleText {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.overViewText {
+  font-size: 22px;
+  line-height: 1;
+}
+.vpNumber {
+  font-size: 14;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.15;
+}
 #info {
   right: 1%;
-  bottom: 0%;
+  top: 1%;
 }
 #copyright {
   left: 1%;
   bottom: 2%;
+}
+@media (min-width: 768px) {
+  .titleText {
+    font-size: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .overViewText {
+    font-size: 28px;
+  }
+  .vpNumber {
+    font-size: 20px;
+  }
 }

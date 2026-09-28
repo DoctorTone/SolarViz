@@ -17,8 +17,8 @@ const Grid = ({ spacing = 500 }) => {
   const halfD = (rows * cell_size_m) / 2;
 
   // BNG easting -> world X ; BNG northing -> world Z
-  const eToX = (e) => e - origin_easting - halfW;
-  const nToZ = (n) => origin_northing - n - halfD;
+  const eToX = (e: number) => e - origin_easting - halfW;
+  const nToZ = (n: number) => origin_northing - n - halfD;
 
   const lines = [];
   const labels = [];
@@ -31,7 +31,7 @@ const Grid = ({ spacing = 500 }) => {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            array={
+            args={[
               new Float32Array([
                 x,
                 LABEL_HEIGHT,
@@ -39,10 +39,9 @@ const Grid = ({ spacing = 500 }) => {
                 x,
                 LABEL_HEIGHT,
                 halfD,
-              ])
-            }
-            count={2}
-            itemSize={3}
+              ]),
+              3,
+            ]}
           />
         </bufferGeometry>
         <lineBasicMaterial color="#00ffff" transparent opacity={0.5} />
@@ -73,7 +72,7 @@ const Grid = ({ spacing = 500 }) => {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            array={
+            args={[
               new Float32Array([
                 -halfW,
                 LABEL_HEIGHT,
@@ -81,10 +80,9 @@ const Grid = ({ spacing = 500 }) => {
                 halfW,
                 LABEL_HEIGHT,
                 z,
-              ])
-            }
-            count={2}
-            itemSize={3}
+              ]),
+              3,
+            ]}
           />
         </bufferGeometry>
         <lineBasicMaterial color="#ffaa00" transparent opacity={0.5} />

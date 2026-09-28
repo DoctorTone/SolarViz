@@ -1,0 +1,12 @@
+{
+  "cols": 500,
+  "rows": 500,
+  "cell_size_m": 10.0,
+  "origin_easting": 510000.0,
+  "origin_northing": 365000.0,
+  "height_min": -0.7355599999427795,
+  "height_max": 20.903600692749023,
+  "nodata_fill": 1.2608100175857544,
+  "row_order": "top_to_bottom",
+  "crs": "EPSG:27700"
+}

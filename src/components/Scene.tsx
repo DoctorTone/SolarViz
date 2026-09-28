@@ -1,14 +1,21 @@
 import { useEffect } from "react";
 import Terrain from "./Terrain";
 import useSolar from "../state/store";
-import Markers from "./Markers";
-import Grid from "./Grid";
+import ViewpointMarkers from "./ViewpointMarkers";
+// import Grid from "./Grid"; // debug grid, re-enable along with <Grid /> below
 import { hedgerows } from "../state/hedgerowData";
-import HedgeRow from "./Hedgerow";
+import HedgeRow from "./HedgeRow";
+import { pvParcels } from "../state/parcelData";
+import Panels from "./Panels";
+import { treeData } from "../state/treeData";
+import Trees from "./Trees";
+import Buildings from "./Buildings";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
   const loaded = useSolar((state) => state.loaded);
+  const season = useSolar((state) => state.currentSeason);
+  const developmentVisible = useSolar((s) => s.developmentVisible);
 
   useEffect(() => {
     if (!loaded) {
@@ -21,11 +28,15 @@ const Scene = () => {
       {loaded ? (
         <>
           <Terrain />
-          <Markers />
-          <Grid />
+          <ViewpointMarkers />
+          {/* <Grid /> */}
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
           ))}
+          {developmentVisible &&
+            pvParcels.map((p) => <Panels key={p.id} parcel={p.boundary} />)}
+          <Trees trees={treeData} season={season} />
+          <Buildings />
         </>
       ) : null}
     </>
