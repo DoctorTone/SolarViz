@@ -7,6 +7,7 @@ import ParcelInspector from "./components/ParcelInspector";
 import CameraController from "./components/CameraController";
 import { pvParcels } from "./state/parcelData";
 import LoadingScreen from "./UI/LoadingScreen";
+import { Perf } from "r3f-perf";
 
 const TEST_CAMERA = false;
 
@@ -19,6 +20,7 @@ function App() {
         <Lights />
         <DaySky />
         <Scene />
+        {/* <Perf /> */}
       </Canvas>
       <UI />
       <LoadingScreen />
