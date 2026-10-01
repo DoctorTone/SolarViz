@@ -1,4 +1,5 @@
-import { useMemo, useRef, useLayoutEffect } from "react";
+import { useMemo, useRef, useEffect, useLayoutEffect } from "react";
+import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import useSolar from "../state/store";
 import { bngToWorld } from "../Utils/utils";
@@ -28,6 +29,17 @@ const Trees = ({ trees, season }: TreesProps) => {
   const year = useSolar((s) => s.currentYear);
   const canopyRef = useRef<THREE.InstancedMesh>(null);
   const trunkRef = useRef<THREE.InstancedMesh>(null);
+  const leafRef = useRef();
+
+  const { nodes, materials } = useGLTF("/models/elm1.glb");
+  // DEBUG
+  console.log("Nodes = ", nodes);
+  console.log("Mats = ", materials);
+
+  const trunkGeo = nodes.Trunk.geometry;
+  const leafGeo = nodes.Leaves.geometry;
+  const trunkMat = materials.bark07_0Mat;
+  const leafMat = materials.elm_leaf_1Mat;
 
   const currentTrees = useMemo(() => {
     if (!meta) return [];
@@ -97,10 +109,8 @@ const Trees = ({ trees, season }: TreesProps) => {
     });
     canopy.instanceMatrix.needsUpdate = true;
     trunk.instanceMatrix.needsUpdate = true;
-    if (canopy.instanceColor)
-      canopy.instanceColor.needsUpdate = true;
-    if (trunk.instanceColor)
-      trunk.instanceColor.needsUpdate = true;
+    if (canopy.instanceColor) canopy.instanceColor.needsUpdate = true;
+    if (trunk.instanceColor) trunk.instanceColor.needsUpdate = true;
   }, [trees, count, season]);
 
   if (!count) return null;

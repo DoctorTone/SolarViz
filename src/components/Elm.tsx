@@ -16,18 +16,14 @@ const Elm = () => {
       leafMat.color =
         season === "winter"
           ? new Color("#9a7b4f") // brown/tan for winter
-          : new Color("#ffffff"); // white = untinted (natural texture) for summer
+          : new Color("#8d8b8b"); // white = untinted (natural texture) for summer
       leafMat.needsUpdate = true;
     }
   }, [materials, season]);
 
   return (
     <group>
-      <Clone object={scene} position={[-2100, 14, 320]} scale={2} />
-      <Clone object={scene} position={[-2100, 14, 322]} scale={2.5} />
-      <Clone object={scene} position={[-2100, 14, 324]} scale={1.87} />
-      <Clone object={scene} position={[-2100, 14, 326]} scale={2} />
-      <Clone object={scene} position={[-2100, 14, 328]} scale={2.5} />
+      <Clone object={scene} position={[-2000, 14, 320]} scale={1} />
     </group>
   );
 };
