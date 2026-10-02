@@ -83,6 +83,11 @@
       { "label": "South West", "shortLabel": "SW", "bearing": 205.7 },
       { "label": "North West", "shortLabel": "NW", "bearing": 295.7 },
       { "label": "North East", "shortLabel": "NE", "bearing": 25.7 }
+    ],
+    "waypoints": [
+      { "easting": 508022, "northing": 359680, "label": "Assessed viewpoint" },
+      { "easting": 508010, "northing": 359695, "label": "Along the path" },
+      { "easting": 508035, "northing": 359670, "label": "Field edge" }
     ]
   },
   {

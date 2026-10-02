@@ -64,6 +64,10 @@ type SolarState = {
   toggleCamera: () => void;
   rendered: boolean;
   setRendered: (status: boolean) => void;
+  activeWaypoint: number;
+  setWaypoint: (waypoint: number) => void;
+  roamMode: "fixed" | "freeroam";
+  setRoamMode: (mode: "fixed" | "freeroam") => void;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -134,6 +138,10 @@ const useSolar = create<SolarState>((set, get) => ({
   toggleCamera: () => set((s) => ({ freeCamera: !s.freeCamera })),
   rendered: false,
   setRendered: (status) => set(() => ({ rendered: status })),
+  activeWaypoint: 0,
+  setWaypoint: (wayPoint) => set(() => ({ activeWaypoint: wayPoint })),
+  roamMode: "fixed",
+  setRoamMode: (mode) => set(() => ({ roamMode: mode })),
   // Terrain height lookup: BNG easting/northing -> ground elevation (m AOD).
   // Returns null if the point is outside the loaded tile.
   sampleHeight: (easting, northing) => {
