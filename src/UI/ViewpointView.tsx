@@ -4,14 +4,12 @@ import StageControl from "./StageControl";
 import RoamToggle from "./RoamToggle";
 import ViewpointHeader from "./ViewpointHeader";
 import DirectionButtons from "./DirectionButtons";
+import YearSlider from "./YearSlider";
 
 const ViewpointView = () => {
   const vpId = useSolar((s) => s.activeViewpoint);
   const viewpoints = useSolar((s) => s.viewpoints);
-  const year = useSolar((s) => s.currentYear);
 
-  const developmentVisible = useSolar((s) => s.developmentVisible);
-  const setYear = useSolar((s) => s.setCurrentYear);
   const season = useSolar((s) => s.currentSeason);
   const setSeason = useSolar((s) => s.setCurrentSeason);
   const uiHidden = useSolar((s) => s.uiHidden);
@@ -31,21 +29,7 @@ const ViewpointView = () => {
             <ViewpointHeader />
             <StageControl />
             <DirectionButtons />
-            <div style={label}>Year: {year}</div>
-            <input
-              type="range"
-              min={1}
-              max={10}
-              step={1}
-              disabled={!developmentVisible}
-              value={year}
-              onChange={(e) => setYear(+e.target.value)}
-              style={{ ...slider, opacity: developmentVisible ? 1 : 0.4 }}
-            />
-            <div style={scaleRow}>
-              <span>Planting</span>
-              <span>Established</span>
-            </div>
+            <YearSlider />
 
             <div style={label}>Season</div>
             <div style={dirRow}>
@@ -130,14 +114,7 @@ const dirBtnActive: CSSProperties = {
   color: "#fff",
   borderColor: "#2a6",
 };
-const slider: CSSProperties = { width: "100%" };
-const scaleRow: CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  fontSize: 11,
-  color: "#777",
-  marginTop: 2,
-};
+
 const hint = {
   fontSize: 12,
   color: "#666",
