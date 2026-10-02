@@ -1,5 +1,19 @@
 import { type CSSProperties } from "react";
 
+export const panelWrap: CSSProperties = {
+  position: "absolute",
+  top: 16,
+  left: 16,
+  zIndex: 10,
+  fontFamily: "system-ui, sans-serif",
+};
+export const panel: CSSProperties = {
+  background: "rgba(255,255,255,0.94)",
+  borderRadius: 10,
+  padding: 16,
+  width: 300,
+  boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+};
 export const label: CSSProperties = {
   fontSize: 12,
   fontWeight: 600,
@@ -36,4 +50,13 @@ export const dirBtnActive: CSSProperties = {
   background: "#2a6",
   color: "#fff",
   borderColor: "#2a6",
+};
+export const hint: CSSProperties = {
+  fontSize: 12,
+  color: "#666",
+  fontStyle: "italic",
+  textAlign: "center",
+  padding: "8px 4px",
+  lineHeight: 1.4,
+  fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
 };
