@@ -3,13 +3,13 @@ import useSolar from "../state/store";
 import StageControl from "./StageControl";
 import RoamToggle from "./RoamToggle";
 import ViewpointHeader from "./ViewpointHeader";
+import DirectionButtons from "./DirectionButtons";
 
 const ViewpointView = () => {
   const vpId = useSolar((s) => s.activeViewpoint);
   const viewpoints = useSolar((s) => s.viewpoints);
   const year = useSolar((s) => s.currentYear);
-  const dirIdx = useSolar((s) => s.activeDirection);
-  const setDir = useSolar((s) => s.setDirection);
+
   const developmentVisible = useSolar((s) => s.developmentVisible);
   const setYear = useSolar((s) => s.setCurrentYear);
   const season = useSolar((s) => s.currentSeason);
@@ -30,19 +30,7 @@ const ViewpointView = () => {
           <div style={panel}>
             <ViewpointHeader />
             <StageControl />
-            <div style={label}>View direction</div>
-            <div style={dirRow}>
-              {vp.directions?.map((d, i) => (
-                <button
-                  key={i}
-                  style={i === dirIdx ? dirBtnActive : dirBtn}
-                  onClick={() => setDir(i)}
-                >
-                  {d.label}
-                </button>
-              ))}
-            </div>
-
+            <DirectionButtons />
             <div style={label}>Year: {year}</div>
             <input
               type="range"
