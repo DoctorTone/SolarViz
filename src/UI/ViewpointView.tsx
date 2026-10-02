@@ -5,13 +5,12 @@ import RoamToggle from "./RoamToggle";
 import ViewpointHeader from "./ViewpointHeader";
 import DirectionButtons from "./DirectionButtons";
 import YearSlider from "./YearSlider";
+import SeasonToggle from "./SeasonToggle";
 
 const ViewpointView = () => {
   const vpId = useSolar((s) => s.activeViewpoint);
   const viewpoints = useSolar((s) => s.viewpoints);
 
-  const season = useSolar((s) => s.currentSeason);
-  const setSeason = useSolar((s) => s.setCurrentSeason);
   const uiHidden = useSolar((s) => s.uiHidden);
   const roamMode = useSolar((s) => s.roamMode);
 
@@ -30,22 +29,7 @@ const ViewpointView = () => {
             <StageControl />
             <DirectionButtons />
             <YearSlider />
-
-            <div style={label}>Season</div>
-            <div style={dirRow}>
-              <button
-                style={season === "summer" ? dirBtnActive : dirBtn}
-                onClick={() => setSeason("summer")}
-              >
-                Summer
-              </button>
-              <button
-                style={season === "winter" ? dirBtnActive : dirBtn}
-                onClick={() => setSeason("winter")}
-              >
-                Winter (leaf-off)
-              </button>
-            </div>
+            <SeasonToggle />
           </div>
         </div>
       ) : (
@@ -99,7 +83,7 @@ const label: CSSProperties = {
   color: "#444",
   margin: "14px 0 6px",
 };
-const dirRow: CSSProperties = { display: "flex", flexWrap: "wrap", gap: 6 };
+
 const dirBtn: CSSProperties = {
   padding: "6px 10px",
   border: "1px solid #ccc",
