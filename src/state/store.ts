@@ -60,6 +60,8 @@ type SolarState = {
   setShowInfoDialog: (status: boolean) => void;
   uiHidden: boolean;
   toggleUI: () => void;
+  freeCamera: boolean;
+  toggleCamera: () => void;
   rendered: boolean;
   setRendered: (status: boolean) => void;
 };
@@ -128,6 +130,8 @@ const useSolar = create<SolarState>((set, get) => ({
   setShowInfoDialog: (status) => set(() => ({ infoDialogOpen: status })),
   uiHidden: false,
   toggleUI: () => set((s) => ({ uiHidden: !s.uiHidden })),
+  freeCamera: false,
+  toggleCamera: () => set((s) => ({ freeCamera: !s.freeCamera })),
   rendered: false,
   setRendered: (status) => set(() => ({ rendered: status })),
   // Terrain height lookup: BNG easting/northing -> ground elevation (m AOD).

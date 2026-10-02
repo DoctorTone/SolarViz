@@ -7,16 +7,17 @@ import ParcelInspector from "./components/ParcelInspector";
 import CameraController from "./components/CameraController";
 import { pvParcels } from "./state/parcelData";
 import LoadingScreen from "./UI/LoadingScreen";
+import useSolar from "./state/store";
 import { Perf } from "r3f-perf";
 
-const TEST_CAMERA = false;
-
 function App() {
+  const freeCamera = useSolar((s) => s.freeCamera);
+
   return (
     <>
       <Canvas>
-        {!TEST_CAMERA && <CameraController />}
-        {TEST_CAMERA && <ParcelInspector parcel={pvParcels[0].boundary} />}
+        {!freeCamera && <CameraController />}
+        {freeCamera && <ParcelInspector parcel={pvParcels[0].boundary} />}
         <Lights />
         <DaySky />
         <Scene />

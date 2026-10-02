@@ -4,49 +4,115 @@ export const treeData = [
     easting: 508209,
     northing: 359714,
     existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
+    mature_height: 25, // full height; existing trees sit at this always
   },
   {
     easting: 508212,
     northing: 359746,
     existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
+    mature_height: 25, // full height; existing trees sit at this always
   },
   {
     easting: 508210,
     northing: 359733,
     existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
+    mature_height: 25, // full height; existing trees sit at this always
   },
   {
     easting: 508210,
     northing: 359725,
     existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
+    mature_height: 25, // full height; existing trees sit at this always
   },
   {
     easting: 508209,
     northing: 359721,
     existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
+    mature_height: 25, // full height; existing trees sit at this always
   },
   {
     easting: 508211,
     northing: 359719,
     existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
+    mature_height: 25, // full height; existing trees sit at this always
   },
   {
     easting: 508212,
     northing: 359740,
     existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
+    mature_height: 25, // full height; existing trees sit at this always
   },
   {
     easting: 508212,
     northing: 359731,
     existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508214,
+    northing: 359737,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508213,
+    northing: 359758,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508219,
+    northing: 359763,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508225,
+    northing: 359768,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508233,
+    northing: 359770,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508241,
+    northing: 359770,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508247,
+    northing: 359771,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508254,
+    northing: 359773,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508262,
+    northing: 359772,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508271,
+    northing: 359774,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
+  },
+  {
+    easting: 508281,
+    northing: 359774,
+    existing: true,
+    mature_height: 25, // full height; existing trees sit at this always
   },
   {
     easting: 508420,

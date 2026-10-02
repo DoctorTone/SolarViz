@@ -20,6 +20,9 @@ const UI = () => {
       if (e.key === "h") {
         useSolar.getState().toggleUI();
       }
+      if (e.key === "c") {
+        useSolar.getState().toggleCamera();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);

@@ -37,7 +37,7 @@ const CoordinatePicker = ({ terrainRef }) => {
       console.log(`{ easting: ${easting}, northing: ${northing} },`);
       // also copy to clipboard for convenience:
       navigator.clipboard?.writeText(
-        `{ easting: ${easting}, northing: ${northing} },`,
+        `easting: ${easting}, northing: ${northing},`,
       );
     };
 
