@@ -6,6 +6,7 @@ import type { hedgerows } from "../state/hedgerowData";
 import { bngToWorld } from "../Utils/utils";
 
 const MIN_HEIGHT = 0.15;
+const MODEL_REF = 3.5;
 
 function rand(seed: number) {
   const s = Math.sin(seed * 127.1) * 43758.5453;
@@ -51,7 +52,7 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
       height = 0;
     } else height = start_height + (mature_height - start_height) * t;
   }
-  const yScale = height / mature_height; // model base = mature, so scale is fraction
+  const yScale = height / MODEL_REF; // model base = mature, so scale is fraction
 
   // build the per-segment transforms along the polyline
   const segments = useMemo(() => {

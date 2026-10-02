@@ -11,6 +11,7 @@ import { treeData } from "../state/treeData";
 import Trees from "./Trees";
 import Buildings from "./Buildings";
 // import Elm from "./Elm";
+import CoordinatePicker from "./CoordinatePicker";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
@@ -39,6 +40,7 @@ const Scene = () => {
           <Trees trees={treeData} season={season} />
           <Buildings />
           {/* <Elm /> */}
+          <CoordinatePicker terrainRef={null} />
         </>
       ) : null}
     </>

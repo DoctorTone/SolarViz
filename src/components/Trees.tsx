@@ -23,6 +23,8 @@ type TreesProps = {
   season: "summer" | "winter";
 };
 
+const TREE_MODEL_REF = 16.5;
+
 const Trees = ({ trees, season }: TreesProps) => {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
@@ -35,6 +37,10 @@ const Trees = ({ trees, season }: TreesProps) => {
 
   const trunkGeo = nodes.Trunk.geometry;
   const leafGeo = nodes.Leaves.geometry;
+  leafGeo.computeBoundingBox();
+  const nativeHeight = leafGeo.boundingBox.max.y; // top of foliage = tree height
+  console.log("tree native height:", nativeHeight);
+
   const trunkMat = materials.bark07_0Mat;
   const leafMat = materials.elm_leaf_1Mat;
 
@@ -57,7 +63,8 @@ const Trees = ({ trees, season }: TreesProps) => {
     return trees.map((t, i) => {
       const [x, z] = bngToWorld(t.easting, t.northing, meta);
       const y = sampleHeight(t.easting, t.northing) ?? 0;
-      const scale = (t.scale ?? 1) * (0.8 + rand(i * 3.7) * 0.4); // ±20% size variation
+      const baseScale = (t.mature_height ?? TREE_MODEL_REF) / TREE_MODEL_REF;
+      const scale = baseScale * (0.85 + rand(i * 3.7) * 0.3); // ±15% variation
       const yaw = rand(i * 1.3) * Math.PI * 2; // free random rotation
       return { x, y, z, scale, yaw };
     });

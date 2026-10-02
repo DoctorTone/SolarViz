@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { type CSSProperties } from "react";
 import useSolar from "../state/store";
 import StageControl from "./StageControl";
 
@@ -13,12 +13,15 @@ const ViewpointView = () => {
   const setYear = useSolar((s) => s.setCurrentYear);
   const season = useSolar((s) => s.currentSeason);
   const setSeason = useSolar((s) => s.setCurrentSeason);
+  const uiHidden = useSolar((s) => s.uiHidden);
 
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
   if (!vp) return null;
 
   const impact = year <= 5 ? vp.impactY1 : vp.impactY10;
   const phase = year <= 5 ? "Year 1" : "Year 10";
+
+  if (uiHidden) return null;
 
   return (
     <div style={panelWrap}>
@@ -109,7 +112,11 @@ const backBtn: CSSProperties = {
   marginBottom: 8,
 };
 const h3: CSSProperties = { margin: "0 0 2px", fontSize: 18 };
-const sub: CSSProperties = { margin: "8px 0 12px 0", fontSize: 13, color: "#0e0d0d" };
+const sub: CSSProperties = {
+  margin: "8px 0 12px 0",
+  fontSize: 13,
+  color: "#0e0d0d",
+};
 const tagLine: CSSProperties = {
   margin: "0 0 14px",
   fontSize: 12,

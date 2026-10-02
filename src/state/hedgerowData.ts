@@ -423,8 +423,8 @@ export const hedgerows = [
     id: "By20 - East 1",
     type: "hedgerow",
     augments_existing: true,
-    start_height: 8, // existing hedge height at year 0 (m)
-    mature_height: 8, // documented year-10 maintained height
+    start_height: 6, // existing hedge height at year 0 (m)
+    mature_height: 6, // documented year-10 maintained height
     points: [
       [508992, 360255],
       [509043, 360075],
@@ -434,8 +434,8 @@ export const hedgerows = [
     id: "By20 - East 2",
     type: "hedgerow",
     augments_existing: true,
-    start_height: 8, // existing hedge height at year 0 (m)
-    mature_height: 8, // documented year-10 maintained height
+    start_height: 6, // existing hedge height at year 0 (m)
+    mature_height: 6, // documented year-10 maintained height
     points: [
       [509048, 360057],
       [509117, 359700],
