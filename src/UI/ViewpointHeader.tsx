@@ -1,4 +1,4 @@
-import { type CSSProperties } from "react";
+import { backBtn, h3, sub, tagLine } from "../css/UIStyles";
 import useSolar from "../state/store";
 
 const ViewpointHeader = () => {
@@ -28,25 +28,3 @@ const ViewpointHeader = () => {
 };
 
 export default ViewpointHeader;
-
-const backBtn: CSSProperties = {
-  border: "none",
-  background: "none",
-  color: "#2a6",
-  cursor: "pointer",
-  fontSize: 13,
-  padding: 0,
-  marginBottom: 8,
-};
-const h3: CSSProperties = { margin: "0 0 2px", fontSize: 18 };
-const sub: CSSProperties = {
-  margin: "8px 0 12px 0",
-  fontSize: 13,
-  color: "#0e0d0d",
-};
-const tagLine: CSSProperties = {
-  margin: "0 0 14px",
-  fontSize: 12,
-  color: "#8a6d1f",
-  fontWeight: 600,
-};
