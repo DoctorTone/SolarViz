@@ -1,9 +1,10 @@
 import { type CSSProperties } from "react";
 import useSolar from "../state/store";
 import StageControl from "./StageControl";
+import RoamToggle from "./RoamToggle";
+import ViewpointHeader from "./ViewpointHeader";
 
 const ViewpointView = () => {
-  const exit = useSolar((s) => s.exitToOverview);
   const vpId = useSolar((s) => s.activeViewpoint);
   const viewpoints = useSolar((s) => s.viewpoints);
   const year = useSolar((s) => s.currentYear);
@@ -14,74 +15,71 @@ const ViewpointView = () => {
   const season = useSolar((s) => s.currentSeason);
   const setSeason = useSolar((s) => s.setCurrentSeason);
   const uiHidden = useSolar((s) => s.uiHidden);
+  const roamMode = useSolar((s) => s.roamMode);
 
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
   if (!vp) return null;
 
-  const impact = year <= 5 ? vp.impactY1 : vp.impactY10;
-  const phase = year <= 5 ? "Year 1" : "Year 10";
-
   if (uiHidden) return null;
 
   return (
-    <div style={panelWrap}>
-      <div style={panel}>
-        <button style={backBtn} onClick={exit}>
-          ← Overview
-        </button>
-        <h3 style={h3}>VP{vpId}</h3>
-        <p style={sub}>{vp.name}</p>
-        <p style={tagLine}>
-          Assessed visual impact ({phase}): <strong>{impact}</strong>
-        </p>
+    <>
+      <RoamToggle />
+      {roamMode === "fixed" ? (
+        <div style={panelWrap}>
+          <div style={panel}>
+            <ViewpointHeader />
+            <StageControl />
+            <div style={label}>View direction</div>
+            <div style={dirRow}>
+              {vp.directions?.map((d, i) => (
+                <button
+                  key={i}
+                  style={i === dirIdx ? dirBtnActive : dirBtn}
+                  onClick={() => setDir(i)}
+                >
+                  {d.label}
+                </button>
+              ))}
+            </div>
 
-        <StageControl />
-        <div style={label}>View direction</div>
-        <div style={dirRow}>
-          {vp.directions?.map((d, i) => (
-            <button
-              key={i}
-              style={i === dirIdx ? dirBtnActive : dirBtn}
-              onClick={() => setDir(i)}
-            >
-              {d.label}
-            </button>
-          ))}
-        </div>
+            <div style={label}>Year: {year}</div>
+            <input
+              type="range"
+              min={1}
+              max={10}
+              step={1}
+              disabled={!developmentVisible}
+              value={year}
+              onChange={(e) => setYear(+e.target.value)}
+              style={{ ...slider, opacity: developmentVisible ? 1 : 0.4 }}
+            />
+            <div style={scaleRow}>
+              <span>Planting</span>
+              <span>Established</span>
+            </div>
 
-        <div style={label}>Year: {year}</div>
-        <input
-          type="range"
-          min={1}
-          max={10}
-          step={1}
-          disabled={!developmentVisible}
-          value={year}
-          onChange={(e) => setYear(+e.target.value)}
-          style={{ ...slider, opacity: developmentVisible ? 1 : 0.4 }}
-        />
-        <div style={scaleRow}>
-          <span>Planting</span>
-          <span>Established</span>
+            <div style={label}>Season</div>
+            <div style={dirRow}>
+              <button
+                style={season === "summer" ? dirBtnActive : dirBtn}
+                onClick={() => setSeason("summer")}
+              >
+                Summer
+              </button>
+              <button
+                style={season === "winter" ? dirBtnActive : dirBtn}
+                onClick={() => setSeason("winter")}
+              >
+                Winter (leaf-off)
+              </button>
+            </div>
+          </div>
         </div>
-
-        <div style={label}>Season</div>
-        <div style={dirRow}>
-          <button
-            style={season === "summer" ? dirBtnActive : dirBtn}
-            onClick={() => setSeason("summer")}
-          >
-            Summer
-          </button>
-          <button
-            style={season === "winter" ? dirBtnActive : dirBtn}
-            onClick={() => setSeason("winter")}
-          >
-            Winter (leaf-off)
-          </button>
-        </div>
-      </div>
-    </div>
+      ) : (
+        <div style={hint}>Click a marker to move · drag to look around</div>
+      )}
+    </>
   );
 };
 
@@ -151,4 +149,13 @@ const scaleRow: CSSProperties = {
   fontSize: 11,
   color: "#777",
   marginTop: 2,
+};
+const hint = {
+  fontSize: 12,
+  color: "#666",
+  fontStyle: "italic",
+  textAlign: "center",
+  padding: "8px 4px",
+  lineHeight: 1.4,
+  fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
 };
