@@ -8,6 +8,7 @@ import DirectionButtons from "./DirectionButtons";
 import YearSlider from "./YearSlider";
 import SeasonToggle from "./SeasonToggle";
 import RoamHint from "./RoamHint";
+import ExplorePanel from "./ExplorePanel";
 
 const ViewpointView = () => {
   const canRoam = useMediaQuery("(pointer: fine)");
@@ -15,6 +16,10 @@ const ViewpointView = () => {
   const uiHidden = useSolar((s) => s.uiHidden);
 
   if (uiHidden) return null;
+
+  if (roamMode === "freeroam") {
+    return <ExplorePanel />; // minimal
+  }
 
   return (
     <div style={panelWrap}>
