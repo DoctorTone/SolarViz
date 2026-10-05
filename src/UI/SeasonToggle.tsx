@@ -19,7 +19,7 @@ const SeasonToggle = () => {
           style={season === "winter" ? dirBtnActive : dirBtn}
           onClick={() => setSeason("winter")}
         >
-          Winter (leaf-off)
+          Winter
         </button>
       </div>
     </>
