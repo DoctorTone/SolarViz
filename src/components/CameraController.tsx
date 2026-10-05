@@ -45,10 +45,10 @@ function CameraController() {
   const initialYaw = useMemo(() => {
     if (!vp) return 0;
     // use the first documented direction's bearing, or a bearing toward the development
-    const bearing = vp.directions?.[0]?.bearing ?? 0;
+    const bearing = vp.directions?.[dirIdx]?.bearing ?? 0; // dirIdx, not [0]
     // convert compass bearing to the yaw convention FirstPersonLook uses
     return THREE.MathUtils.degToRad(-bearing); // may need sign/offset — see note
-  }, [vp]);
+  }, [vp, dirIdx]);
 
   useFrame(() => {
     if (!meta) return;
@@ -111,7 +111,11 @@ function CameraController() {
   return (
     <>
       {mode === "viewpoint" && roamMode === "freeroam" && (
-        <FirstPersonLook enabled={true} initialYaw={initialYaw} key={vpId} />
+        <FirstPersonLook
+          enabled={true}
+          initialYaw={initialYaw}
+          key={`${vpId}-${dirIdx}`}
+        />
       )}
     </>
   );
