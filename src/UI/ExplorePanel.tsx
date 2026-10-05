@@ -12,7 +12,9 @@ const ExplorePanel = () => {
         ← Assessed views
       </button>
       <SeasonToggle />
-      <YearSlider />
+      <div style={{ width: 120 }}>
+        <YearSlider />
+      </div>
       <span style={hint}>Click a marker to move · drag to look</span>
     </div>
   );
