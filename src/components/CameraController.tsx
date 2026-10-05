@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useMediaQuery } from "@mui/material";
 import useSolar from "../state/store";
 import { bngToWorld } from "../Utils/utils";
+import FirstPersonLook from "./FirstPersonLook";
 
 function hFovToVFov(hFovDeg: number, aspect: number) {
   const h = THREE.MathUtils.degToRad(hFovDeg);
@@ -28,6 +29,7 @@ function CameraController() {
   // The scene uses a perspective camera, so fov is available
   const camera = defaultCamera as THREE.PerspectiveCamera;
   const controlsRef = useRef(null);
+  const arrived = useRef(false);
 
   // reusable target vectors
   const targetPos = useRef(new THREE.Vector3());
@@ -39,6 +41,14 @@ function CameraController() {
   // Get current viewpoint
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
   const CAM_POS = isMobile ? [0, 900, 1200] : [0, 250, 800];
+
+  const initialYaw = useMemo(() => {
+    if (!vp) return 0;
+    // use the first documented direction's bearing, or a bearing toward the development
+    const bearing = vp.directions?.[0]?.bearing ?? 0;
+    // convert compass bearing to the yaw convention FirstPersonLook uses
+    return THREE.MathUtils.degToRad(-bearing); // may need sign/offset — see note
+  }, [vp]);
 
   useFrame(() => {
     if (!meta) return;
@@ -69,29 +79,6 @@ function CameraController() {
         targetPos.current.set(x, y, z);
         targetLook.current.set(lx, y, lz); // level look
         targetFov.current = hFovToVFov(90, size.width / size.height);
-      } else {
-        const wp = vp?.waypoints?.[activeWP];
-        if (!wp) return;
-
-        const halfW = (meta.cols * meta.cell_size_m) / 2;
-        const halfD = (meta.rows * meta.cell_size_m) / 2;
-        const x = wp.easting - meta.origin_easting - halfW;
-        const z = meta.origin_northing - wp.northing - halfD;
-        const y = (sampleHeight(wp.easting, wp.northing) ?? 0) + 1.6; // eye height
-
-        targetPos.current.set(x, y, z);
-        camera.position.lerp(targetPos.current, 0.08); // glide toward waypoint
-        // keep the OrbitControls target just in front of the camera, so rotation
-        // happens "around the viewer" rather than orbiting a fixed distant point
-        if (controlsRef.current) {
-          // put target a small distance ahead in the current look direction
-          const forward = new THREE.Vector3();
-          camera.getWorldDirection(forward);
-          controlsRef.current.target
-            .copy(camera.position)
-            .add(forward.multiplyScalar(10));
-          controlsRef.current.update();
-        }
       }
     }
 
@@ -122,12 +109,11 @@ function CameraController() {
   });
 
   return (
-    <OrbitControls
-      ref={controlsRef}
-      enabled={mode === "viewpoint" && roamMode === "freeroam"}
-      enablePan={false}
-      enableZoom={false}
-    />
+    <>
+      {mode === "viewpoint" && roamMode === "freeroam" && (
+        <FirstPersonLook enabled={true} initialYaw={initialYaw} key={vpId} />
+      )}
+    </>
   );
 }
 
