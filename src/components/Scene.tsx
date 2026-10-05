@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Terrain from "./Terrain";
 import useSolar from "../state/store";
 import ViewpointMarkers from "./ViewpointMarkers";
-// import Grid from "./Grid"; // debug grid, re-enable along with <Grid /> below
+import Grid from "./Grid";
 import { hedgerows } from "../state/hedgerowData";
 import HedgeRow from "./HedgeRow";
 import { pvParcels } from "../state/parcelData";
@@ -10,7 +10,8 @@ import Panels from "./Panels";
 import { treeData } from "../state/treeData";
 import Trees from "./Trees";
 import Buildings from "./Buildings";
-import HedgePiece from "./HedgePiece";
+// import Elm from "./Elm";
+import CoordinatePicker from "./CoordinatePicker";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);
@@ -30,7 +31,7 @@ const Scene = () => {
         <>
           <Terrain />
           <ViewpointMarkers />
-          {/* <Grid /> */}
+          <Grid />
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
           ))}
@@ -38,7 +39,8 @@ const Scene = () => {
             pvParcels.map((p) => <Panels key={p.id} parcel={p.boundary} />)}
           <Trees trees={treeData} season={season} />
           <Buildings />
-          <HedgePiece />
+          {/* <Elm /> */}
+          <CoordinatePicker terrainRef={null} />
         </>
       ) : null}
     </>

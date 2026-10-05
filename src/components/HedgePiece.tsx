@@ -1,9 +1,15 @@
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Clone } from "@react-three/drei";
 
 const HedgePiece = () => {
-  const { scene } = useGLTF("./models/hedge.glb");
-
-  return <primitive object={scene} position={[-1500, 0, 0]} />;
+  const { scene, nodes, materials } = useGLTF("/models/hedgePiece.glb");
+  console.log("Nodes = ", nodes);
+  console.log("Mats = ", materials);
+  return (
+    <group>
+      <Clone object={scene} position={[-1980, 14, 300]} />
+      <Clone object={scene} position={[-1990, 14, 300]} />
+    </group>
+  );
 };
 
 export default HedgePiece;
