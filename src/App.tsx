@@ -7,13 +7,8 @@ import ParcelInspector from "./components/ParcelInspector";
 import CameraController from "./components/CameraController";
 import { pvParcels } from "./state/parcelData";
 import LoadingScreen from "./UI/LoadingScreen";
-<<<<<<< HEAD
-
-const TEST_CAMERA = true;
-=======
 import useSolar from "./state/store";
 import { Perf } from "r3f-perf";
->>>>>>> cd51e6643bb89a6ae0c47b74bb47c32f6b0ca2db
 
 function App() {
   const freeCamera = useSolar((s) => s.freeCamera);
