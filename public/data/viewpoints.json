@@ -84,10 +84,13 @@
       { "label": "North West", "shortLabel": "NW", "bearing": 295.7 },
       { "label": "North East", "shortLabel": "NE", "bearing": 25.7 }
     ],
+    "entryWaypoint": 2,
     "waypoints": [
+      { "easting": 507991, "northing": 359675, "label": "East along path 2" },
+      { "easting": 508011, "northing": 359679, "label": "East along path 1" },
       { "easting": 508022, "northing": 359680, "label": "Assessed viewpoint" },
-      { "easting": 508010, "northing": 359695, "label": "Along the path" },
-      { "easting": 508035, "northing": 359670, "label": "Field edge" }
+      { "easting": 508034, "northing": 359683, "label": "West along path 1" },
+      { "easting": 508070, "northing": 359688, "label": "West along path 2" }
     ]
   },
   {

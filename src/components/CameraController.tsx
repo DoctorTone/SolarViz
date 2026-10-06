@@ -1,5 +1,4 @@
-import { useRef, useMemo } from "react";
-import { OrbitControls } from "@react-three/drei";
+import { useRef, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useMediaQuery } from "@mui/material";
@@ -14,6 +13,7 @@ function hFovToVFov(hFovDeg: number, aspect: number) {
 
 const LOOK_POS_EAST = 508400;
 const LOOK_POS_NORTH = 358850;
+const EYE_HEIGHT = 1.6;
 
 function CameraController() {
   const isMobile = useMediaQuery("(max-width: 600px)");
@@ -25,13 +25,12 @@ function CameraController() {
   const activeWP = useSolar((s) => s.activeWaypoint);
   const dirIdx = useSolar((s) => s.activeDirection);
   const viewpoints = useSolar((s) => s.viewpoints);
-  const { camera: defaultCamera, size } = useThree();
-  // The scene uses a perspective camera, so fov is available
-  const camera = defaultCamera as THREE.PerspectiveCamera;
-  const controlsRef = useRef(null);
-  const arrived = useRef(false);
 
-  // reusable target vectors
+  const { camera: defaultCamera, size } = useThree();
+  const camera = defaultCamera as THREE.PerspectiveCamera;
+
+  // Refs
+  const arrived = useRef(false);
   const targetPos = useRef(new THREE.Vector3());
   const targetLook = useRef(new THREE.Vector3());
   const currentLook = useRef(new THREE.Vector3());
@@ -40,20 +39,53 @@ function CameraController() {
 
   // Get current viewpoint
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
+
   const CAM_POS = isMobile ? [0, 900, 1200] : [0, 250, 800];
 
-  const initialYaw = useMemo(() => {
-    if (!vp) return 0;
-    // use the first documented direction's bearing, or a bearing toward the development
-    const bearing = vp.directions?.[dirIdx]?.bearing ?? 0; // dirIdx, not [0]
-    // convert compass bearing to the yaw convention FirstPersonLook uses
-    return THREE.MathUtils.degToRad(-bearing); // may need sign/offset — see note
-  }, [vp, dirIdx]);
+  // reset the glide latch whenever the active waypoint changes, so the camera
+  // glides to the new waypoint (then latches on arrival)
+  useEffect(() => {
+    arrived.current = false;
+  }, [activeWP, vpId, roamMode]);
+
+  // compute the yaw FirstPersonLook should start from, based on the active
+  // documented direction (so entering explore faces the right way)
+  const initialYaw =
+    vp?.directions?.[dirIdx]?.bearing != null
+      ? THREE.MathUtils.degToRad(-vp.directions[dirIdx].bearing) // tune offset to match scene
+      : 0;
 
   useFrame(() => {
     if (!meta) return;
 
-    // --- compute the target pose for the current mode ---
+    // ---------------------------------------------------------------
+    // FREEROAM: glide position only; FirstPersonLook owns rotation.
+    // Handled first and returns early so it never touches the shared
+    // ease/lookAt block below.
+    // ---------------------------------------------------------------
+    if (mode === "viewpoint" && roamMode === "freeroam") {
+      if (!vp) return;
+      const wp = vp.waypoints?.[activeWP];
+      if (!wp) return;
+
+      const [x, z] = bngToWorld(wp.easting, wp.northing, meta);
+      const y = (sampleHeight(wp.easting, wp.northing) ?? 0) + EYE_HEIGHT; // eye height
+      targetPos.current.set(x, y, z);
+
+      if (!arrived.current) {
+        camera.position.lerp(targetPos.current, 0.08);
+        if (camera.position.distanceTo(targetPos.current) < 0.1) {
+          camera.position.copy(targetPos.current);
+          arrived.current = true;
+        }
+      }
+      // rotation handled by <FirstPersonLook />
+      return;
+    }
+
+    // ---------------------------------------------------------------
+    // OVERVIEW and FIXED viewpoint: compute a target pose, then ease.
+    // ---------------------------------------------------------------
     if (mode === "overview") {
       // high vantage looking down over site centre
       const [cx, cz] = bngToWorld(LOOK_POS_EAST, LOOK_POS_NORTH, meta); // rough site centre BNG — tune
@@ -61,25 +93,23 @@ function CameraController() {
       targetLook.current.set(cx, 0, cz);
       targetFov.current = 55;
     } else {
+      // roamMode === fixed
       if (!vp) return null;
 
-      if (roamMode === "fixed") {
-        const [x, z] = bngToWorld(vp.easting, vp.northing, meta);
-        const groundAOD = sampleHeight(vp.easting, vp.northing) ?? 0;
-        const y = vp.eyeAOD ?? groundAOD + 1.5;
+      const [x, z] = bngToWorld(vp.easting, vp.northing, meta);
+      const y = (sampleHeight(vp.easting, vp.northing) ?? 0) + EYE_HEIGHT; // eye height
 
-        const direction = vp.directions?.[dirIdx];
-        if (!direction) return;
-        const bearing = THREE.MathUtils.degToRad(direction.bearing);
-        const d = 200;
-        const lookE = vp.easting + Math.sin(bearing) * d;
-        const lookN = vp.northing + Math.cos(bearing) * d;
-        const [lx, lz] = bngToWorld(lookE, lookN, meta);
+      const direction = vp.directions?.[dirIdx];
+      if (!direction) return;
+      const bearing = THREE.MathUtils.degToRad(direction.bearing);
+      const d = 200;
+      const lookE = vp.easting + Math.sin(bearing) * d;
+      const lookN = vp.northing + Math.cos(bearing) * d;
+      const [lx, lz] = bngToWorld(lookE, lookN, meta);
 
-        targetPos.current.set(x, y, z);
-        targetLook.current.set(lx, y, lz); // level look
-        targetFov.current = hFovToVFov(90, size.width / size.height);
-      }
+      targetPos.current.set(x, y, z);
+      targetLook.current.set(lx, y, lz); // level look
+      targetFov.current = hFovToVFov(90, size.width / size.height);
     }
 
     // --- initialise instantly on first frame, then ease ---

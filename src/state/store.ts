@@ -11,6 +11,7 @@ export type Viewpoint = {
   name: string;
   description?: string;
   shortDescription?: string;
+  entryWaypoint?: number;
   easting: number;
   northing: number;
   distance: number;
@@ -85,15 +86,18 @@ const useSolar = create<SolarState>((set, get) => ({
   activeViewpoint: null,
   activeDirection: 0,
   developmentVisible: true,
-  enterViewpoint: (id) =>
+  enterViewpoint: (id) => {
+    const vp = get().viewpoints.find((v) => v.no === id);
     set({
       viewMode: "viewpoint",
       activeViewpoint: id,
       activeDirection: 0,
+      activeWaypoint: vp?.entryWaypoint ?? 0,
       stage: "built",
       developmentVisible: true,
       currentYear: 1,
-    }),
+    });
+  },
   exitToOverview: () =>
     set({
       viewMode: "overview",
