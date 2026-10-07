@@ -9,8 +9,9 @@ const WaypointMarkers = () => {
   const activeWP = useSolar((s) => s.activeWaypoint);
   const setWaypoint = useSolar((s) => s.setWaypoint);
   const mode = useSolar((s) => s.viewMode);
+  const roamMode = useSolar((s) => s.roamMode);
 
-  if (!meta || mode !== "viewpoint") return null;
+  if (!meta || mode !== "viewpoint" || roamMode !== "freeroam") return null;
 
   const vp = viewpoints.find((v) => v.no === activeVP);
   if (!vp?.waypoints) return null;
