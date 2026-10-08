@@ -1,0 +1,11 @@
+{
+  "crs": "EPSG:27700",
+  "min_easting": 507000.0,
+  "min_northing": 358000.0,
+  "max_easting": 509500.0,
+  "max_northing": 360500.0,
+  "width_px": 3488,
+  "height_px": 3488,
+  "ground_mpp": 0.717,
+  "row0_is_north": true
+}

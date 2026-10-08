@@ -1,9 +1,12 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { useTexture } from "@react-three/drei";
 import useSolar from "../state/store";
 import * as THREE from "three";
 
 const Terrain = () => {
+  const groundTexture = useTexture("/textures/aerial_bng.png");
+  groundTexture.colorSpace = THREE.SRGBColorSpace;
   const metaData = useSolar((state) => state.metaData);
   const heights = useSolar((state) => state.heights);
   const setRendered = useSolar((s) => s.setRendered);
@@ -45,10 +48,10 @@ const Terrain = () => {
   return (
     <mesh geometry={geometry} receiveShadow>
       <meshStandardMaterial
-        color="#6b7a4f"
         roughness={0.95}
         metalness={0}
         flatShading={false}
+        map={groundTexture}
       />
     </mesh>
   );

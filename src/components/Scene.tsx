@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import Terrain from "./Terrain";
 import useSolar from "../state/store";
 import ViewpointMarkers from "./ViewpointMarkers";
@@ -13,6 +13,8 @@ import Buildings from "./Buildings";
 // import Elm from "./Elm";
 import CoordinatePicker from "./CoordinatePicker";
 import WaypointMarkers from "./WaypointMarkers";
+import AerialInset from "./AerialInset";
+import InsetExtent from "../assets/aerial_inset.json";
 import HedgePiece from "./HedgePiece";
 
 const Scene = () => {
@@ -32,8 +34,14 @@ const Scene = () => {
       {loaded ? (
         <>
           <Terrain />
+          <Suspense fallback={null}>
+            <AerialInset
+              url="/textures/aerial_inset.png"
+              extent={InsetExtent}
+            />
+          </Suspense>
           <ViewpointMarkers />
-          <Grid />
+          {/* <Grid /> */}
           {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
           ))}
