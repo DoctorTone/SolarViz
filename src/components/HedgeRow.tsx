@@ -1,4 +1,4 @@
-import { useMemo, useRef, useLayoutEffect } from "react";
+import { useMemo, useRef, useLayoutEffect, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import useSolar from "../state/store";
@@ -22,15 +22,29 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
   const year = useSolar((s) => s.currentYear); // 0..10
   const season = useSolar((s) => s.currentSeason); // 'summer' | 'winter'
   const meshRef = useRef<THREE.InstancedMesh>(null);
+  const coreRef = useRef<THREE.InstancedMesh>(null); // woody structure
 
-  // load the hedge GLB — grab its geometry + material for instancing
+  // leaves
   const { nodes, materials } = useGLTF("/models/hedgeRow.glb");
   const hedgeGeo = nodes.LC2004.geometry;
   const hedgeMat = materials["LC2_Mat.004"];
-  hedgeGeo.computeBoundingBox();
-  hedgeGeo.translate(0, -hedgeGeo.boundingBox.min.y, 0); // shift base to y=0
 
-  const SEGMENT_LENGTH = 7.5; // metres each hedge piece covers along the line — match your model
+  // woody core — decimated branch structure extracted from the original model
+  const coreGltf = useGLTF("/models/hedgeCore.glb");
+  // DEBUG
+  console.log("Nodes = ", coreGltf.nodes);
+  console.log("Materials = ", coreGltf.materials);
+  const coreGeo = (coreGltf.nodes.Core as THREE.Mesh).geometry; // <-- set to YOUR exported node name
+  // // reuse the branch model's own bark material if it has one, else a dark fallback
+  const coreMat = coreGltf.materials["BarkPoplar_Mat.001"];
+
+  // base BOTH to y=0 using the SAME offset so their authored relative pose is kept
+  hedgeGeo.computeBoundingBox();
+  const baseOffset = -hedgeGeo.boundingBox!.min.y;
+  hedgeGeo.translate(0, baseOffset, 0);
+  coreGeo.translate(0, baseOffset, 0);
+
+  const SEGMENT_LENGTH = 5.5; // metres each hedge piece covers along the line — match your model
 
   const {
     augments_existing,
@@ -38,6 +52,19 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
     mature_height = 3.5,
     points,
   } = hedge;
+
+  useEffect(() => {
+    if (!hedgeMat) return;
+
+    hedgeMat.alphaTest = season === "winter" ? 0.4 : 0.05;
+    hedgeMat.transparent = false;
+    hedgeMat.depthWrite = true;
+    hedgeMat.color =
+      season === "winter"
+        ? new THREE.Color("#9a7b4f") // brown/tan for winter
+        : new THREE.Color("#8d8b8b"); // white = untinted (natural texture) for summer
+    hedgeMat.needsUpdate = true;
+  }, [hedgeMat, season]);
 
   const t = Math.min(1, Math.max(0, year / 10));
   let height,
@@ -84,27 +111,39 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
   const count = segments.length;
 
   useLayoutEffect(() => {
-    if (!meshRef.current || !count) return;
+    if (!count) return;
     const dummy = new THREE.Object3D();
     segments.forEach((seg, i) => {
       dummy.position.set(seg.px, seg.py, seg.pz);
       dummy.rotation.set(0, seg.angle + Math.PI / 2, 0);
       dummy.scale.set(1, yScale, yScale); // base scale = mature; Y-scale for growth
       dummy.updateMatrix();
-      meshRef.current.setMatrixAt(i, dummy.matrix);
+      meshRef.current?.setMatrixAt(i, dummy.matrix);
+      coreRef.current?.setMatrixAt(i, dummy.matrix); // same transform for the woody core
     });
-    meshRef.current.instanceMatrix.needsUpdate = true;
+    if (meshRef.current) meshRef.current.instanceMatrix.needsUpdate = true;
+    if (coreRef.current) coreRef.current.instanceMatrix.needsUpdate = true;
   }, [segments, count, yScale]);
 
   if (!render || !count || height < 0.15) return null;
 
   return (
-    <instancedMesh
-      ref={meshRef}
-      args={[hedgeGeo, hedgeMat, count]}
-      key={count}
-    />
+    <>
+      {/* woody structure first; foliage draws over it */}
+      <instancedMesh
+        ref={coreRef}
+        args={[coreGeo, coreMat, count]}
+        key={`core-${count}`}
+      />
+      <instancedMesh
+        ref={meshRef}
+        args={[hedgeGeo, hedgeMat, count]}
+        key={`leaf-${count}`}
+      />
+    </>
   );
 };
 
 export default HedgeRow;
+
+useGLTF.preload("/models/hedgeCore.glb");

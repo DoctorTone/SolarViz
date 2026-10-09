@@ -34,16 +34,16 @@ const Scene = () => {
           <Terrain />
           <ViewpointMarkers />
           {/* <Grid /> */}
-          {/* {hedgerows.map((h) => (
+          {hedgerows.map((h) => (
             <HedgeRow key={h.id} hedge={h} />
-          ))} */}
+          ))}
           {developmentVisible &&
             pvParcels.map((p) => <Panels key={p.id} parcel={p.boundary} />)}
           <Trees trees={treeData} season={season} />
           <Buildings />
           {/* <Elm /> */}
           <CoordinatePicker terrainRef={null} />
-          <HedgePiece />
+          {/* <HedgePiece /> */}
           <WaypointMarkers />
         </>
       ) : null}
