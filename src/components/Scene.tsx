@@ -43,7 +43,7 @@ const Scene = () => {
           <Buildings />
           {/* <Elm /> */}
           <CoordinatePicker terrainRef={null} />
-          {/* <HedgePiece /> */}
+          <HedgePiece />
           <WaypointMarkers />
         </>
       ) : null}

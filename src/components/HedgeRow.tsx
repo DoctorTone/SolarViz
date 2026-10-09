@@ -24,13 +24,13 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
   const meshRef = useRef<THREE.InstancedMesh>(null);
 
   // load the hedge GLB — grab its geometry + material for instancing
-  const { nodes, materials } = useGLTF("/models/hedgePiece.glb");
-  const hedgeGeo = nodes.Object_2.geometry;
-  const hedgeMat = materials.hedgetextured;
+  const { nodes, materials } = useGLTF("/models/hedgeRow.glb");
+  const hedgeGeo = nodes.LC2004.geometry;
+  const hedgeMat = materials["LC2_Mat.004"];
   hedgeGeo.computeBoundingBox();
   hedgeGeo.translate(0, -hedgeGeo.boundingBox.min.y, 0); // shift base to y=0
 
-  const SEGMENT_LENGTH = 10; // metres each hedge piece covers along the line — match your model
+  const SEGMENT_LENGTH = 7.5; // metres each hedge piece covers along the line — match your model
 
   const {
     augments_existing,
