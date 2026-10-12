@@ -1,6 +1,12 @@
 import { useMemo, useRef, useEffect, useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
-import { Color, InstancedMesh, Object3D } from "three";
+import {
+  Color,
+  InstancedMesh,
+  Mesh,
+  MeshStandardMaterial,
+  Object3D,
+} from "three";
 import useSolar from "../state/store";
 import { bngToWorld } from "../Utils/utils";
 
@@ -28,21 +34,19 @@ const TREE_MODEL_REF = 16.5;
 const Trees = ({ trees, season }: TreesProps) => {
   const meta = useSolar((s) => s.metaData);
   const sampleHeight = useSolar((s) => s.sampleHeight);
-  const year = useSolar((s) => s.currentYear);
-  const canopyRef = useRef<InstancedMesh>(null);
   const trunkRef = useRef<InstancedMesh>(null);
-  const leafRef = useRef();
+  const leafRef = useRef<InstancedMesh>(null);
 
   const { nodes, materials } = useGLTF("/models/elm1.glb");
 
-  const trunkGeo = nodes.Trunk.geometry;
-  const leafGeo = nodes.Leaves.geometry;
+  const trunkGeo = (nodes.Trunk as Mesh).geometry;
+  const leafGeo = (nodes.Leaves as Mesh).geometry;
   leafGeo.computeBoundingBox();
-  const nativeHeight = leafGeo.boundingBox.max.y; // top of foliage = tree height
+  const nativeHeight = leafGeo.boundingBox!.max.y; // top of foliage = tree height
   console.log("tree native height:", nativeHeight);
 
   const trunkMat = materials.bark07_0Mat;
-  const leafMat = materials.elm_leaf_1Mat;
+  const leafMat = materials.elm_leaf_1Mat as MeshStandardMaterial;
 
   useEffect(() => {
     if (!leafMat) return;
@@ -73,18 +77,20 @@ const Trees = ({ trees, season }: TreesProps) => {
   const count = instances.length;
 
   useLayoutEffect(() => {
-    if (!trunkRef.current || !leafRef.current || !count) return;
+    const trunk = trunkRef.current;
+    const leaf = leafRef.current;
+    if (!trunk || !leaf || !count) return;
     const dummy = new Object3D();
     instances.forEach((inst, i) => {
       dummy.position.set(inst.x, inst.y, inst.z);
       dummy.rotation.set(0, inst.yaw, 0);
       dummy.scale.setScalar(inst.scale);
       dummy.updateMatrix();
-      trunkRef.current.setMatrixAt(i, dummy.matrix);
-      leafRef.current.setMatrixAt(i, dummy.matrix); // same transform for both
+      trunk.setMatrixAt(i, dummy.matrix);
+      leaf.setMatrixAt(i, dummy.matrix); // same transform for both
     });
-    trunkRef.current.instanceMatrix.needsUpdate = true;
-    leafRef.current.instanceMatrix.needsUpdate = true;
+    trunk.instanceMatrix.needsUpdate = true;
+    leaf.instanceMatrix.needsUpdate = true;
   }, [instances, count]);
 
   if (!count) return null;

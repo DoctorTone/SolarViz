@@ -8,11 +8,6 @@ import { bngToWorld } from "../Utils/utils";
 const MIN_HEIGHT = 0.15;
 const MODEL_REF = 3.5;
 
-function rand(seed: number) {
-  const s = Math.sin(seed * 127.1) * 43758.5453;
-  return s - Math.floor(s);
-}
-
 type Hedgerow = (typeof hedgerows)[number];
 
 const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
@@ -26,8 +21,8 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
 
   // leaves
   const { nodes, materials } = useGLTF("/models/hedgeRow.glb");
-  const hedgeGeo = nodes.LC2004.geometry;
-  const hedgeMat = materials["LC2_Mat.004"];
+  const hedgeGeo = (nodes.LC2004 as THREE.Mesh).geometry;
+  const hedgeMat = materials["LC2_Mat.004"] as THREE.MeshStandardMaterial;
 
   // woody core — decimated branch structure extracted from the original model
   const coreGltf = useGLTF("/models/hedgeCore.glb");
@@ -125,7 +120,7 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
     if (coreRef.current) coreRef.current.instanceMatrix.needsUpdate = true;
   }, [segments, count, yScale]);
 
-  if (!render || !count || height < 0.15) return null;
+  if (!render || !count || height < MIN_HEIGHT) return null;
 
   return (
     <>

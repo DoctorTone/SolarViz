@@ -1,4 +1,4 @@
-import { label, dirRow, dirBtnActive, dirBtn } from "../css/UIStyles";
+import { dirRow, dirBtnActive, dirBtn } from "../css/UIStyles";
 import useSolar from "../state/store";
 
 const SeasonToggle = () => {

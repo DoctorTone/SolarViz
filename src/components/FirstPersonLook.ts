@@ -1,9 +1,13 @@
 import { useThree, useFrame } from "@react-three/fiber";
 import { useRef, useEffect } from "react";
-import * as THREE from "three";
-import useSolar from "../state/store";
 
-const FirstPersonLook = ({ enabled, initialYaw = 0 }) => {
+const FirstPersonLook = ({
+  enabled,
+  initialYaw = 0,
+}: {
+  enabled: boolean;
+  initialYaw?: number;
+}) => {
   const { camera, gl } = useThree();
   const dragging = useRef(false);
   const last = useRef({ x: 0, y: 0 });
@@ -20,14 +24,14 @@ const FirstPersonLook = ({ enabled, initialYaw = 0 }) => {
     if (!enabled) return;
     const el = gl.domElement;
 
-    const onDown = (e) => {
+    const onDown = (e: PointerEvent) => {
       dragging.current = true;
       last.current = { x: e.clientX, y: e.clientY };
     };
     const onUp = () => {
       dragging.current = false;
     };
-    const onMove = (e) => {
+    const onMove = (e: PointerEvent) => {
       if (!dragging.current) return;
       const dx = e.clientX - last.current.x;
       const dy = e.clientY - last.current.y;

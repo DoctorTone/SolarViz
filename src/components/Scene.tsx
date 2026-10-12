@@ -1,8 +1,8 @@
-import { useEffect, Suspense } from "react";
+import { useEffect } from "react";
 import Terrain from "./Terrain";
 import useSolar from "../state/store";
 import ViewpointMarkers from "./ViewpointMarkers";
-import Grid from "./Grid";
+// import Grid from "./Grid";
 import { hedgerows } from "../state/hedgerowData";
 import HedgeRow from "./HedgeRow";
 import { pvParcels } from "../state/parcelData";
@@ -13,7 +13,7 @@ import Buildings from "./Buildings";
 // import Elm from "./Elm";
 import CoordinatePicker from "./CoordinatePicker";
 import WaypointMarkers from "./WaypointMarkers";
-import HedgePiece from "./HedgePiece";
+// import HedgePiece from "./HedgePiece";
 
 const Scene = () => {
   const loadData = useSolar((state) => state.loadData);

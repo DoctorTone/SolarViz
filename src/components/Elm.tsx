@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useGLTF, Clone } from "@react-three/drei";
-import { Color } from "three";
+import { Color, MeshStandardMaterial } from "three";
 import useSolar from "../state/store";
 
 const Elm = () => {
@@ -8,7 +8,7 @@ const Elm = () => {
   const season = useSolar((s) => s.currentSeason);
 
   useEffect(() => {
-    const leafMat = materials.elm_leaf_1Mat;
+    const leafMat = materials.elm_leaf_1Mat as MeshStandardMaterial;
     if (leafMat) {
       leafMat.alphaTest = season === "winter" ? 0.6 : 0.15;
       leafMat.transparent = false;

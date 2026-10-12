@@ -6,6 +6,12 @@ export type ViewpointDirection = {
   bearing: number;
 };
 
+export type Waypoint = {
+  easting: number;
+  northing: number;
+  label?: string;
+};
+
 export type Viewpoint = {
   no: number;
   name: string;
@@ -19,6 +25,7 @@ export type Viewpoint = {
   impactY10: string;
   eyeAOD?: number;
   directions?: ViewpointDirection[];
+  waypoints?: Waypoint[];
 };
 
 export type TerrainMeta = {

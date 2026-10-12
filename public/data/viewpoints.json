@@ -24,11 +24,11 @@
       { "label": "South", "shortLabel": "South", "bearing": 178.1 },
       { "label": "West", "shortLabel": "West", "bearing": 268.1 }
     ],
-    "entryWaypoint": 1,
+    "entryWaypoint": 0,
     "waypoints": [
-      { "easting": 508664, "northing": 360142, "label": "East along path 1" },
       { "easting": 508662, "northing": 360144, "label": "Assessed viewpoint" },
-      { "easting": 508660, "northing": 360146, "label": "West along path 1" }
+      { "easting": 508666, "northing": 360117, "label": "Further along path" },
+      { "easting": 508679, "northing": 360083, "label": "West along path 1" }
     ]
   },
   {

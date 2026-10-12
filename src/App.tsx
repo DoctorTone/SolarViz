@@ -8,7 +8,7 @@ import CameraController from "./components/CameraController";
 import { pvParcels } from "./state/parcelData";
 import LoadingScreen from "./UI/LoadingScreen";
 import useSolar from "./state/store";
-import { Perf } from "r3f-perf";
+// import { Perf } from "r3f-perf";
 
 function App() {
   const freeCamera = useSolar((s) => s.freeCamera);

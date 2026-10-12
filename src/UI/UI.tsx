@@ -17,7 +17,7 @@ const UI = () => {
   );
 
   useEffect(() => {
-    const onKey = (e) => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === "h") {
         useSolar.getState().toggleUI();
       }

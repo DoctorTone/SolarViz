@@ -80,7 +80,7 @@ export const hint: CSSProperties = {
   lineHeight: 1.4,
   fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
 };
-export const exploreBar = {
+export const exploreBar: CSSProperties = {
   position: "absolute",
   top: 16,
   left: 16,
@@ -94,7 +94,7 @@ export const exploreBar = {
   fontFamily: "system-ui, sans-serif",
   zIndex: 10,
 };
-export const exitBtn = {
+export const exitBtn: CSSProperties = {
   border: "none",
   background: "none",
   color: "#2a7d2a",

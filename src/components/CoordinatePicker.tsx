@@ -1,9 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, type RefObject } from "react";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import useSolar from "../state/store";
 
-const CoordinatePicker = ({ terrainRef }) => {
+const CoordinatePicker = ({
+  terrainRef,
+}: {
+  terrainRef: RefObject<THREE.Object3D | null> | null;
+}) => {
   const { camera, gl, scene } = useThree();
   const meta = useSolar((s) => s.metaData);
 
@@ -12,7 +16,7 @@ const CoordinatePicker = ({ terrainRef }) => {
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
-    const onClick = (event) => {
+    const onClick = (event: MouseEvent) => {
       // normalised device coords from the click
       const rect = gl.domElement.getBoundingClientRect();
       mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
