@@ -56,9 +56,9 @@
     ],
     "entryWaypoint": 1,
     "waypoints": [
-      { "easting": 508585, "northing": 358363, "label": "East along path 1" },
+      { "easting": 508567, "northing": 358362, "label": "East along path 1" },
       { "easting": 508587, "northing": 358365, "label": "Assessed viewpoint" },
-      { "easting": 508589, "northing": 358367, "label": "West along path 1" }
+      { "easting": 508602, "northing": 358371, "label": "West along path 1" }
     ]
   },
   {
