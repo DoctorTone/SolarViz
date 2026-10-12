@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -75,6 +76,47 @@ const InfoDialog = () => {
             intended to be equally useful to applicants, authorities and the
             public.
           </Typography>
+          <Box
+            sx={{
+              mt: 2,
+              mb: 2,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              flexWrap: "wrap",
+            }}
+          >
+            <Link
+              href="https://www.maptiler.com/"
+              target="_blank"
+              rel="noopener"
+              sx={{ display: "inline-flex" }}
+            >
+              <img
+                src="/images/maptiler-logo-white.png"
+                alt="MapTiler"
+                height={16}
+              />
+            </Link>
+            <Typography variant="h6" color="text.secondary">
+              Aerial imagery{" "}
+              <Link
+                href="https://www.maptiler.com/copyright/"
+                target="_blank"
+                rel="noopener"
+              >
+                © MapTiler
+              </Link>
+              {"  "}
+              <Link
+                href="https://www.openstreetmap.org/copyright"
+                target="_blank"
+                rel="noopener"
+              >
+                © OpenStreetMap contributors
+              </Link>
+            </Typography>
+          </Box>
           <Typography variant="h6">
             Created by{" "}
             <Link
