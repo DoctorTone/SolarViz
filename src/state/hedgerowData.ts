@@ -646,8 +646,8 @@ export const hedgerows = [
     start_height: 4.5, // existing hedge height at year 0 (m)
     mature_height: 4.5, // documented year-10 maintained height
     points: [
-      [508624, 358361],
-      [508517, 358322],
+      [508515, 358322],
+      [508836, 358439],
     ],
   },
 ];
