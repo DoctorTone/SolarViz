@@ -4,6 +4,7 @@ import ViewpointUI from "./ViewpointUI";
 import Info from "./Info";
 import MobilePortraitUI from "./MobilePortraitUI";
 import MobileLandscapeUI from "./MobileLandscapeUI";
+import MapAttribution from "./MapAttribution";
 import { useMediaQuery } from "@mui/material";
 import useSolar from "../state/store";
 
@@ -31,6 +32,7 @@ const UI = () => {
   return (
     <>
       <Info />
+      <MapAttribution />
       {isPhonePortrait ? (
         <MobilePortraitUI />
       ) : isPhoneLandscape ? (
