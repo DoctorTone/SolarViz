@@ -11,8 +11,8 @@ const Terrain = () => {
   const { gl } = useThree();
   // NOTE: colorSpace is NoColorSpace here (not SRGB) because we decode sRGB
   // manually in the shader, identically for base + inset, so they always match.
-  const groundTexture = useTexture("/textures/aerial_bng.png");
-  const insetTexture = useTexture("/textures/aerial_inset.png");
+  const groundTexture = useTexture("textures/aerial_bng.jpg");
+  const insetTexture = useTexture("textures/aerial_inset.jpg");
   for (const t of [groundTexture, insetTexture]) {
     t.colorSpace = THREE.NoColorSpace;
     t.anisotropy = gl.capabilities.getMaxAnisotropy();

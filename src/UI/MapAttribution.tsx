@@ -42,7 +42,7 @@ const MapAttribution = () => {
         sx={{ display: "inline-flex" }}
       >
         <img
-          src="/images/maptiler-logo.png"
+          src="images/maptiler-logo.png"
           alt="MapTiler"
           height={14}
           style={{ display: "block" }}

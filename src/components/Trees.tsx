@@ -37,7 +37,7 @@ const Trees = ({ trees, season }: TreesProps) => {
   const trunkRef = useRef<InstancedMesh>(null);
   const leafRef = useRef<InstancedMesh>(null);
 
-  const { nodes, materials } = useGLTF("/models/elm1.glb");
+  const { nodes, materials } = useGLTF("models/elm1.glb");
 
   const trunkGeo = (nodes.Trunk as Mesh).geometry;
   const leafGeo = (nodes.Leaves as Mesh).geometry;
@@ -112,3 +112,5 @@ const Trees = ({ trees, season }: TreesProps) => {
 };
 
 export default Trees;
+
+useGLTF.preload("models/elm1.glb");

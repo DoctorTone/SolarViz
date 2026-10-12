@@ -20,12 +20,12 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
   const coreRef = useRef<THREE.InstancedMesh>(null); // woody structure
 
   // leaves
-  const { nodes, materials } = useGLTF("/models/hedgeRow.glb");
+  const { nodes, materials } = useGLTF("models/hedgeRow.glb");
   const hedgeGeo = (nodes.LC2004 as THREE.Mesh).geometry;
   const hedgeMat = materials["LC2_Mat.004"] as THREE.MeshStandardMaterial;
 
   // woody core — decimated branch structure extracted from the original model
-  const coreGltf = useGLTF("/models/hedgeCore.glb");
+  const coreGltf = useGLTF("models/hedgeCore.glb");
   // DEBUG
   console.log("Nodes = ", coreGltf.nodes);
   console.log("Materials = ", coreGltf.materials);
@@ -141,4 +141,5 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
 
 export default HedgeRow;
 
-useGLTF.preload("/models/hedgeCore.glb");
+useGLTF.preload("models/hedgeRow.glb");
+useGLTF.preload("models/hedgeCore.glb");
