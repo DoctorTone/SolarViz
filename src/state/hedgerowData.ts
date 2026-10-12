@@ -628,4 +628,26 @@ export const hedgerows = [
       [508273, 358372],
     ],
   },
+  {
+    id: "Immediately south of Lf08",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 1.5, // existing hedge height at year 0 (m)
+    mature_height: 1.5, // documented year-10 maintained height
+    points: [
+      [508492, 358421],
+      [508512, 358322],
+    ],
+  },
+  {
+    id: "South of Lf08",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 4.5, // existing hedge height at year 0 (m)
+    mature_height: 4.5, // documented year-10 maintained height
+    points: [
+      [508624, 358361],
+      [508517, 358322],
+    ],
+  },
 ];
