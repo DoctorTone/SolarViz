@@ -7,7 +7,6 @@ const SeasonToggle = () => {
 
   return (
     <>
-      <div style={label}>Season</div>
       <div style={dirRow}>
         <button
           style={season === "summer" ? dirBtnActive : dirBtn}
