@@ -145,6 +145,17 @@ export const hedgerows = [
     ],
   },
   {
+    id: "By24 - North 7",
+    type: "hedgerow",
+    augments_existing: false,
+    start_height: NEW_START_HEIGHT, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508000, 359672],
+      [507977, 359659],
+    ],
+  },
+  {
     id: "By11 - South 1",
     type: "hedgerow",
     augments_existing: false,
