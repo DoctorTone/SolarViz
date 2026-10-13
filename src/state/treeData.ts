@@ -271,10 +271,10 @@ export const treeData = [
   },
   // Existing tree lines - VP7 lookinh NE
   {
-    easting: 508021,
-    northing: 359690,
+    easting: 508020,
+    northing: 359691,
     existing: true,
-    mature_height: 4.5, // full height; existing trees sit at this always
+    mature_height: 3.5, // full height; existing trees sit at this always
   },
   // Existing tree lines - VP7 looking north west
   // Forest - top
