@@ -29,9 +29,9 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
   // DEBUG
   console.log("Nodes = ", coreGltf.nodes);
   console.log("Materials = ", coreGltf.materials);
-  const coreGeo = (coreGltf.nodes.Core as THREE.Mesh).geometry; // <-- set to YOUR exported node name
+  const coreGeo = (coreGltf.nodes.BarkPoplar001 as THREE.Mesh).geometry; // <-- set to YOUR exported node name
   // // reuse the branch model's own bark material if it has one, else a dark fallback
-  const coreMat = coreGltf.materials["BarkPoplar_Mat.001"];
+  const coreMat = coreGltf.materials.Bark;
 
   // base BOTH to y=0 using the SAME offset so their authored relative pose is kept
   hedgeGeo.computeBoundingBox();
