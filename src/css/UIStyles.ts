@@ -45,6 +45,21 @@ export const backBtn: CSSProperties = {
   padding: 0,
   marginBottom: 8,
 };
+export const backBtnMobile: CSSProperties = {
+  pointerEvents: "auto", // … buttons stay tappable
+  display: "flex",
+  alignItems: "center",
+  gap: 6,
+  minHeight: 40,
+  padding: "0 4px",
+  border: "none",
+  background: "none",
+  color: "#2a7d2a",
+  fontWeight: 600,
+  cursor: "pointer",
+  flexShrink: 0,
+};
+export const identity = { minWidth: 0 }; // truncation context for the name
 export const tagLine: CSSProperties = {
   margin: "0 0 14px",
   fontSize: 12,
@@ -115,4 +130,12 @@ export const topBar: CSSProperties = {
   padding: "calc(10px + env(safe-area-inset-top)) 14px 16px",
   fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
   pointerEvents: "none", // gradient lets taps through …
+};
+export const leftGroup: CSSProperties = {
+  display: "flex",
+  flexDirection: "column", // was implicitly row — now stacks vertically
+  alignItems: "flex-start", // left-align the back button and text
+  gap: 6,
+  minWidth: 0,
+  flex: 1,
 };
