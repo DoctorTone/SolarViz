@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import Copyright from "../UI/Copyright";
 import ViewpointUI from "./ViewpointUI";
 import Info from "./Info";
@@ -6,7 +6,7 @@ import MobilePortraitUI from "./MobilePortraitUI";
 import MobileLandscapeUI from "./MobileLandscapeUI";
 import MapAttribution from "./MapAttribution";
 import { useMediaQuery } from "@mui/material";
-import useSolar from "../state/store";
+// import useSolar from "../state/store";
 
 const UI = () => {
   const isPhonePortrait = useMediaQuery(
@@ -16,18 +16,18 @@ const UI = () => {
     "(orientation: landscape) and (max-height: 500px)",
   );
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "h") {
-        useSolar.getState().toggleUI();
-      }
-      if (e.key === "c") {
-        useSolar.getState().toggleCamera();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  // useEffect(() => {
+  //   const onKey = (e: KeyboardEvent) => {
+  //     if (e.key === "h") {
+  //       useSolar.getState().toggleUI();
+  //     }
+  //     if (e.key === "c") {
+  //       useSolar.getState().toggleCamera();
+  //     }
+  //   };
+  //   window.addEventListener("keydown", onKey);
+  //   return () => window.removeEventListener("keydown", onKey);
+  // }, []);
 
   return (
     <>
