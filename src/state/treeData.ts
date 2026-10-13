@@ -1598,4 +1598,53 @@ export const treeData = [
     existing: true,
     mature_height: 20,
   },
+  // Trees in fields looking SE from VP7
+  {
+    easting: 508712,
+    northing: 359460,
+    existing: true,
+    mature_height: 20,
+  },
+  {
+    easting: 508728,
+    northing: 359473,
+    existing: true,
+    mature_height: 20,
+  },
+  {
+    easting: 508738,
+    northing: 359482,
+    existing: true,
+    mature_height: 20,
+  },
+  {
+    easting: 508748,
+    northing: 359489,
+    existing: true,
+    mature_height: 20,
+  },
+  {
+    easting: 508764,
+    northing: 359503,
+    existing: true,
+    mature_height: 20,
+  },
+  {
+    easting: 508787,
+    northing: 359521,
+    existing: true,
+    mature_height: 20,
+  },
+  {
+    easting: 508805,
+    northing: 359536,
+    existing: true,
+    mature_height: 20,
+  },
+  {
+    easting: 508839,
+    northing: 359559,
+    existing: true,
+    mature_height: 20,
+  },
 ];
