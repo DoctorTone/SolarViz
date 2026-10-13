@@ -409,6 +409,28 @@ export const hedgerows = [
     ],
   },
   {
+    id: "By20 - North 2",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 3.5, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508988, 360260],
+      [508897, 360207],
+    ],
+  },
+  {
+    id: "By20 - North 3",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 3.5, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508897, 360207],
+      [508798, 360251],
+    ],
+  },
+  {
     id: "By20 - West 1",
     type: "hedgerow",
     augments_existing: true,
@@ -416,7 +438,18 @@ export const hedgerows = [
     mature_height: 3.5, // documented year-10 maintained height
     points: [
       [508652, 360140],
-      [508659, 360124],
+      [508657, 360121],
+    ],
+  },
+  {
+    id: "By20 - West 2",
+    type: "hedgerow",
+    augments_existing: true,
+    start_height: 2, // existing hedge height at year 0 (m)
+    mature_height: 3.5, // documented year-10 maintained height
+    points: [
+      [508649, 360159],
+      [508649, 360149],
     ],
   },
   {
