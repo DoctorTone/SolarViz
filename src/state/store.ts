@@ -76,6 +76,8 @@ type SolarState = {
   setWaypoint: (waypoint: number) => void;
   roamMode: "fixed" | "freeroam";
   setRoamMode: (mode: "fixed" | "freeroam") => void;
+  uiBottomInset: number;
+  setUIBottomInset: (px: number) => void;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -171,6 +173,8 @@ const useSolar = create<SolarState>((set, get) => ({
 
     return heights[row * metaData.cols + col];
   },
+  uiBottomInset: 0,
+  setUIBottomInset: (px) => set({ uiBottomInset: px }),
 }));
 
 export default useSolar;

@@ -139,3 +139,31 @@ export const leftGroup: CSSProperties = {
   minWidth: 0,
   flex: 1,
 };
+export const bar: CSSProperties = {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  background: "rgba(255,255,255,0.95)",
+  padding: "12px 12px calc(12px + env(safe-area-inset-bottom))",
+  borderTopLeftRadius: 14,
+  borderTopRightRadius: 14,
+  boxShadow: "0 -2px 14px rgba(0,0,0,0.14)",
+  fontFamily: "system-ui, sans-serif",
+  zIndex: 10,
+};
+export const vpBtn: CSSProperties = {
+  flex: 1,
+  minHeight: 60,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 3,
+  padding: "8px 6px",
+  border: "1px solid #2a7d2a",
+  borderRadius: 10,
+  background: "#fff",
+  color: "#2a7d2a",
+  cursor: "pointer",
+};

@@ -1,17 +1,19 @@
-import type { CSSProperties } from "react";
 import useSolar from "../state/store";
+import { bar, vpBtn } from "../css/UIStyles";
 import MobileTopBar from "./MobileTopBar";
+import { useReportBottomInset } from "../hooks/useReportBottomInset";
 
 const MobileOverviewPanel = () => {
   const enter = useSolar((s) => s.enterViewpoint);
   const viewpoints = useSolar((s) => s.viewpoints);
+  const barRef = useReportBottomInset<HTMLDivElement>();
 
   const featured = viewpoints.filter((v) => [7, 2, 4].includes(v.no));
 
   return (
     <>
       <MobileTopBar />
-      <div style={bar}>
+      <div ref={barRef} style={bar}>
         {/* title + orienting line */}
         <div style={{ marginBottom: 10 }}>
           <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>
@@ -41,37 +43,6 @@ const MobileOverviewPanel = () => {
       </div>
     </>
   );
-};
-
-// CSS styling
-const bar: CSSProperties = {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
-  background: "rgba(255,255,255,0.95)",
-  padding: "12px 12px calc(12px + env(safe-area-inset-bottom))",
-  borderTopLeftRadius: 14,
-  borderTopRightRadius: 14,
-  boxShadow: "0 -2px 14px rgba(0,0,0,0.14)",
-  fontFamily: "system-ui, sans-serif",
-  zIndex: 10,
-};
-
-const vpBtn: CSSProperties = {
-  flex: 1,
-  minHeight: 60,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 3,
-  padding: "8px 6px",
-  border: "1px solid #2a7d2a",
-  borderRadius: 10,
-  background: "#fff",
-  color: "#2a7d2a",
-  cursor: "pointer",
 };
 
 export default MobileOverviewPanel;

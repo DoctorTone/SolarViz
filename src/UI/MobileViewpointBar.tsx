@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { useState } from "react";
 import MobileTopBar from "./MobileTopBar";
 import useSolar from "../state/store";
+import { useReportBottomInset } from "../hooks/useReportBottomInset";
 
 const MobileViewpointBar = () => {
   const vpId = useSolar((s) => s.activeViewpoint);
@@ -15,6 +16,7 @@ const MobileViewpointBar = () => {
   const setYear = useSolar((s) => s.setCurrentYear);
   const setSeason = useSolar((s) => s.setCurrentSeason);
   const [expanded, setExpanded] = useState(false);
+  const barRef = useReportBottomInset<HTMLDivElement>();
 
   const vp = viewpoints.find((v) => v.no === vpId);
   if (!vp) return null;
@@ -34,7 +36,7 @@ const MobileViewpointBar = () => {
   return (
     <>
       <MobileTopBar />
-      <div style={bar}>
+      <div ref={barRef} style={bar}>
         {/* stage — the mini timeline */}
         <div style={segRow}>
           {STAGES.map((s) => (
