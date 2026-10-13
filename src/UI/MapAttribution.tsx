@@ -1,3 +1,4 @@
+import useSolar from "../state/store";
 import { Box, Link } from "@mui/material";
 
 /**
@@ -13,12 +14,20 @@ import { Box, Link } from "@mui/material";
  * Needs the MapTiler logo at /maptiler-logo.svg (free tier requires the logo).
  */
 const MapAttribution = () => {
+  const mode = useSolar((s) => s.viewMode);
+
+  // Alter height depending on UI displayed
+  const bottom = {
+    xs: mode === "viewpoint" ? 240 : 120,
+    sm: 8,
+  };
+
   return (
     <Box
       sx={{
         position: "fixed",
         right: 8,
-        bottom: 8,
+        bottom,
         zIndex: 1200, // above the canvas, below MUI dialogs (1300)
         display: "flex",
         alignItems: "center",

@@ -102,3 +102,17 @@ export const exitBtn: CSSProperties = {
   fontSize: 13,
   cursor: "pointer",
 };
+export const topBar: CSSProperties = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 15,
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
+  gap: 12,
+  padding: "calc(10px + env(safe-area-inset-top)) 14px 16px",
+  fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+  pointerEvents: "none", // gradient lets taps through …
+};
