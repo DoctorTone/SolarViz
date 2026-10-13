@@ -771,24 +771,104 @@ export const treeData = [
     existing: true,
     mature_height: 10, // full height; existing trees sit at this always
   },
+  // Trees along second field looking east from VP2
   {
-    easting: 509056,
-    northing: 360025,
-    existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
-  },
-  {
-    easting: 509056,
-    northing: 360020,
-    existing: true,
-    mature_height: 15, // full height; existing trees sit at this always
-  },
-  {
-    easting: 509056,
-    northing: 360015,
+    easting: 509046,
+    northing: 360060,
     existing: true,
     mature_height: 17.5, // full height; existing trees sit at this always
   },
+  {
+    easting: 509045,
+    northing: 360054,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509045,
+    northing: 360047,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509046,
+    northing: 360040,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509047,
+    northing: 360032,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509049,
+    northing: 360024,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509050,
+    northing: 360016,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509051,
+    northing: 360009,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509053,
+    northing: 360000,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509055,
+    northing: 359993,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509055,
+    northing: 359985,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509057,
+    northing: 359979,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509059,
+    northing: 359971,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509061,
+    northing: 359963,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509062,
+    northing: 359955,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  {
+    easting: 509064,
+    northing: 359947,
+    existing: true,
+    mature_height: 17.5, // full height; existing trees sit at this always
+  },
+  // Trees around field for VP2
   {
     easting: 508652,
     northing: 360116,
@@ -819,6 +899,7 @@ export const treeData = [
     existing: true,
     mature_height: 12, // full height; existing trees sit at this always
   },
+  // Tree looking west from VP2
   {
     easting: 508649,
     northing: 360154,
