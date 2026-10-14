@@ -1,7 +1,9 @@
 import useSolar from "../state/store";
+import { useProgress } from "@react-three/drei";
 
 const LoadingScreen = () => {
   const rendered = useSolar((s) => s.rendered);
+  const { progress } = useProgress(); // 0–100
 
   return (
     <div
@@ -42,7 +44,7 @@ const LoadingScreen = () => {
       />
 
       <div style={{ fontSize: 12, color: "#88aa7a", marginTop: 20 }}>
-        Loading terrain and viewpoints…
+        Loading terrain and viewpoints {Math.round(progress)}%
       </div>
 
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
