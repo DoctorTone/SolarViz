@@ -42,8 +42,6 @@ const Trees = ({ trees, season }: TreesProps) => {
   const trunkGeo = (nodes.Trunk as Mesh).geometry;
   const leafGeo = (nodes.Leaves as Mesh).geometry;
   leafGeo.computeBoundingBox();
-  const nativeHeight = leafGeo.boundingBox!.max.y; // top of foliage = tree height
-  console.log("tree native height:", nativeHeight);
 
   const trunkMat = materials.bark07_0Mat;
   const leafMat = materials.elm_leaf_1Mat as MeshStandardMaterial;

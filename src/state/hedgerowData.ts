@@ -453,7 +453,7 @@ export const hedgerows = [
     ],
   },
   {
-    id: "By20 - West 2",
+    id: "By20 - West 3",
     type: "hedgerow",
     augments_existing: true,
     start_height: 2, // existing hedge height at year 0 (m)

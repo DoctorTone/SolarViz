@@ -26,9 +26,6 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
 
   // woody core — decimated branch structure extracted from the original model
   const coreGltf = useGLTF("models/hedgeCore.glb");
-  // DEBUG
-  console.log("Nodes = ", coreGltf.nodes);
-  console.log("Materials = ", coreGltf.materials);
   const coreGeo = (coreGltf.nodes.BarkPoplar001 as THREE.Mesh).geometry; // <-- set to YOUR exported node name
   // // reuse the branch model's own bark material if it has one, else a dark fallback
   const coreMat = coreGltf.materials.Bark;
