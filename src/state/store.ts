@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { track, trackOnce } from "../analytics/track";
 
 export type ViewpointDirection = {
   label: string;
@@ -88,9 +89,15 @@ const useSolar = create<SolarState>((set, get) => ({
   setViewpoint: (viewpoint) => set({ viewPoint: [...viewpoint] }),
   loaded: false,
   currentYear: 0,
-  setCurrentYear: (year) => set({ currentYear: year }),
+  setCurrentYear: (year) => {
+    trackOnce("year-slider-used");
+    set({ currentYear: year });
+  },
   currentSeason: "summer",
-  setCurrentSeason: (season) => set({ currentSeason: season }),
+  setCurrentSeason: (season) => {
+    track(`season-${season}`);
+    set({ currentSeason: season });
+  },
   viewMode: "overview",
   activeViewpoint: null,
   activeDirection: 0,
@@ -152,9 +159,17 @@ const useSolar = create<SolarState>((set, get) => ({
   rendered: false,
   setRendered: (status) => set(() => ({ rendered: status })),
   activeWaypoint: 0,
-  setWaypoint: (wayPoint) => set(() => ({ activeWaypoint: wayPoint })),
+  setWaypoint: (wayPoint) => {
+    track(`viewpoint-${wayPoint}`);
+    set(() => ({ activeWaypoint: wayPoint }));
+  },
   roamMode: "fixed",
-  setRoamMode: (mode) => set(() => ({ roamMode: mode })),
+  setRoamMode: (mode) => {
+    if (mode === "freeroam") {
+      trackOnce("explore-entered");
+    }
+    set(() => ({ roamMode: mode }));
+  },
   // Terrain height lookup: BNG easting/northing -> ground elevation (m AOD).
   // Returns null if the point is outside the loaded tile.
   sampleHeight: (easting, northing) => {
