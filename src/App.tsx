@@ -10,6 +10,8 @@ import { pvParcels } from "./state/parcelData";
 import LoadingScreen from "./UI/LoadingScreen";
 import useSolar from "./state/store";
 import type * as THREE from "three";
+import LoaderTracker from "./UI/LoaderTracker";
+import { Loader } from "@react-three/drei";
 // import { Perf } from "r3f-perf";
 
 // coarse low-memory signal; only true when the device actually reports < 3GB
@@ -120,6 +122,7 @@ function App() {
         {/* <Perf /> */}
       </Canvas>
       <UI />
+      <LoaderTracker />
       <LoadingScreen />
     </>
   );
