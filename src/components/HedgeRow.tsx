@@ -36,7 +36,7 @@ const HedgeRow = ({ hedge }: { hedge: Hedgerow }) => {
   hedgeGeo.translate(0, baseOffset, 0);
   coreGeo.translate(0, baseOffset, 0);
 
-  const SEGMENT_LENGTH = 5.5; // metres each hedge piece covers along the line — match your model
+  const SEGMENT_LENGTH = 5.25; // metres each hedge piece covers along the line — match your model
 
   const {
     augments_existing,
