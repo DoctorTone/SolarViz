@@ -79,6 +79,11 @@ type SolarState = {
   setRoamMode: (mode: "fixed" | "freeroam") => void;
   uiBottomInset: number;
   setUIBottomInset: (px: number) => void;
+  // one-shot intro sweep from overview into a viewpoint on first load
+  introSweepPlayed: boolean;
+  introSweepActive: boolean; // true while the camera is easing in on the intro
+  playIntroSweep: (id: number) => void;
+  endIntroSweep: () => void;
 };
 
 const useSolar = create<SolarState>((set, get) => ({
@@ -106,6 +111,7 @@ const useSolar = create<SolarState>((set, get) => ({
     const vp = get().viewpoints.find((v) => v.no === id);
     set({
       viewMode: "viewpoint",
+      introSweepActive: false, // a manual entry always uses the normal speed
       activeViewpoint: id,
       activeDirection: 0,
       activeWaypoint: vp?.entryWaypoint ?? 0,
@@ -117,6 +123,7 @@ const useSolar = create<SolarState>((set, get) => ({
   exitToOverview: () =>
     set({
       viewMode: "overview",
+      introSweepActive: false,
       activeViewpoint: null,
       developmentVisible: true,
       currentYear: 10,
@@ -190,6 +197,21 @@ const useSolar = create<SolarState>((set, get) => ({
   },
   uiBottomInset: 0,
   setUIBottomInset: (px) => set({ uiBottomInset: px }),
+  introSweepPlayed: false,
+  introSweepActive: false,
+  playIntroSweep: (id) => {
+    const { introSweepPlayed, viewMode, viewpoints } = get();
+    if (introSweepPlayed) return;
+    // only sweep if the user hasn't already moved off the overview
+    if (viewMode !== "overview" || !viewpoints.some((v) => v.no === id)) {
+      set({ introSweepPlayed: true });
+      return;
+    }
+    // same entry path as clicking a marker, then flag the slower intro ease
+    get().enterViewpoint(id);
+    set({ introSweepPlayed: true, introSweepActive: true, roamMode: "fixed" });
+  },
+  endIntroSweep: () => set({ introSweepActive: false }),
 }));
 
 export default useSolar;

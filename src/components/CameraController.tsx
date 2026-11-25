@@ -15,6 +15,13 @@ const LOOK_POS_EAST = 508400;
 const LOOK_POS_NORTH = 358850;
 const EYE_HEIGHT = 1.6;
 
+// Per-frame ease factors. The intro sweep uses the same lerp as a marker click,
+// but with a smaller factor (longer glide) and a smoothstep ramp-in so it
+// starts gently instead of lurching off the overview.
+const EASE_K = 0.08;
+const INTRO_EASE_K = 0.035;
+const INTRO_RAMP_S = 1.2;
+
 function CameraController() {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const meta = useSolar((s) => s.metaData);
@@ -25,6 +32,8 @@ function CameraController() {
   const activeWP = useSolar((s) => s.activeWaypoint);
   const dirIdx = useSolar((s) => s.activeDirection);
   const viewpoints = useSolar((s) => s.viewpoints);
+  const introSweepActive = useSolar((s) => s.introSweepActive);
+  const endIntroSweep = useSolar((s) => s.endIntroSweep);
 
   const { camera: defaultCamera, size } = useThree();
   const camera = defaultCamera as THREE.PerspectiveCamera;
@@ -36,6 +45,7 @@ function CameraController() {
   const currentLook = useRef(new THREE.Vector3());
   const targetFov = useRef(55);
   const initialised = useRef(false);
+  const introStart = useRef<number | null>(null);
 
   // Get current viewpoint
   const vp = vpId != null ? viewpoints.find((v) => v.no === vpId) : null;
@@ -55,7 +65,7 @@ function CameraController() {
       ? THREE.MathUtils.degToRad(-vp.directions[dirIdx].bearing) // tune offset to match scene
       : 0;
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!meta) return;
 
     // ---------------------------------------------------------------
@@ -126,7 +136,22 @@ function CameraController() {
     }
 
     // ease position, look target, and fov toward their goals
-    const k = 0.08; // 0..1 per frame; higher = snappier
+    let k = EASE_K; // 0..1 per frame; higher = snappier
+    if (introSweepActive) {
+      const now = state.clock.getElapsedTime();
+      if (introStart.current === null) introStart.current = now;
+      const t = Math.min((now - introStart.current) / INTRO_RAMP_S, 1);
+      k = INTRO_EASE_K * THREE.MathUtils.smoothstep(t, 0, 1) + 0.002;
+      if (
+        camera.position.distanceTo(targetPos.current) < 0.5 &&
+        currentLook.current.distanceTo(targetLook.current) < 0.5
+      ) {
+        introStart.current = null;
+        endIntroSweep();
+      }
+    } else {
+      introStart.current = null;
+    }
     camera.position.lerp(targetPos.current, k);
     currentLook.current.lerp(targetLook.current, k);
     camera.lookAt(currentLook.current);
